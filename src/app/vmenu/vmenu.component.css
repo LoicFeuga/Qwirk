@@ -1,0 +1,154 @@
+/* The side navigation menu */
+#nav {
+    padding:5px;
+    height: 100%; /* 100% Full-height */
+    width: 200px; 
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    color:white;
+    left: 0;
+    background-color: #039BE5; /* Black*/
+    box-shadow: 0 2px 4px rgba(0,0,0,0.30), 0 4px 3px rgba(0,0,0,0.22); 
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+
+.intro{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.line{
+    margin-left:10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+}
+
+.hr{
+    width:100%;
+    height: 1px;
+    display: block;
+    background: #eeeeee;
+    
+    margin:10px;
+    margin-left:0px;
+}
+.menu-item{
+    
+    
+    width:100%;
+    padding:20px;
+    display: flex;
+    
+    align-items: center;
+    height:20px;
+}
+
+.menu-item:hover{
+    background:white;
+    color:black;
+}
+.search{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+    box-shadow: 0 2px 4px rgba(0,0,0,0.30), 0 4px 3px rgba(0,0,0,0.22); 
+    height: 40px;
+    background: white;
+    color:black;
+    margin: 10px 0px;
+    margin-top: 40px;
+    border-radius: 1px;
+}
+
+.line i {
+    margin-right: 10px;
+}
+
+.line:hover{
+    background:white;
+    color:black;
+}
+
+.chap{
+    width:100%;
+    height:30px;
+    padding:5px;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 5px;
+    float: left;
+}
+.chap_title{
+    float: left;
+}
+.chap_more{
+    float: right;
+    border-radius: 50%;
+    border: 2px white solid;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+}
+
+.search i{
+    width:15%;float:left;
+    color:grey;
+    display: flex;  
+    justify-content: center;
+}
+.search input{
+    width:85%;
+    height: 100%;
+    float:left;
+    display: flex;
+    align-items: center;
+    margin-top:20px;
+    border:none;
+}
+
+.menu-top{
+    right:0;
+    display: flex;
+    width: 100%;
+    
+}
+.fl{
+    float: left;
+    display: flex;
+    justify-content: space-between;
+}
+#top-bar{
+    width:100%;
+    left: 200px;
+    display: flex;
+    align-items: center;
+    padding-left:20px;
+    position: fixed;
+    color:white;
+    top: 0;
+    height: 60px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.30), 0 4px 3px rgba(0,0,0,0.22); 
+    background: #039BE5;
+}
+
+.title-top{
+    width: 20%;
+    display:flex;
+    align-items:center;
+}
+.title-top i{
+    margin-right:10px;
+}
+
+.menu-top li{
+    margin: 10px;
+}

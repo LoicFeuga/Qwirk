@@ -1,0 +1,17 @@
+<div id="timeline" class="timeline">
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+  <app-message *ngFor="let message of messages" [author]="message.author" [content]="message.content" class="row message" >
+  </app-message>
+
+  <div class="container_text">
+    <textarea class="text" (keyup.enter)="add()" [(ngModel)]="text" placeholder="Commencez à écrire votre message ici" ></textarea>
+
+    <div class="container_send">
+
+      <button (click)="add()" class="btn waves-effect waves-light send" type="submit" name="action">
+      Envoyer<i class="material-icons right">send</i>
+      </button>
+    </div>
+  </div>
+</div>
