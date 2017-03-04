@@ -12,6 +12,7 @@ import { MessageComponent } from './message/message.component';
 import { ContactComponent } from './contact/contact.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UsersService } from './users.service';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UsersService } from './users.service';
     TimelineComponent,
     MessageComponent,
     ContactComponent,
-    SettingsComponent
+    SettingsComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
