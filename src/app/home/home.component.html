@@ -1,5 +1,9 @@
-<app-vmenu (deco)="deconnexion($event)" (timeline)="toTimeline($event)" (contact)="toContact($event)" (settings)="toSettings($event)"></app-vmenu>
+<app-vmenu (deco)="deconnexion($event)" (notification)="toNotification($event)" (timeline)="toTimeline($event)" (contact)="toContact($event)" (settings)="toSettings($event)"></app-vmenu>
 
-<app-timeline *ngIf="router == 0" ></app-timeline>
-<app-contact *ngIf="router == 1" ></app-contact>
-<app-settings *ngIf="router == 2" ></app-settings>
+<div id="all" class="all">
+
+    <app-timeline *ngIf="router == 0"></app-timeline>
+    <app-contact *ngIf="router == 1"></app-contact>
+    <app-settings *ngIf="router == 2"></app-settings>
+    <app-notification *ngIf="router == 3"></app-notification>
+</div>

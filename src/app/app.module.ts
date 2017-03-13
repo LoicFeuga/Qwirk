@@ -12,6 +12,9 @@ import { MessageComponent } from './message/message.component';
 import { ContactComponent } from './contact/contact.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UsersService } from './users.service';
+import { AuthenticationService } from './authentication.service';
+import { ModalComponent } from './modal/modal.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +25,16 @@ import { UsersService } from './users.service';
     TimelineComponent,
     MessageComponent,
     ContactComponent,
-    SettingsComponent
+    SettingsComponent,
+    ModalComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [UsersService],
+  providers: [UsersService,AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

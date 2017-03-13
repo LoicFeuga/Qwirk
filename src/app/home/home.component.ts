@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +13,9 @@ export class HomeComponent implements OnInit {
   //0 = timelines 
   // 1 = contact
   // 2 = settings
-  constructor() {
-
+  // 3 = notification
+  constructor(private authService : AuthenticationService) {
+    
   }
 
   ngOnInit() {
@@ -29,6 +30,9 @@ export class HomeComponent implements OnInit {
   }
   toSettings(recup: boolean) {
     this.router = 2;
+  }
+  toNotification(recup : boolean){
+    this.router = 3;
   }
 
   deconnexion(recup: boolean) {

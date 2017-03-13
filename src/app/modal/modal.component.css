@@ -1,0 +1,61 @@
+.root{
+    position:absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(158, 158, 158, 0.5);
+    top:0;
+    left:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal{
+    width: 300px;
+    background: white;
+    height: 200px;
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal .titre{
+    background-color: #F44336;
+    color:white;
+    width: 100%;
+    max-height: 50px;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    z-index: 102;
+    padding: 10px;
+}
+
+.modal .description{
+    width: 100%;
+    max-height: 100px;
+    min-height: 100px;    z-index: 102;
+
+    padding: 10px;
+    overflow: auto;
+}
+
+.modal .action{
+ z-index: 102;
+
+padding:10px;
+display: flex;
+justify-content:    center;
+align-items: center;
+    width: 100%;
+    max-height: 50px;
+    min-height: 50px;
+}
+
+.btn{
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    background-color: #F44336;
+}

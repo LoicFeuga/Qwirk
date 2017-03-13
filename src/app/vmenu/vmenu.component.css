@@ -127,13 +127,13 @@
     justify-content: space-between;
 }
 #top-bar{
-    width:100%;
+    width:calc(100% - 200px);
     left: 200px;
     display: flex;
     align-items: center;
-    padding-left:20px;
     position: fixed;
     color:white;
+    justify-content: space-between;
     top: 0;
     height: 60px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.30), 0 4px 3px rgba(0,0,0,0.22); 
@@ -142,9 +142,14 @@
 
 .title-top{
     width: 20%;
+    margin-left: 20px;
     display:flex;
     align-items:center;
 }
+.title-right{
+    margin-right:20px;
+}
+
 .title-top i{
     margin-right:10px;
 }

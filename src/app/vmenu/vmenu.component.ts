@@ -7,16 +7,17 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./vmenu.component.css']
 })
 export class VMenuComponent implements OnInit {
-  @Output() contact : EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() settings : EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() timeline : EventEmitter<number> = new EventEmitter<number>();
+  @Output() contact: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() settings: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() timeline: EventEmitter<number> = new EventEmitter<number>();
+  @Output() notification: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @Output() deco : EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() deco: EventEmitter<boolean> = new EventEmitter<boolean>();
   channels: string[] = [];
   groupes: string[] = [];
   chats: string[] = [];
 
-  isMinimize : boolean = false;
+  isMinimize: boolean = false;
 
   appName: string = "Qwirk";
 
@@ -32,39 +33,45 @@ export class VMenuComponent implements OnInit {
     this.chats.push('chat 2');
     this.chats.push('chat 3');
     this.chats.push('chat 4');
-    
+
   }
 
-  toTimeline(){
+  toTimeline() {
     this.timeline.emit(1);
   }
-  toContact(){
+  toContact() {
     this.contact.emit(true);
   }
-  toSettings(){
+  toSettings() {
     this.settings.emit(true);
 
   }
-  deconnexion(){
+
+  toNotification(){
+    this.notification.emit(true);
+  }
+  deconnexion() {
     this.deco.emit(true);
   }
 
-  minimize(){
-    if(!this.isMinimize){
+  minimize() {
+    if (!this.isMinimize) {
 
-     document.getElementById('nav').style.left = "-200px";
-     document.getElementById('top-bar').style.left = "0px";
-     document.getElementById('timeline').style.width = "calc(100% - 10px)";
-     document.getElementById('timeline').style.marginLeft = "10px";
-     
-     this.isMinimize = true;
-    }else{
-     document.getElementById('nav').style.left = "0px";
-     document.getElementById('top-bar').style.left = "200px";
-     document.getElementById('timeline').style.width = "calc(100% - 220px)";
-     document.getElementById('timeline').style.marginLeft = "210px";
-     
-     this.isMinimize = false;
+      document.getElementById('nav').style.left = "-200px";
+      document.getElementById('top-bar').style.left = "0px";//calc(100% - 200px)
+      document.getElementById('top-bar').style.width = "100%";
+      document.getElementById('all').style.width = "calc(100% - 10px)";
+      document.getElementById('all').style.marginLeft = "10px";
+
+      this.isMinimize = true;
+    } else {
+      document.getElementById('all').style.width = "calc(100% - 220px)";
+      document.getElementById('all').style.marginLeft = "210px";
+      document.getElementById('nav').style.left = "0px";
+      document.getElementById('top-bar').style.left = "200px";
+      document.getElementById('top-bar').style.width = "calc(100% - 200px)";
+
+      this.isMinimize = false;
 
     }
   }

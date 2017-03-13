@@ -1,4 +1,5 @@
-<div class="root">
+<div class="root">  
+  <app-modal [titre]="modalTitre" [content]="modalContent" [displayed]="modalDisplayed"></app-modal>
   <div class="padding">
     <div class="circle">
 
@@ -16,11 +17,11 @@
         <div class="container">
           <div class="row">
             <div class="input-field col s12">
-              <input id="email" type="email" class="validate">
+              <input id="email" [(ngModel)]="email" name="email" type="email" class="validate">
               <label for="email">Email</label>
             </div>
             <div class="input-field col s12">
-              <input id="password" type="password" class="validate">
+              <input id="password" [(ngModel)]="password" name="password" type="password" class="validate">
               <label for="password">Password</label>
             </div>
             
@@ -36,20 +37,20 @@
           <div class="row">
 
             <div *ngIf="step == 1" class="input-field col s12">
-              <input id="email" type="email" class="validate">
+              <input id="email" type="email" [(ngModel)]="email" name="email" class="validate">
               <label for="email">Email</label>
             </div>
             <div *ngIf="step == 1" class="input-field col s12">
-              <input id="password" type="password" class="validate">
+              <input id="password" type="password" [(ngModel)]="password" name="password" class="validate">
               <label for="password">Password</label>
             </div>
 
              <div *ngIf="step == 2" class="input-field col s12">
-              <input id="nom" type="text" class="validate">
+              <input id="nom" type="text" [(ngModel)]="nom" name="nom" class="validate">
               <label for="nom">Nom</label>
             </div>
             <div *ngIf="step == 2" class="input-field col s12">
-              <input id="prenom" type="text" class="validate">
+              <input id="prenom" type="text" [(ngModel)]="prenom" name="prenom" class="validate">
               <label for="prenom">Prenom</label>
             </div>
             

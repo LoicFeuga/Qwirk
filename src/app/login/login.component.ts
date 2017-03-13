@@ -1,6 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { UsersService } from '../users.service';
+import { AuthenticationService } from '../authentication.service';
+import { QDate } from '../classes/date';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,7 @@ import { UsersService } from '../users.service';
 export class LoginComponent implements OnInit {
 
 
-  @Output() logged : EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() logged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   isLogin: number = 1;
   step: number = 1;
@@ -18,9 +21,18 @@ export class LoginComponent implements OnInit {
   loginTitle: string = "Connectez-vous à " + this.appName;
   signinTitle: string = "Inscrivez-vous à " + this.appName;
   isLogged: number = 0;
+  email: string = "";
+  password: string = "";
+  nom: string = "";
+  prenom: string = "";
+
+  modalTitre: string = "Titre";
+  modalContent: string = "description";
+  modalDisplayed: boolean = false;
+  date: QDate = new QDate();
   //isLogged: number = 1;
 
-  constructor(app: AppComponent, public usersService : UsersService) {
+  constructor(app: AppComponent, public usersService: UsersService, private authService: AuthenticationService) {
     this.appName = app.appName;
   }
 
@@ -29,13 +41,34 @@ export class LoginComponent implements OnInit {
     //this.login();
   }
 
-  login(){
-    this.usersService.test();
-    this.logged.emit(true);
+  login() {
+    let dateCreate = new Date();
+    let that = this;
+    this.usersService.login(this.email, this.password, function (data) {
+      
+      if (data.id != null) {
+        that.authService.setToken(data.token);
+        console.log(data);
+        that.logged.emit(true);
+      }
+    });
+
   }
 
-  signin(){
+  signin() {
+    console.log(this.authService.token);
+    this.usersService.signup(this.email, this.password, this.nom, this.prenom, function (data) {
+      console.log(data);
+    });
     this.isLogged = 0;
+    this.initData();
+  }
+
+  initData() {
+    this.email = "";
+    this.password = "";
+    this.nom = "";
+    this.prenom = "";
   }
   step2() {
     this.step = 2;
@@ -46,10 +79,12 @@ export class LoginComponent implements OnInit {
 
   toLogin() {
     this.isLogin = 1;
+    this.initData();
   }
 
   toSignin() {
     this.isLogin = 0;
+    this.initData();
 
   }
 
