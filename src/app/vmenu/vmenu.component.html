@@ -5,8 +5,8 @@
 
 
   <div class="hr"></div>
-  <div class="menu-item"  (click)="toContact()">Contact</div>
-  <div class="menu-item"  (click)="toSettings()">Paramètre</div>
+  <div class="menu-item" (click)="toContact()">Contact</div>
+  <div class="menu-item" (click)="toSettings()">Paramètre</div>
   <div class="menu-item" (click)="deconnexion()">Déconnexion</div>
   <div class="hr"></div>
 
@@ -19,7 +19,7 @@
     <div class="chap_more">+</div>
   </div>
 
-  <div *ngFor="let channel of channels"   (click)="toTimeline()" class="line" >
+  <div *ngFor="let channel of channels" (click)="toTimeline()" class="line">
     <i class="material-icons">group_work</i>{{channel}}
   </div>
 
@@ -28,7 +28,7 @@
     <div class="chap_more">+</div>
   </div>
 
-  <div *ngFor="let groupe of groupes"   (click)="toTimeline()" class="line" >
+  <div *ngFor="let groupe of groupes" (click)="toTimeline()" class="line">
     <i class="material-icons">people</i> {{groupe}}
   </div>
   <div class="chap">
@@ -36,7 +36,7 @@
     <div class="chap_more">+</div>
   </div>
 
-    <div *ngFor="let chat of chats"   (click)="toTimeline()" class="line" >
+  <div *ngFor="let chat of chats" (click)="toTimeline()" class="line">
     <i class="material-icons">chat</i> {{chat}}
   </div>
 </div>
@@ -44,7 +44,12 @@
 
 <div id="top-bar">
   <div class="title-top" (click)="minimize()">
-<i class="material-icons">menu</i> 
-   Home
+    <i class="material-icons">menu</i> Home
   </div>
+
+  <div class="title-right" (click)="toNotification()">
+
+    <i class="material-icons">notifications_none</i>
+  </div>
+
 </div>

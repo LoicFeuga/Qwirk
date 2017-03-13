@@ -1,7 +1,6 @@
 .contact{
-     width: calc(100% - 220px);
+     width: 100%;
     min-width: 200px;
-    margin-left:210px;
     border-radius: 1px;
     height: calc(100% - 75px);
     overflow: auto;
@@ -15,7 +14,7 @@
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
-.title{
+    .title{
     width:100%;
     display: flex;
     justify-content: center;

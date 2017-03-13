@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { UsersService } from '../users.service';
+import { AuthenticationService } from '../authentication.service';
 import { QDate } from '../classes/date';
 import { ModalComponent } from '../modal/modal.component';
 
@@ -22,16 +23,16 @@ export class LoginComponent implements OnInit {
   isLogged: number = 0;
   email: string = "";
   password: string = "";
-  nom : string ="";
-  prenom : string ="";
+  nom: string = "";
+  prenom: string = "";
 
-  modalTitre : string ="Ttoijoiaizej";
-  modalContent : string ="loremloremloremloremlorem";
-  modalDisplayed : boolean = true;
-  date : QDate = new QDate();
+  modalTitre: string = "Titre";
+  modalContent: string = "description";
+  modalDisplayed: boolean = false;
+  date: QDate = new QDate();
   //isLogged: number = 1;
 
-  constructor(app: AppComponent, public usersService: UsersService) {
+  constructor(app: AppComponent, public usersService: UsersService, private authService: AuthenticationService) {
     this.appName = app.appName;
   }
 
@@ -41,23 +42,33 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.usersService.test();
     let dateCreate = new Date();
-    console.log(this.date.now());
-    //this.logged.emit(true);
+    let that = this;
+    this.usersService.login(this.email, this.password, function (data) {
+      
+      if (data.id != null) {
+        that.authService.setToken(data.token);
+        console.log(data);
+        that.logged.emit(true);
+      }
+    });
+
   }
 
   signin() {
-    this.usersService.signup(this.email, this.password,this.nom,this.prenom);
+    console.log(this.authService.token);
+    this.usersService.signup(this.email, this.password, this.nom, this.prenom, function (data) {
+      console.log(data);
+    });
     this.isLogged = 0;
     this.initData();
   }
 
-  initData(){
-    this.email ="";
-    this.password ="";
+  initData() {
+    this.email = "";
+    this.password = "";
     this.nom = "";
-    this.prenom ="";
+    this.prenom = "";
   }
   step2() {
     this.step = 2;

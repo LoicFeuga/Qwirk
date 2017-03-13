@@ -1,7 +1,6 @@
 .timeline{
-    width: calc(100% - 220px);
+    width: 100%;
     min-width: 200px;
-    margin-left:210px;
     border-radius: 1px;
     max-height: calc(100% - 75px);
     overflow: auto;
