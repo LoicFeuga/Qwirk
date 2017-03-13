@@ -50,9 +50,17 @@ export class LoginComponent implements OnInit {
         that.authService.setToken(data.token);
         console.log(data);
         that.logged.emit(true);
+      }else{
+        that.displayNotif("Avertissement","Mauvaise combinaison email / mot de passe");
       }
     });
 
+  }
+
+  displayNotif(titre : string, description : string){
+    this.modalTitre = titre;
+    this.modalContent = description;
+    this.modalDisplayed = true;
   }
 
   signin() {
