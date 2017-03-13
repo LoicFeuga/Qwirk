@@ -1,5 +1,5 @@
 <div class="root">  
-  <app-modal [titre]="modalTitre" [content]="modalContent" [displayed]="modalDisplayed"></app-modal>
+  <app-modal *ngIf="modalDisplayed" (displayed)="modalShow($event)" [titre]="modalTitre" [content]="modalContent"></app-modal>
   <div class="padding">
     <div class="circle">
 
