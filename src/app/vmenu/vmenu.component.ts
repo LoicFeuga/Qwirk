@@ -11,11 +11,17 @@ export class VMenuComponent implements OnInit {
   @Output() settings: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() timeline: EventEmitter<number> = new EventEmitter<number>();
   @Output() notification: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() addChannel: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() addGroupe: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() addChat: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Output() deco: EventEmitter<boolean> = new EventEmitter<boolean>();
   channels: string[] = [];
   groupes: string[] = [];
   chats: string[] = [];
+
+  nom: string = "";
+  prenom: string = "";
 
   isMinimize: boolean = false;
 
@@ -24,6 +30,11 @@ export class VMenuComponent implements OnInit {
 
   constructor(app: AppComponent) {
     this.appName = app.appName;
+
+    let user = JSON.parse(localStorage.getItem('user'));
+
+    this.nom = user.nom;
+    this.prenom = user.prenom;
 
     this.channels.push('Channel 1');
     this.channels.push('Channel 2');
@@ -47,7 +58,19 @@ export class VMenuComponent implements OnInit {
 
   }
 
-  toNotification(){
+  toAddChannel() {
+    this.addChannel.emit(true);
+  }
+  toAddGroupe() {
+    this.addGroupe.emit(true);
+
+  }
+  toAddChat() {
+    this.addChat.emit(true);
+
+  }
+
+  toNotification() {
     this.notification.emit(true);
   }
   deconnexion() {

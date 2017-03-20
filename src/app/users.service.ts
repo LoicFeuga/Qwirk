@@ -30,6 +30,7 @@ export class UsersService {
     let options = new RequestOptions({ headers: headers });
     
     this.http.post(this.apiLogin + "?login=" + login + "&mdp=" + mdp, "", options).map(res => res.json()).subscribe(data => {
+      localStorage.setItem('user',JSON.stringify(data));
       callback(data);
     });
   }

@@ -1,6 +1,6 @@
 <div id="nav">
   <div class="intro">
-    Loïc Feuga
+    {{prenom}} {{nom}}
   </div>
 
 
@@ -16,7 +16,7 @@
   </div>
   <div class="chap">
     <div class="chap_title">Channels</div>
-    <div class="chap_more">+</div>
+    <div class="chap_more" (click)="toAddChannel()">+</div>
   </div>
 
   <div *ngFor="let channel of channels" (click)="toTimeline()" class="line">
@@ -25,7 +25,7 @@
 
   <div class="chap">
     <div class="chap_title">Groupes</div>
-    <div class="chap_more">+</div>
+    <div class="chap_more" (click)="toAddGroupe()">+</div>
   </div>
 
   <div *ngFor="let groupe of groupes" (click)="toTimeline()" class="line">
@@ -33,7 +33,7 @@
   </div>
   <div class="chap">
     <div class="chap_title">Chats</div>
-    <div class="chap_more">+</div>
+    <div class="chap_more" (click)="toAddChat()">+</div>
   </div>
 
   <div *ngFor="let chat of chats" (click)="toTimeline()" class="line">
