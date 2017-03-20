@@ -14,6 +14,9 @@ export class HomeComponent implements OnInit {
   // 1 = contact
   // 2 = settings
   // 3 = notification
+  // 4 = add channel
+  // 5 = add groupe
+  // 6 = add chat
   constructor(private authService : AuthenticationService) {
     
   }
@@ -33,6 +36,18 @@ export class HomeComponent implements OnInit {
   }
   toNotification(recup : boolean){
     this.router = 3;
+  }
+
+  toAddChat(recup :boolean){
+    this.router = 6;
+  }
+
+  toAddChannel(recup :boolean){
+    this.router = 4;
+  }
+
+  toAddGroupe(recup :boolean){
+    this.router = 5;
   }
 
   deconnexion(recup: boolean) {
