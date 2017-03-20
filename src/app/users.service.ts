@@ -6,7 +6,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UsersService {
-  private url: string = "http://94.247.27.209:8080/SupChat/api/rest/";
+  //private url: string = "http://94.247.27.209:8080/SupChat/api/rest/";
+  private url: string = "http://10.31.18.76:8080/SupChat/api/rest/";
   private service: string = "user";
   private api: string = this.url + this.service;
   private apiLogin: string = this.url + "login";
@@ -52,6 +53,7 @@ export class UsersService {
    
     let headers = new Headers({
       "Content-Type": "application/json",
+      "Authorization":"Basic aazeazeaz"
     });
     let options = new RequestOptions({ headers: headers });
 

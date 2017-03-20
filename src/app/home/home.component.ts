@@ -1,5 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
+import { ChatsService} from '../chats.service';
+import { StoreService} from '../store.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,7 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class HomeComponent implements OnInit {
   @Output() deco: EventEmitter<boolean> = new EventEmitter<boolean>();
-  router: number = 0;
+  router: number = 4;
 
   //0 = timelines 
   // 1 = contact
@@ -17,8 +19,10 @@ export class HomeComponent implements OnInit {
   // 4 = add channel
   // 5 = add groupe
   // 6 = add chat
-  constructor(private authService : AuthenticationService) {
+  constructor(private authService : AuthenticationService, public chatsServices: ChatsService) {
     
+    
+    //this.chatsServices.getAllChats();
   }
 
   ngOnInit() {

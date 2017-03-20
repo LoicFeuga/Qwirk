@@ -17,7 +17,6 @@ export class AddChannelComponent implements OnInit {
   }
 
   create(){
-    alert(this.libelle+this.detail);
     this.chatsService.createChannel(this.libelle,this.detail, function(data){
       console.log(data);
     });
