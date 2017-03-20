@@ -3,10 +3,11 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { QDate } from './classes/date';
 import 'rxjs/add/operator/map';
 
+
 @Injectable()
 export class UsersService {
   private url: string = "http://94.247.27.209:8080/SupChat/api/rest/";
-  private service: string = "user/";
+  private service: string = "user";
   private api: string = this.url + this.service;
   private apiLogin: string = this.url + "login";
   private date: QDate = new QDate;
@@ -23,13 +24,12 @@ export class UsersService {
 
 
   login(login: string, mdp: string, callback: any) {
-
-    let headers = new Headers({
+     let headers = new Headers({
       "Content-Type": "application/x-www-form-urlencoded",
     });
     let options = new RequestOptions({ headers: headers });
     
-    this.http.post(this.apiLogin+"?login="+login+"&mdp="+mdp,"", options).map(res => res.json()).subscribe(data => {
+    this.http.post(this.apiLogin + "?login=" + login + "&mdp=" + mdp, "", options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
   }
@@ -39,13 +39,29 @@ export class UsersService {
     let dateCreate = this.date.now();
 
     let headers = new Headers({
-      'Authorization': 'Basic 93d56f77-3bd8-41af-a55c-a20af6059c72'
+      "content-type": "application/json"
     });
     let options = new RequestOptions({ headers: headers });
+    let obj = {
+      "login": login,
+      "mdp": mdp,
+      "nom": nom,
+      "prenom": prenom
+    }
+    let objS = JSON.stringify(obj);
+    let objo = JSON.parse(objS);
+    let that = this;
 
-    this.http.post(this.api + "", { login, mdp, nom, prenom, dateCreate }).map(res => res.json()).subscribe(data => {
+   
+    let headers2 = new Headers({
+      "Content-Type": "application/json",
+    });
+    let options2 = new RequestOptions({ headers: headers2 });
+
+    this.http.post(this.api, objo, options2).map(res => res.json()).subscribe(data => {
       callback(data);
     });
+
   }
 
 }

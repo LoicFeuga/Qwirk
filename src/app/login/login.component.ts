@@ -32,6 +32,9 @@ export class LoginComponent implements OnInit {
   date: QDate = new QDate();
   //isLogged: number = 1;
 
+  modalShow(show : boolean) {
+    this.modalDisplayed = false;
+  }
   constructor(app: AppComponent, public usersService: UsersService, private authService: AuthenticationService) {
     this.appName = app.appName;
   }
@@ -45,14 +48,22 @@ export class LoginComponent implements OnInit {
     let dateCreate = new Date();
     let that = this;
     this.usersService.login(this.email, this.password, function (data) {
-      
+
       if (data.id != null) {
         that.authService.setToken(data.token);
         console.log(data);
         that.logged.emit(true);
+      } else {
+        that.displayNotif("Avertissement", "Mauvaise combinaison email / mot de passe");
       }
     });
 
+  }
+
+  displayNotif(titre: string, description: string) {
+    this.modalTitre = titre;
+    this.modalContent = description;
+    this.modalDisplayed = true;
   }
 
   signin() {
