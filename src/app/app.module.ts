@@ -12,9 +12,13 @@ import { MessageComponent } from './message/message.component';
 import { ContactComponent } from './contact/contact.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UsersService } from './users.service';
+import { ChatsService } from './chats.service';
 import { AuthenticationService } from './authentication.service';
 import { ModalComponent } from './modal/modal.component';
 import { NotificationComponent } from './notification/notification.component';
+import { AddChannelComponent } from './add-channel/add-channel.component';
+import { AddGroupeComponent } from './add-groupe/add-groupe.component';
+import { AddChatComponent } from './add-chat/add-chat.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +31,17 @@ import { NotificationComponent } from './notification/notification.component';
     ContactComponent,
     SettingsComponent,
     ModalComponent,
-    NotificationComponent
+    NotificationComponent,
+    AddChannelComponent,
+    AddGroupeComponent,
+    AddChatComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [UsersService,AuthenticationService],
+  providers: [UsersService,AuthenticationService,ChatsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

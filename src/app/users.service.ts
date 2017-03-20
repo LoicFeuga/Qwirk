@@ -39,10 +39,6 @@ export class UsersService {
 
     let dateCreate = this.date.now();
 
-    let headers = new Headers({
-      "content-type": "application/json"
-    });
-    let options = new RequestOptions({ headers: headers });
     let obj = {
       "login": login,
       "mdp": mdp,
@@ -51,15 +47,15 @@ export class UsersService {
     }
     let objS = JSON.stringify(obj);
     let objo = JSON.parse(objS);
-    let that = this;
+    
 
    
-    let headers2 = new Headers({
+    let headers = new Headers({
       "Content-Type": "application/json",
     });
-    let options2 = new RequestOptions({ headers: headers2 });
+    let options = new RequestOptions({ headers: headers });
 
-    this.http.post(this.api, objo, options2).map(res => res.json()).subscribe(data => {
+    this.http.post(this.api, objo, options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
 
