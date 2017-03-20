@@ -21,6 +21,7 @@ export class AppComponent {
   onDeco(recup : boolean){
     console.log('ondeco');
     this.isLog = 0;  
+    localStorage.setItem('user','');
     document.querySelector('.root')['style'].background = "#FFFFFF";
 
 
