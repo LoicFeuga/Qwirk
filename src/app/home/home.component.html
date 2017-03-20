@@ -1,4 +1,4 @@
-<app-vmenu (deco)="deconnexion($event)" (notification)="toNotification($event)" (timeline)="toTimeline($event)" (contact)="toContact($event)" (settings)="toSettings($event)"></app-vmenu>
+<app-vmenu (deco)="deconnexion($event)" (addGroupe)="toAddGroupe($event)" (addChat)="toAddChat($event)"  (addChannel)="toAddChannel($event)"  (notification)="toNotification($event)" (timeline)="toTimeline($event)" (contact)="toContact($event)" (settings)="toSettings($event)"></app-vmenu>
 
 <div id="all" class="all">
 
@@ -6,4 +6,7 @@
     <app-contact *ngIf="router == 1"></app-contact>
     <app-settings *ngIf="router == 2"></app-settings>
     <app-notification *ngIf="router == 3"></app-notification>
+    <app-add-channel *ngIf="router == 4"></app-add-channel>
+    <app-add-groupe *ngIf="router == 5"></app-add-groupe>
+    <app-add-chat *ngIf="router == 6"></app-add-chat>
 </div>

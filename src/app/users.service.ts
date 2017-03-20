@@ -6,7 +6,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UsersService {
-  private url: string = "http://94.247.27.209:8080/SupChat/api/rest/";
+  //private url: string = "http://94.247.27.209:8080/SupChat/api/rest/";
+  private url: string = "http://10.31.18.76:8080/SupChat/api/rest/";
   private service: string = "user";
   private api: string = this.url + this.service;
   private apiLogin: string = this.url + "login";
@@ -30,6 +31,7 @@ export class UsersService {
     let options = new RequestOptions({ headers: headers });
     
     this.http.post(this.apiLogin + "?login=" + login + "&mdp=" + mdp, "", options).map(res => res.json()).subscribe(data => {
+      localStorage.setItem('user',JSON.stringify(data));
       callback(data);
     });
   }
@@ -38,10 +40,6 @@ export class UsersService {
 
     let dateCreate = this.date.now();
 
-    let headers = new Headers({
-      "content-type": "application/json"
-    });
-    let options = new RequestOptions({ headers: headers });
     let obj = {
       "login": login,
       "mdp": mdp,
@@ -50,15 +48,16 @@ export class UsersService {
     }
     let objS = JSON.stringify(obj);
     let objo = JSON.parse(objS);
-    let that = this;
+    
 
    
-    let headers2 = new Headers({
+    let headers = new Headers({
       "Content-Type": "application/json",
+      "Authorization":"Basic aazeazeaz"
     });
-    let options2 = new RequestOptions({ headers: headers2 });
+    let options = new RequestOptions({ headers: headers });
 
-    this.http.post(this.api, objo, options2).map(res => res.json()).subscribe(data => {
+    this.http.post(this.api, objo, options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
 
