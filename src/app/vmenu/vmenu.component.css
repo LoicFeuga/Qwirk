@@ -16,6 +16,10 @@
 }
 
 
+#nav::-webkit-scrollbar {
+    width: 8px;
+    background: #039BE5;
+}
 .intro{
     height: 60px;
     display: flex;

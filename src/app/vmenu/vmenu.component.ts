@@ -30,7 +30,7 @@ export class VMenuComponent implements OnInit {
   nom: string = "";
   prenom: string = "";
 
-  isMinimize: boolean = false;
+  isMinimize: boolean = true;
 
   appName: string = "Qwirk";
 
@@ -123,9 +123,8 @@ export class VMenuComponent implements OnInit {
   }
   minimize() {
     if (!this.isMinimize) {
-
       document.getElementById('nav').style.left = "-200px";
-      document.getElementById('top-bar').style.left = "0px";//calc(100% - 200px)
+      document.getElementById('top-bar').style.left = "0px";
       document.getElementById('top-bar').style.width = "100%";
       this.maxId('app-timeline');
       this.isMinimize = !this.isMinimize;
