@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ChatsService } from '../chats.service';
 
 @Component({
@@ -10,16 +10,19 @@ export class AddChatComponent implements OnInit {
 
   libelle: string = "";
   detail: string = "";
+  @Output() created: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(public chatsService: ChatsService) { }
 
   ngOnInit() {
   }
   
+  
+  
   create() {
-    alert(this.libelle + this.detail);
+    let that = this;
     this.chatsService.createChat(this.libelle, this.detail, function (data) {
-      console.log(data);
+      that.created.emit(data);
     });
   }
 

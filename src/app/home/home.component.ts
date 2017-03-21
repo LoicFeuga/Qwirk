@@ -1,6 +1,7 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild } from '@angular/core';
 import { ChatsService } from '../chats.service';
 import { AuthenticationService } from '../authentication.service';
+import { VMenuComponent } from '../vmenu/vmenu.component';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { AuthenticationService } from '../authentication.service';
 export class HomeComponent implements OnInit {
   @Output() deco: EventEmitter<boolean> = new EventEmitter<boolean>();
   router: number = 0;
-
+  @ViewChild(VMenuComponent) vmenu;
   //0 = timelines 
   // 1 = contact
   // 2 = settings
@@ -24,6 +25,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+  channelCreate(chat: any) {
+    this.vmenu.pushChannel(chat);
+  }
+  groupeCreate(chat: any) {
+    this.vmenu.pushGroupe(chat);
+  }
+  chatCreate(chat : any){
+    this.vmenu.pushChat(chat);
   }
 
   toContact(recup: boolean) {

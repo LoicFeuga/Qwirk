@@ -18,6 +18,11 @@ export class VMenuComponent implements OnInit {
   @Output() addChat: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Output() deco: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  allChannels: any[] = []; 
+  allGroupes: any[] = []; 
+  allChats: any[] = []; 
+  
   channels: any[] = [];
   groupes: any[] = [];
   chats: any[] = [];
@@ -39,6 +44,17 @@ export class VMenuComponent implements OnInit {
     this.prenom = user.prenom;
 
     this.rebuildChats();
+  }
+
+  pushChannel(data : any){
+    this.channels.push(data);
+  }
+
+  pushGroupe(data : any){
+    this.groupes.push(data);
+  }
+  pushChat(data : any){
+    this.chats.push(data);
   }
 
   rebuildChats() {
@@ -101,6 +117,8 @@ export class VMenuComponent implements OnInit {
       document.getElementById('top-bar').style.width = "100%";
       document.getElementById('all').style.width = "calc(100% - 10px)";
       document.getElementById('all').style.marginLeft = "10px";
+
+      
 
       this.isMinimize = true;
     } else {
