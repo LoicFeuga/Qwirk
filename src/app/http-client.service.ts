@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, RequestOptions } from '@angular/http';
-import { StoreService } from './store.service';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class HttpClientService {
@@ -10,13 +10,13 @@ export class HttpClientService {
   public chatService: string = "chat";
   public userService: string = "user";
 
-  constructor(private store : StoreService) {
+  constructor(private auth : AuthenticationService) {
 
   }
 
 
   getHeaders(): Headers {
-    let token = this.store.token;
+    let token = this.auth.getToken();
     let headers = new Headers();
     headers.append('Authorization', 'Basic ' + token);
     headers.append('Content-type', 'application/json');
@@ -24,11 +24,10 @@ export class HttpClientService {
   }
 
   getHeadersOptions(): RequestOptions {    
-    let token = this.store.token;
+    let token = this.auth.getToken();
     let headers = new Headers();
     headers.append('Authorization', 'Basic ' + token);
     headers.append('Content-type', 'application/json');
-    console.log('Basic '+token);
     return new RequestOptions({ headers: headers });
   }
 

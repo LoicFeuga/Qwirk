@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { HttpClientService } from './http-client.service';
-import { StoreService } from './store.service';
+import { AuthenticationService } from './authentication.service';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -13,12 +13,12 @@ export class ChatsService {
   private headers: Headers = this.httpClient.getHeaders();
   private options: RequestOptions = this.httpClient.getHeadersOptions();
 
-  constructor(private http: Http, private httpClient: HttpClientService,private store : StoreService) { }
+  constructor(private http: Http, private httpClient: HttpClientService,private auth : AuthenticationService) { }
 
   createChannel(libelle: string, detail: string, callback: any) {
     let type = 2;
     let statut = 1;
-    let creator = this.store.idUser;
+    let creator = this.auth.getUserID();
 
     this.http.post(this.apiCreate, { libelle, detail, type, statut, creator }, this.options).map(res => res.json()).subscribe(data => {
       callback(data);
@@ -36,8 +36,9 @@ export class ChatsService {
   createGroupe(libelle: string, detail: string, callback: any) {
     let type = 1;
     let statut = 1;
+    let creator = this.auth.getUserID();
     
-    this.http.post(this.apiCreate, { libelle, detail, type, statut }, this.options).map(res => res.json()).subscribe(data => {
+    this.http.post(this.apiCreate, { libelle, detail, type, statut, creator }, this.options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
   }
@@ -46,10 +47,10 @@ export class ChatsService {
   /**
    * 
    */
-  getAllChats(idUser : number){
+  getAllChats(idUser : number, callback : any){
     this.options = this.httpClient.getHeadersOptions();
     this.http.get(this.api+"/"+idUser,this.options).map(res => res.json()).subscribe(data => {
-      console.log(data);
+      callback(data);
     });
   }
 

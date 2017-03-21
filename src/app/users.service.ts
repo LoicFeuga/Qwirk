@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { QDate } from './classes/date';
 import { HttpClientService} from './http-client.service';
+import { AuthenticationService } from './authentication.service';
 import 'rxjs/add/operator/map';
 
 
@@ -12,7 +13,7 @@ export class UsersService {
   private apiLogin: string = this.httpClient.url + "login";
   private date: QDate = new QDate;
 
-  constructor(private http: Http, private httpClient : HttpClientService) {
+  constructor(private http: Http, private httpClient : HttpClientService, private auth :AuthenticationService) {
     this.http = http;
   }
 
@@ -30,7 +31,7 @@ export class UsersService {
     let options = new RequestOptions({ headers: headers });
     
     this.http.post(this.apiLogin + "?login=" + login + "&mdp=" + mdp, "", options).map(res => res.json()).subscribe(data => {
-      localStorage.setItem('user',JSON.stringify(data));
+      this.auth.setToken(data);
       callback(data);
     });
   }

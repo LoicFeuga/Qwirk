@@ -2,7 +2,6 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { UsersService } from '../users.service';
 import { AuthenticationService } from '../authentication.service';
-import { StoreService } from '../store.service';
 import { QDate } from '../classes/date';
 import { ModalComponent } from '../modal/modal.component';
 
@@ -36,7 +35,7 @@ export class LoginComponent implements OnInit {
   modalShow(show: boolean) {
     this.modalDisplayed = false;
   }
-  constructor(app: AppComponent, public usersService: UsersService, private store: StoreService) {
+  constructor(app: AppComponent, public usersService: UsersService, private auth: AuthenticationService) {
     this.appName = app.appName;
   }
 
@@ -51,7 +50,7 @@ export class LoginComponent implements OnInit {
     this.usersService.login(this.email, this.password, function (data) {
 
       if (data.id != null) {
-        that.store.setToken(JSON.stringify(data));
+        that.auth.setToken(data);
         that.logged.emit(true);
       } else {
         that.displayNotif("Avertissement", "Mauvaise combinaison email / mot de passe");
