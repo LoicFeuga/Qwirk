@@ -45,6 +45,10 @@ export class VMenuComponent implements OnInit {
     this.channels.push(data);
   }
 
+  pushGroupe(data : any){
+    this.groupes.push(data);
+  }
+
   rebuildChats() {
 
     let that = this;
