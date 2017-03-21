@@ -20,7 +20,7 @@
   </div>
 
   <div *ngFor="let channel of channels" (click)="toTimeline()" class="line">
-    <i class="material-icons">group_work</i>{{channel}}
+    <i class="material-icons">group_work</i>{{channel.libelle}}
   </div>
 
   <div class="chap">
@@ -29,7 +29,7 @@
   </div>
 
   <div *ngFor="let groupe of groupes" (click)="toTimeline()" class="line">
-    <i class="material-icons">people</i> {{groupe}}
+    <i class="material-icons">people</i> {{groupe.libelle}}
   </div>
   <div class="chap">
     <div class="chap_title">Chats</div>
@@ -37,7 +37,7 @@
   </div>
 
   <div *ngFor="let chat of chats" (click)="toTimeline()" class="line">
-    <i class="material-icons">chat</i> {{chat}}
+    <i class="material-icons">chat</i> {{chat.libelle}}
   </div>
 </div>
 
