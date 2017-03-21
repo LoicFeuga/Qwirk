@@ -8,7 +8,7 @@ import { VMenuComponent } from './vmenu/vmenu.component';
 })
 export class AppComponent {
   appName : string = "Qwirk";
-  isLog : number = 0;
+  isLog : number = 1;
   
   
   onLogged(recup : boolean){    

@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { ChatsService } from '../chats.service';
 import { AuthenticationService } from '../authentication.service';
-import { ChatsService} from '../chats.service';
-import { StoreService} from '../store.service';
 
 @Component({
   selector: 'app-home',
@@ -19,11 +18,8 @@ export class HomeComponent implements OnInit {
   // 4 = add channel
   // 5 = add groupe
   // 6 = add chat
-  constructor(private store : StoreService, public chatsServices: ChatsService) {
-    
-    console.log(this.store.idUser);
-    
-    this.chatsServices.getAllChats(this.store.idUser);
+  constructor(private auth: AuthenticationService, public chatsServices: ChatsService) {
+
   }
 
   ngOnInit() {
@@ -39,19 +35,19 @@ export class HomeComponent implements OnInit {
   toSettings(recup: boolean) {
     this.router = 2;
   }
-  toNotification(recup : boolean){
+  toNotification(recup: boolean) {
     this.router = 3;
   }
 
-  toAddChat(recup :boolean){
+  toAddChat(recup: boolean) {
     this.router = 6;
   }
 
-  toAddChannel(recup :boolean){
+  toAddChannel(recup: boolean) {
     this.router = 4;
   }
 
-  toAddGroupe(recup :boolean){
+  toAddGroupe(recup: boolean) {
     this.router = 5;
   }
 

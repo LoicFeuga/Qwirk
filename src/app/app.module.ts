@@ -14,7 +14,6 @@ import { SettingsComponent } from './settings/settings.component';
 import { UsersService } from './users.service';
 import { ChatsService } from './chats.service';
 import { HttpClientService } from './http-client.service';
-import { StoreService } from './store.service';
 import { AuthenticationService } from './authentication.service';
 import { ModalComponent } from './modal/modal.component';
 import { NotificationComponent } from './notification/notification.component';
@@ -43,7 +42,7 @@ import { AddChatComponent } from './add-chat/add-chat.component';
     FormsModule,
     HttpModule
   ],
-  providers: [UsersService,AuthenticationService,ChatsService,HttpClientService,StoreService],
+  providers: [UsersService,AuthenticationService,ChatsService,HttpClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

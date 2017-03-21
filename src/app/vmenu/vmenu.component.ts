@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AppComponent } from '../app.component';
-import { StoreService } from '../store.service';
+import { AuthenticationService } from '../authentication.service';
+import { ChatsService } from '../chats.service';
 
 @Component({
   selector: 'app-vmenu',
@@ -17,9 +18,9 @@ export class VMenuComponent implements OnInit {
   @Output() addChat: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Output() deco: EventEmitter<boolean> = new EventEmitter<boolean>();
-  channels: string[] = [];
-  groupes: string[] = [];
-  chats: string[] = [];
+  channels: any[] = [];
+  groupes: any[] = [];
+  chats: any[] = [];
 
   nom: string = "";
   prenom: string = "";
@@ -29,25 +30,39 @@ export class VMenuComponent implements OnInit {
   appName: string = "Qwirk";
 
 
-  constructor(app: AppComponent, private store : StoreService) {
+  constructor(app: AppComponent, private auth: AuthenticationService, private chatsServices: ChatsService) {
     this.appName = app.appName;
 
-    let user =this.store.user;
+    let user = this.auth.getUser();
 
     this.nom = user.nom;
     this.prenom = user.prenom;
 
-    this.channels.push('Channel 1');
-    this.channels.push('Channel 2');
-    this.groupes.push('groupe 1');
-    this.groupes.push('groupe 2');
-    this.chats.push('chat 1');
-    this.chats.push('chat 2');
-    this.chats.push('chat 3');
-    this.chats.push('chat 4');
-
+    this.rebuildChats();
   }
 
+  rebuildChats() {
+
+    let that = this;
+    this.chatsServices.getAllChats(this.auth.getUserID(), function (chats) {
+      for (let i = 0; i < chats.length; i++) {
+        //en fonction du type de chats
+        switch (chats[i].type) {
+          case 0:
+            that.chats.push(chats[i]);
+            break;
+
+          case 1:
+            that.groupes.push(chats[i]);
+            break;
+
+          case 2:
+            that.channels.push(chats[i]);
+            break;
+        }
+      }
+    });
+  }
   toTimeline() {
     this.timeline.emit(1);
   }
