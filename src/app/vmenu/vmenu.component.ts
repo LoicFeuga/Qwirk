@@ -48,6 +48,9 @@ export class VMenuComponent implements OnInit {
   pushGroupe(data : any){
     this.groupes.push(data);
   }
+  pushChat(data : any){
+    this.chats.push(data);
+  }
 
   rebuildChats() {
 

@@ -10,7 +10,7 @@ export class AddChatComponent implements OnInit {
 
   libelle: string = "";
   detail: string = "";
-  @Output() created: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() created: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(public chatsService: ChatsService) { }
 
@@ -20,9 +20,9 @@ export class AddChatComponent implements OnInit {
   
   
   create() {
+    let that = this;
     this.chatsService.createChat(this.libelle, this.detail, function (data) {
-      console.log(data);
-      
+      that.created.emit(data);
     });
   }
 

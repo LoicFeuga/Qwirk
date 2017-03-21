@@ -32,6 +32,9 @@ export class HomeComponent implements OnInit {
   groupeCreate(chat: any) {
     this.vmenu.pushGroupe(chat);
   }
+  chatCreate(chat : any){
+    this.vmenu.pushChat(chat);
+  }
 
   toContact(recup: boolean) {
     this.router = 1;

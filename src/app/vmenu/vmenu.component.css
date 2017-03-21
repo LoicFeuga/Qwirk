@@ -78,25 +78,24 @@
 
 .chap{
     width:100%;
-    height:30px;
+    height:50px;
     padding:5px;
     font-size: 20px;
     margin-top: 30px;
     margin-bottom: 5px;
-    float: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .chap_title{
-    float: left;
+    
 }
 .chap_more{
-    float: right;
-    border-radius: 50%;
-    border: 2px white solid;
     width: 30px;
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 30px;
+    display: flex;
 }
 
 .search i{
