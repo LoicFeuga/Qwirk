@@ -123,7 +123,6 @@ export class VMenuComponent implements OnInit {
 
     let el = document.getElementById(id);
     if (el != null) {
-
       document.getElementById(id).style.width = "calc(100% - 20px)";
       document.getElementById(id).style.marginLeft = "10px";
     }

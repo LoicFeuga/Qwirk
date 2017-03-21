@@ -9,7 +9,7 @@
     background: white;
     margin-top:70px;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-
+    transition: 0.5s;
 }
 
 .timeline::-webkit-scrollbar {
