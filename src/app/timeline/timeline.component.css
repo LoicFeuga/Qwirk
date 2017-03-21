@@ -11,6 +11,14 @@
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 
 }
+
+.timeline::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 10px;
+    background: #eee;
+}
+
+
 .container_text{    
     bottom: 0;
     padding-left:40px;
