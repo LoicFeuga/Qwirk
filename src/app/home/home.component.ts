@@ -10,7 +10,7 @@ import { StoreService} from '../store.service';
 })
 export class HomeComponent implements OnInit {
   @Output() deco: EventEmitter<boolean> = new EventEmitter<boolean>();
-  router: number = 4;
+  router: number = 0;
 
   //0 = timelines 
   // 1 = contact
@@ -19,10 +19,11 @@ export class HomeComponent implements OnInit {
   // 4 = add channel
   // 5 = add groupe
   // 6 = add chat
-  constructor(private authService : AuthenticationService, public chatsServices: ChatsService) {
+  constructor(private store : StoreService, public chatsServices: ChatsService) {
     
+    console.log(this.store.idUser);
     
-    //this.chatsServices.getAllChats();
+    this.chatsServices.getAllChats(this.store.idUser);
   }
 
   ngOnInit() {

@@ -8,18 +8,15 @@ import { VMenuComponent } from './vmenu/vmenu.component';
 })
 export class AppComponent {
   appName : string = "Qwirk";
-  isLog : number = 1;
+  isLog : number = 0;
   
   
-  onLogged(recup : boolean){
-    console.log('onLogged');
-    
+  onLogged(recup : boolean){    
     document.querySelector('.root')['style'].background = "#bbdefb";
     this.isLog = recup == true ? 1 : 0;
   }
 
   onDeco(recup : boolean){
-    console.log('ondeco');
     this.isLog = 0;  
     localStorage.setItem('user','');
     document.querySelector('.root')['style'].background = "#FFFFFF";

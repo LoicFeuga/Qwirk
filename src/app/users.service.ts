@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { QDate } from './classes/date';
+import { HttpClientService} from './http-client.service';
 import 'rxjs/add/operator/map';
 
 
 @Injectable()
 export class UsersService {
-  //private url: string = "http://94.247.27.209:8080/SupChat/api/rest/";
-  private url: string = "http://10.31.18.76:8080/SupChat/api/rest/";
-  private service: string = "user";
-  private api: string = this.url + this.service;
-  private apiLogin: string = this.url + "login";
+  
+  private api: string = this.httpClient.url + this.httpClient.userService;
+  private apiLogin: string = this.httpClient.url + "login";
   private date: QDate = new QDate;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private httpClient : HttpClientService) {
     this.http = http;
   }
 

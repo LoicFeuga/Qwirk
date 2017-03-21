@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AppComponent } from '../app.component';
+import { StoreService } from '../store.service';
 
 @Component({
   selector: 'app-vmenu',
@@ -28,10 +29,10 @@ export class VMenuComponent implements OnInit {
   appName: string = "Qwirk";
 
 
-  constructor(app: AppComponent) {
+  constructor(app: AppComponent, private store : StoreService) {
     this.appName = app.appName;
 
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user =this.store.user;
 
     this.nom = user.nom;
     this.prenom = user.prenom;
