@@ -15,7 +15,7 @@ export class TimelineComponent implements OnInit {
 
     this.messages.push({author:"loic",content:"loremkojaoj oijoiaj ioj"});
     setTimeout(function () {
-      let objDiv = document.querySelector("#timeline");
+      let objDiv = document.querySelector("#app-timeline");
       objDiv.scrollTop = objDiv.scrollHeight;
     }, 100);
   }
@@ -26,9 +26,9 @@ export class TimelineComponent implements OnInit {
   add() {
     this.messages.push({ author: "loic", content: this.text });
     setTimeout(function () {
-      let objDiv = document.querySelector("#timeline");
+      let objDiv = document.querySelector("#app-timeline");
       objDiv.scrollTop = objDiv.scrollHeight;
-    });
+    },1);
     this.text = "";
   }
   ngOnInit() {

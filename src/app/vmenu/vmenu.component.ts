@@ -19,10 +19,10 @@ export class VMenuComponent implements OnInit {
 
   @Output() deco: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  allChannels: any[] = []; 
-  allGroupes: any[] = []; 
-  allChats: any[] = []; 
-  
+  allChannels: any[] = [];
+  allGroupes: any[] = [];
+  allChats: any[] = [];
+
   channels: any[] = [];
   groupes: any[] = [];
   chats: any[] = [];
@@ -46,14 +46,14 @@ export class VMenuComponent implements OnInit {
     this.rebuildChats();
   }
 
-  pushChannel(data : any){
+  pushChannel(data: any) {
     this.channels.push(data);
   }
 
-  pushGroupe(data : any){
+  pushGroupe(data: any) {
     this.groupes.push(data);
   }
-  pushChat(data : any){
+  pushChat(data: any) {
     this.chats.push(data);
   }
 
@@ -77,6 +77,8 @@ export class VMenuComponent implements OnInit {
             break;
         }
       }
+
+      that.minimize();
     });
   }
   toTimeline() {
@@ -109,26 +111,32 @@ export class VMenuComponent implements OnInit {
     this.deco.emit(true);
   }
 
+  minId(id: string) {
+
+    document.getElementById(id).style.width = "calc(100% - 220px)";
+    document.getElementById(id).style.marginLeft = "210px";
+  }
+  maxId(id: string) {
+
+    document.getElementById(id).style.width = "calc(100% - 20px)";
+    document.getElementById(id).style.marginLeft = "10px";
+  }
   minimize() {
     if (!this.isMinimize) {
 
       document.getElementById('nav').style.left = "-200px";
       document.getElementById('top-bar').style.left = "0px";//calc(100% - 200px)
       document.getElementById('top-bar').style.width = "100%";
-      document.getElementById('all').style.width = "calc(100% - 10px)";
-      document.getElementById('all').style.marginLeft = "10px";
-
-      
-
-      this.isMinimize = true;
+      this.maxId('app-timeline');
+      this.isMinimize = !this.isMinimize;
     } else {
-      document.getElementById('all').style.width = "calc(100% - 220px)";
-      document.getElementById('all').style.marginLeft = "210px";
+      
       document.getElementById('nav').style.left = "0px";
       document.getElementById('top-bar').style.left = "200px";
       document.getElementById('top-bar').style.width = "calc(100% - 200px)";
+      this.minId('app-timeline');
 
-      this.isMinimize = false;
+      this.isMinimize = !this.isMinimize;
 
     }
   }

@@ -1,12 +1,10 @@
-<app-vmenu (deco)="deconnexion($event)" (addGroupe)="toAddGroupe($event)" (addChat)="toAddChat($event)"  (addChannel)="toAddChannel($event)"  (notification)="toNotification($event)" (timeline)="toTimeline($event)" (contact)="toContact($event)" (settings)="toSettings($event)"></app-vmenu>
+<app-vmenu (deco)="deconnexion($event)" (addGroupe)="toAddGroupe($event)" (addChat)="toAddChat($event)" (addChannel)="toAddChannel($event)"
+    (notification)="toNotification($event)" (timeline)="toTimeline($event)" (contact)="toContact($event)" (settings)="toSettings($event)"></app-vmenu>
 
-<div id="all" class="all">
-
-    <app-timeline *ngIf="router == 0"></app-timeline>
-    <app-contact *ngIf="router == 1"></app-contact>
-    <app-settings *ngIf="router == 2"></app-settings>
-    <app-notification *ngIf="router == 3"></app-notification>
-    <app-add-channel *ngIf="router == 4" (created)="channelCreate($event)"></app-add-channel>
-    <app-add-groupe *ngIf="router == 5"  (created)="groupeCreate($event)"></app-add-groupe>
-    <app-add-chat *ngIf="router == 6" (created)="chatCreate($event)"></app-add-chat>
-</div>
+<app-timeline  *ngIf="router == 0"></app-timeline>
+<app-contact id='app-contact' *ngIf="router == 1"></app-contact>
+<app-settings id='app-settings' *ngIf="router == 2"></app-settings>
+<app-notification id='app-notification' *ngIf="router == 3"></app-notification>
+<app-add-channel id='app-channel' *ngIf="router == 4" (created)="channelCreate($event)"></app-add-channel>
+<app-add-groupe id='app-groupe' *ngIf="router == 5" (created)="groupeCreate($event)"></app-add-groupe>
+<app-add-chat id='app-chat' *ngIf="router == 6" (created)="chatCreate($event)"></app-add-chat>
