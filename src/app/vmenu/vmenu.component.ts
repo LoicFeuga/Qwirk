@@ -112,14 +112,21 @@ export class VMenuComponent implements OnInit {
   }
 
   minId(id: string) {
+    let el = document.getElementById(id);
+    if (el != null) {
+      el.style.width = "calc(100% - 220px)";
+      el.style.marginLeft = "210px";
+    }
 
-    document.getElementById(id).style.width = "calc(100% - 220px)";
-    document.getElementById(id).style.marginLeft = "210px";
   }
   maxId(id: string) {
 
-    document.getElementById(id).style.width = "calc(100% - 20px)";
-    document.getElementById(id).style.marginLeft = "10px";
+    let el = document.getElementById(id);
+    if (el != null) {
+
+      document.getElementById(id).style.width = "calc(100% - 20px)";
+      document.getElementById(id).style.marginLeft = "10px";
+    }
   }
   minimize() {
     if (!this.isMinimize) {
@@ -129,7 +136,7 @@ export class VMenuComponent implements OnInit {
       this.maxId('app-timeline');
       this.isMinimize = !this.isMinimize;
     } else {
-      
+
       document.getElementById('nav').style.left = "0px";
       document.getElementById('top-bar').style.left = "200px";
       document.getElementById('top-bar').style.width = "calc(100% - 200px)";
