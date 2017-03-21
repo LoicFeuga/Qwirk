@@ -32,6 +32,9 @@ export class VMenuComponent implements OnInit {
 
   isMinimize: boolean = true;
 
+  //contiendra chaque différent fenetre possible en main
+  allFrame: string[] = [];
+
   appName: string = "Qwirk";
 
 
@@ -42,6 +45,14 @@ export class VMenuComponent implements OnInit {
 
     this.nom = user.nom;
     this.prenom = user.prenom;
+
+    this.allFrame.push('app-timeline');
+    this.allFrame.push('app-contact');
+    this.allFrame.push('app-add-channel');
+    this.allFrame.push('app-add-groupe');
+    this.allFrame.push('app-add-chat');
+    this.allFrame.push('app-setting');
+    this.allFrame.push('app-notificafion');
 
     this.rebuildChats();
   }
@@ -132,15 +143,19 @@ export class VMenuComponent implements OnInit {
       document.getElementById('nav').style.left = "-200px";
       document.getElementById('top-bar').style.left = "0px";
       document.getElementById('top-bar').style.width = "100%";
-      this.maxId('app-timeline');
+      for (let i = 0; i < this.allFrame.length; i++) {
+        this.maxId(this.allFrame[i]);
+      }
       this.isMinimize = !this.isMinimize;
     } else {
 
       document.getElementById('nav').style.left = "0px";
       document.getElementById('top-bar').style.left = "200px";
       document.getElementById('top-bar').style.width = "calc(100% - 200px)";
-      this.minId('app-timeline');
 
+      for (let i = 0; i < this.allFrame.length; i++) {
+        this.minId(this.allFrame[i]);
+      }
       this.isMinimize = !this.isMinimize;
 
     }
