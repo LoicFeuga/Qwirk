@@ -14,21 +14,25 @@
 .shadow{
     box-shadow: 0 2px 4px rgba(0,0,0,0.30), 0 4px 3px rgba(0,0,0,0.22); 
     padding-top: 5px;
+    transition: .5s;
 
 }
 .chat{
+    transition: .5s;
     padding:10px;
 }
 .title{
     width:100%;
     display: flex;
     justify-content: center;
+    transition: .5s;
     align-items: center;
 }
 
 .title-chat{
     font-size: 18px;
     text-align:center;
+    transition: .5s;
     margin-top: 20px;
 }
 .libelle-chat{
@@ -36,9 +40,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+    transition: .5s;
 }
 
 .libelle-chat:hover{
+    transition: 1s;
 background-color: #e0e0e0;
 }
 

@@ -16,6 +16,14 @@ export class AppComponent {
     this.isLog = recup == true ? 1 : 0;
   }
 
+  goFiltre(event : any){
+    if(event.code == "KeyF" && event.ctrlKey == true ){
+      document.getElementById('search').focus();
+      return false;
+    }
+    
+  }
+
   onDeco(recup : boolean){
     this.isLog = 0;  
     localStorage.setItem('user','');

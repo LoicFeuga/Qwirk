@@ -69,19 +69,19 @@ export class VMenuComponent implements OnInit {
     }
     else {
       for (let i = 0; i < this.chats.length; i++) {
-        if (this.chats[i].libelle.indexOf(this.textFiltre) > -1) {
+        if (this.chats[i].libelle.toLowerCase().indexOf(this.textFiltre.toLowerCase()) > -1) {
           this.chatsFiltred.push(this.chats[i]);
         }
       }
 
       for (let i = 0; i < this.groupes.length; i++) {
-        if (this.groupes[i].libelle.indexOf(this.textFiltre) > -1) {
+        if (this.groupes[i].libelle.toLowerCase().indexOf(this.textFiltre.toLowerCase()) > -1) {
           this.groupesFiltred.push(this.groupes[i]);
         }
       }
 
       for (let i = 0; i < this.channels.length; i++) {
-        if (this.channels[i].libelle.indexOf(this.textFiltre) > -1) {
+        if (this.channels[i].libelle.toLowerCase().indexOf(this.textFiltre.toLowerCase()) > -1) {
           this.channelsFiltred.push(this.channels[i]);
         }
       }
