@@ -26,6 +26,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
 
   }
+  chatDeleted(recup : any){
+    this.vmenu.rebuildChatsFromIdLess(recup);
+  }
   channelCreate(chat: any) {
     this.vmenu.pushChannel(chat);
   }

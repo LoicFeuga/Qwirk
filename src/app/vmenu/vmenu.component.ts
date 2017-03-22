@@ -19,10 +19,10 @@ export class VMenuComponent implements OnInit {
 
   @Output() deco: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  allChannels: any[] = []; 
-  allGroupes: any[] = []; 
-  allChats: any[] = []; 
-  
+  allChannels: any[] = [];
+  allGroupes: any[] = [];
+  allChats: any[] = [];
+
   channels: any[] = [];
   groupes: any[] = [];
   chats: any[] = [];
@@ -30,7 +30,10 @@ export class VMenuComponent implements OnInit {
   nom: string = "";
   prenom: string = "";
 
-  isMinimize: boolean = false;
+  isMinimize: boolean = true;
+
+  //contiendra chaque différent fenetre possible en main
+  allFrame: string[] = [];
 
   appName: string = "Qwirk";
 
@@ -43,24 +46,35 @@ export class VMenuComponent implements OnInit {
     this.nom = user.nom;
     this.prenom = user.prenom;
 
+    this.allFrame.push('app-timeline');
+    this.allFrame.push('app-contact');
+    this.allFrame.push('app-add-channel');
+    this.allFrame.push('app-add-groupe');
+    this.allFrame.push('app-add-chat');
+    this.allFrame.push('app-setting');
+    this.allFrame.push('app-notificafion');
+
     this.rebuildChats();
   }
 
-  pushChannel(data : any){
+  pushChannel(data: any) {
     this.channels.push(data);
   }
 
-  pushGroupe(data : any){
+  pushGroupe(data: any) {
     this.groupes.push(data);
   }
-  pushChat(data : any){
+  pushChat(data: any) {
     this.chats.push(data);
   }
 
   rebuildChats() {
-
     let that = this;
-    this.chatsServices.getAllChats(this.auth.getUserID(), function (chats) {
+
+    this.chatsServices.getAllChats(that.auth.getUserID(), function (chats) {
+      that.chats = [];
+      that.channels = [];
+      that.groupes = [];
       for (let i = 0; i < chats.length; i++) {
         //en fonction du type de chats
         switch (chats[i].type) {
@@ -77,58 +91,159 @@ export class VMenuComponent implements OnInit {
             break;
         }
       }
+
+      that.minimize();
     });
   }
+
+  rebuildChatsFromIdLess(id: any) {
+    let that = this;
+
+    let again = true;
+    for (let i = 0; i < this.channels.length && again; i++) {
+      if (this.channels[i].id == id) {
+        this.channels.splice(i, 1);
+        again = false;
+      }
+    }
+    for (let i = 0; i < this.chats.length; i++) {
+      if (this.chats[i].id == id) {
+        this.chats.splice(i, 1);
+        again = false;
+      }
+    }
+    for (let i = 0; i < this.groupes.length; i++) {
+      if (this.groupes[i].id == id) {
+        this.groupes.splice(i, 1);
+        again = false;
+      }
+    }
+
+  }
+
   toTimeline() {
     this.timeline.emit(1);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    });
   }
   toContact() {
     this.contact.emit(true);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    });
+
   }
   toSettings() {
     this.settings.emit(true);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    }, 100);
 
   }
 
   toAddChannel() {
     this.addChannel.emit(true);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    }, 100);
   }
   toAddGroupe() {
     this.addGroupe.emit(true);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    }, 100);
 
   }
   toAddChat() {
     this.addChat.emit(true);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    }, 100);
 
   }
 
   toNotification() {
     this.notification.emit(true);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    });
   }
   deconnexion() {
     this.deco.emit(true);
   }
 
-  minimize() {
-    if (!this.isMinimize) {
+  minId(id: string) {
+    let el = document.getElementById(id);
+    if (el != null) {
+      el.style.width = "calc(100% - 220px)";
+      el.style.marginLeft = "210px";
+    }
 
+  }
+  maxId(id: string) {
+
+    let el = document.getElementById(id);
+    if (el != null) {
+      document.getElementById(id).style.width = "calc(100% - 20px)";
+      document.getElementById(id).style.marginLeft = "10px";
+    }
+  }
+  adapt() {
+    if (this.isMinimize) {
       document.getElementById('nav').style.left = "-200px";
-      document.getElementById('top-bar').style.left = "0px";//calc(100% - 200px)
+      document.getElementById('top-bar').style.left = "0px";
       document.getElementById('top-bar').style.width = "100%";
-      document.getElementById('all').style.width = "calc(100% - 10px)";
-      document.getElementById('all').style.marginLeft = "10px";
+      for (let i = 0; i < this.allFrame.length; i++) {
+        this.maxId(this.allFrame[i]);
+      }
 
-      
-
-      this.isMinimize = true;
     } else {
-      document.getElementById('all').style.width = "calc(100% - 220px)";
-      document.getElementById('all').style.marginLeft = "210px";
+
       document.getElementById('nav').style.left = "0px";
       document.getElementById('top-bar').style.left = "200px";
       document.getElementById('top-bar').style.width = "calc(100% - 200px)";
 
-      this.isMinimize = false;
+      for (let i = 0; i < this.allFrame.length; i++) {
+        this.minId(this.allFrame[i]);
+      }
+
+
+    }
+  }
+  minimize() {
+    if (!this.isMinimize) {
+      document.getElementById('nav').style.left = "-200px";
+      document.getElementById('top-bar').style.left = "0px";
+      document.getElementById('top-bar').style.width = "100%";
+      for (let i = 0; i < this.allFrame.length; i++) {
+        this.maxId(this.allFrame[i]);
+      }
+      this.isMinimize = !this.isMinimize;
+    } else {
+
+      document.getElementById('nav').style.left = "0px";
+      document.getElementById('top-bar').style.left = "200px";
+      document.getElementById('top-bar').style.width = "calc(100% - 200px)";
+
+      for (let i = 0; i < this.allFrame.length; i++) {
+        this.minId(this.allFrame[i]);
+      }
+      this.isMinimize = !this.isMinimize;
 
     }
   }
