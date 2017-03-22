@@ -27,8 +27,9 @@ export class ChatsService {
   createChat(libelle: string, detail: string, callback: any) {
     let type = 0;
     let statut = 1;
+    let creator = this.auth.getUserID();
     
-    this.http.post(this.apiCreate, { libelle, detail, type, statut }, this.options).map(res => res.json()).subscribe(data => {
+    this.http.post(this.apiCreate, { libelle, detail, type, statut, creator }, this.options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
   }
@@ -43,6 +44,11 @@ export class ChatsService {
     });
   }
 
+  deleteChat(id:number){
+    this.http.delete(this.api+"/"+id,this.options).map(res => res.json()).subscribe(data =>{
+      
+    });
+  }
 
   /**
    * 

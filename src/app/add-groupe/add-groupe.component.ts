@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { ChatsService } from '../chats.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { ChatsService } from '../chats.service';
 export class AddGroupeComponent implements OnInit {
   libelle: string = "";
   detail: string = "";
+  @Output() created: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(public chatsService : ChatsService) { }
 
@@ -16,9 +17,11 @@ export class AddGroupeComponent implements OnInit {
   }
 
   create() {
-    alert(this.libelle + this.detail);
+    
+    let that = this;
     this.chatsService.createGroupe(this.libelle, this.detail, function (data) {
-      console.log(data);
+
+      that.created.emit(data)
     });
   }
 }

@@ -1,5 +1,5 @@
 #all{
-      width: calc(100% - 220px);
+    width: calc(100vw - 220px);
     min-width: 200px;
     margin-left:210px;
     border-radius: 1px;

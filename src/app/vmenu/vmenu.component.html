@@ -16,7 +16,9 @@
   </div>
   <div class="chap">
     <div class="chap_title">Channels</div>
-    <div class="chap_more" (click)="toAddChannel()">+</div>
+
+    <a class="btn-floating btn waves-effect waves-light red chap_more" (click)="toAddChannel()"><i class="material-icons">add</i></a>
+
   </div>
 
   <div *ngFor="let channel of channels" (click)="toTimeline()" class="line">
@@ -25,7 +27,8 @@
 
   <div class="chap">
     <div class="chap_title">Groupes</div>
-    <div class="chap_more" (click)="toAddGroupe()">+</div>
+    <a class="btn-floating btn waves-effect waves-light red chap_more" (click)="toAddGroupe()"><i class="material-icons">add</i></a>
+
   </div>
 
   <div *ngFor="let groupe of groupes" (click)="toTimeline()" class="line">
@@ -33,7 +36,8 @@
   </div>
   <div class="chap">
     <div class="chap_title">Chats</div>
-    <div class="chap_more" (click)="toAddChat()">+</div>
+    <!--<div class="chap_more" (click)="toAddChat()">+</div>-->
+    <a class="btn-floating btn waves-effect waves-light red chap_more" (click)="toAddChat()"><i class="material-icons">add</i></a>
   </div>
 
   <div *ngFor="let chat of chats" (click)="toTimeline()" class="line">
