@@ -12,7 +12,7 @@
 
   <div class="search">
     <i class="material-icons">search</i>
-    <input type="text">
+    <input type="text" [(ngModel)]="textFiltre" (keyup)="filtre()">
   </div>
   <div class="chap">
     <div class="chap_title">Channels</div>
@@ -21,7 +21,7 @@
 
   </div>
 
-  <div *ngFor="let channel of channels" (click)="toTimeline()" class="line">
+  <div *ngFor="let channel of channelsFiltred" (click)="toTimeline()" class="line">
     <i class="material-icons">group_work</i>{{channel.libelle}}
   </div>
 
@@ -31,7 +31,7 @@
 
   </div>
 
-  <div *ngFor="let groupe of groupes" (click)="toTimeline()" class="line">
+  <div *ngFor="let groupe of groupesFiltred" (click)="toTimeline()" class="line">
     <i class="material-icons">people</i> {{groupe.libelle}}
   </div>
   <div class="chap">
@@ -40,7 +40,7 @@
     <a class="btn-floating btn waves-effect waves-light red chap_more" (click)="toAddChat()"><i class="material-icons">add</i></a>
   </div>
 
-  <div *ngFor="let chat of chats" (click)="toTimeline()" class="line">
+  <div *ngFor="let chat of chatsFiltred" (click)="toTimeline()" class="line">
     <i class="material-icons">chat</i> {{chat.libelle}}
   </div>
 </div>

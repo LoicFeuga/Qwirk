@@ -19,14 +19,15 @@ export class VMenuComponent implements OnInit {
 
   @Output() deco: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  allChannels: any[] = [];
-  allGroupes: any[] = [];
-  allChats: any[] = [];
+  channelsFiltred: any[] = [];
+  groupesFiltred: any[] = [];
+  chatsFiltred: any[] = [];
 
   channels: any[] = [];
   groupes: any[] = [];
   chats: any[] = [];
 
+  textFiltre: string = "";
   nom: string = "";
   prenom: string = "";
 
@@ -55,6 +56,36 @@ export class VMenuComponent implements OnInit {
     this.allFrame.push('app-notificafion');
 
     this.rebuildChats();
+  }
+
+  filtre() {
+    this.channelsFiltred = [];
+    this.groupesFiltred = [];
+    this.chatsFiltred = [];
+    if (this.textFiltre == "") {
+      this.chatsFiltred = this.chats;
+      this.groupesFiltred = this.groupes;
+      this.channelsFiltred = this.channels;
+    }
+    else {
+      for (let i = 0; i < this.chats.length; i++) {
+        if (this.chats[i].libelle.indexOf(this.textFiltre) > -1) {
+          this.chatsFiltred.push(this.chats[i]);
+        }
+      }
+
+      for (let i = 0; i < this.groupes.length; i++) {
+        if (this.groupes[i].libelle.indexOf(this.textFiltre) > -1) {
+          this.groupesFiltred.push(this.groupes[i]);
+        }
+      }
+
+      for (let i = 0; i < this.channels.length; i++) {
+        if (this.channels[i].libelle.indexOf(this.textFiltre) > -1) {
+          this.channelsFiltred.push(this.channels[i]);
+        }
+      }
+    }
   }
 
   pushChannel(data: any) {
@@ -93,6 +124,7 @@ export class VMenuComponent implements OnInit {
       }
 
       that.minimize();
+      that.filtre();
     });
   }
 
@@ -119,6 +151,7 @@ export class VMenuComponent implements OnInit {
       }
     }
 
+    this.filtre();
   }
 
   toTimeline() {
