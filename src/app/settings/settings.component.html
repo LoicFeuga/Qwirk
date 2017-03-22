@@ -2,23 +2,38 @@
     <h2 class="title">Vos paramètres</h2>
     <div class="container">
         <div class="row">
-            <div class="col m4 s12 ">
-                <h3 class="title-chat">Channels</h3>
-                <div *ngFor="let channel of channels" class="libelle-chat">{{channel.libelle}}
-                    <i *ngIf="channel.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(channel.id)">delete_forever</i>
+            <div class="col m4 s12 chat   ">
+                <div class="shadow">
+                    <h3 class="title-chat">Channels</h3>
+                    <div *ngFor="let channel of channels" class="libelle-chat">
+                        <i class="material-icons">group_work</i>
+                        <div>{{channel.libelle}}</div>
+                        <i *ngIf="channel.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(channel.id)">delete_forever</i>
+                    </div>
+
                 </div>
             </div>
-            <div class="col m4 s12 ">
-                <h3 class="title-chat">Groupes</h3>
-                <div *ngFor="let groupe of groupes" class="libelle-chat">{{groupe.libelle}}
-                    <i *ngIf="groupe.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(groupe.id)">delete_forever</i>
+            <div class="col m4 s12 chat   ">
+                <div class="shadow">
+                    <h3 class="title-chat">Groupes</h3>
+                    <div *ngFor="let groupe of groupes" class="libelle-chat">
+                        <i class="material-icons">people</i>
+                        <div>{{groupe.libelle}}</div>
+                        <i *ngIf="groupe.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(groupe.id)">delete_forever</i>
+                    </div>
+
                 </div>
 
             </div>
-            <div class="col m4 s12 ">
-                <h3 class="title-chat">Chats</h3>
-                <div *ngFor="let chats of chats" class="libelle-chat">{{chats.libelle}}
-                    <i *ngIf="chats.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(chats.id)">delete_forever</i>
+            <div class="col m4 s12  chat ">
+                <div class="shadow">
+                    <h3 class="title-chat">Chats</h3>
+                    <div *ngFor="let chats of chats" class="libelle-chat">
+                        <i class="material-icons">chat</i>
+                        <div>{{chats.libelle}}</div>
+                        <i *ngIf="chats.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(chats.id)">delete_forever</i>
+                    </div>
+
                 </div>
 
             </div>

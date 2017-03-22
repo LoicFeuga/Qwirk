@@ -1,4 +1,4 @@
-<div class="root">
+<div  (window:keydown)="goFiltre($event)"  class="root">
   <app-login (logged)="onLogged($event)" *ngIf="isLog == 0" ></app-login>
   <app-home (deco)="onDeco($event)" *ngIf="isLog == 1" ></app-home>
 </div>
