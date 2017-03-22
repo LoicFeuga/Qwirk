@@ -4,6 +4,8 @@
   <app-message *ngFor="let message of messages" [author]="message.author" [content]="message.content" class="row message">
   </app-message>
 
+  <app-video-call></app-video-call>
+  
   <div class="container_text">
     <div class="container_sub" *ngIf="isChatSelected()">
 
@@ -21,21 +23,23 @@
     <div class="container_sub_center" *ngIf="isCallSelected()">
 
 
-      <div class="container_send" *ngIf="isCallSelected()">
+      <div class="container_send_center" *ngIf="isCallSelected()">
 
         <button (click)="add()" class="btn waves-effect waves-light" type="submit" name="action">
-      Démarrer un appel vidéo
+      Démarrer un appel audio
       </button>
       </div>
     </div>
 
-
     <div class="container_sub_center" *ngIf="isVideoSelected()">
 
-      <div class="container_send">
+      <div class="container_send_center">
 
-        <button (click)="add()" class="btn waves-effect waves-light" type="submit" name="action">
+        <button (click)="startVideo()" class="btn waves-effect waves-light" type="submit" name="action">
       Démarrer un appel vidéo
+      </button>
+        <button (click)="joinVideo()" class="btn waves-effect waves-light" type="submit" name="action">
+      Rejoindre l'appel vidéo
       </button>
       </div>
     </div>

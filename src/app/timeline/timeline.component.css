@@ -101,6 +101,11 @@
     justify-content: center;
     width: 25%;
 }
+.container_send_center{
+
+    display: flex;
+    justify-content: center;
+}
 
 .send{
     width: 100%;

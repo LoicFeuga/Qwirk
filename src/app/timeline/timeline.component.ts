@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { VideoCallComponent } from '../video-call/video-call.component';
 
 @Component({
   selector: 'app-timeline',
@@ -14,6 +14,7 @@ export class TimelineComponent implements OnInit {
   //1 = audio;
   //2 = video
   modeTimeline = 0;
+  @ViewChild(VideoCallComponent) video;
 
   constructor() {
 
@@ -32,15 +33,23 @@ export class TimelineComponent implements OnInit {
   isChatSelected() {
     return this.modeTimeline == 0;
   }
-  isCallSelected(){
+  isCallSelected() {
     return this.modeTimeline == 1;
   }
 
-  setMode(mode : number){
+  setMode(mode: number) {
     this.modeTimeline = mode;
   }
-  isVideoSelected(){
+  isVideoSelected() {
     return this.modeTimeline == 2;
+  }
+
+  startVideo() {
+    this.video.start();
+  }
+
+  joinVideo(){
+    this.video.join();
   }
 
   add() {
