@@ -11,6 +11,30 @@
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     transition: 0.5s;
 }
+.hr{
+    
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color:grey;
+}
+.container_call{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height:40px;
+    margin-top: 20px;
+    border-top: 1px solid #414141;
+}
+.item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
 .timeline::-webkit-scrollbar {
     width: 8px;
@@ -27,16 +51,21 @@
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    flex-direction: column;
     
 }
-
+.container_sub{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top:15px;
+}
 .text{
     display: flex;
-    margin:15px 0;
     justify-content: center;
     align-items: center;
-    width:80%;
+    width:70%;
     border: none;
     overflow: hidden;
     resize:vertical ;
@@ -46,7 +75,7 @@
 
     display: flex;
     justify-content: center;
-    width: 17%;
+    width: 25%;
 }
 
 .send{

@@ -28,6 +28,18 @@
     transition: .5s;
     align-items: center;
 }
+@media screen and (max-width: 1280px)
+{
+    .title{
+        font-size: 35px;    
+    }
+}
+@media screen and (max-width: 469px)
+{
+    .title{
+        font-size: 25px;    
+    }
+}
 
 .title-chat{
     font-size: 18px;
