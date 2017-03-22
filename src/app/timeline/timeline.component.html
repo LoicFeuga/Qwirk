@@ -5,7 +5,7 @@
   </app-message>
 
   <div class="container_text">
-    <div class="container_sub">
+    <div class="container_sub" *ngIf="isChatSelected()">
 
       <textarea class="text" (keyup.enter)="add()" [(ngModel)]="text" placeholder="Commencez à écrire votre message ici"></textarea>
 
@@ -16,11 +16,36 @@
       </button>
       </div>
     </div>
-    <div class="hr"></div>
-    <div class="container_call">
-      <div class="item"><i class="material-icons">chat</i></div>
-      <div class="item"><i class="material-icons">call</i></div>
-      <div class="item"><i class="material-icons">video_call</i></div>
+
+
+    <div class="container_sub_center" *ngIf="isCallSelected()">
+
+
+      <div class="container_send" *ngIf="isCallSelected()">
+
+        <button (click)="add()" class="btn waves-effect waves-light" type="submit" name="action">
+      Démarrer un appel vidéo
+      </button>
+      </div>
     </div>
+
+
+    <div class="container_sub_center" *ngIf="isVideoSelected()">
+
+      <div class="container_send">
+
+        <button (click)="add()" class="btn waves-effect waves-light" type="submit" name="action">
+      Démarrer un appel vidéo
+      </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="container_call">
+    <div class="item" (click)="setMode(0)" [class]="isChatSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">chat</i></div>
+    <div class="item" (click)="setMode(1)" [class]="isCallSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">call</i></div>
+    <div class="item" (click)="setMode(2)" [class]="isVideoSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">video_call</i></div>
   </div>
 </div>
