@@ -8,12 +8,20 @@ import { VMenuComponent } from './vmenu/vmenu.component';
 })
 export class AppComponent {
   appName : string = "Qwirk";
-  isLog : number = 0;
+  isLog : number = 1;
   
   
   onLogged(recup : boolean){    
     document.querySelector('.root')['style'].background = "#bbdefb";
     this.isLog = recup == true ? 1 : 0;
+  }
+
+  goFiltre(event : any){
+    if(event.code == "KeyF" && event.ctrlKey == true ){
+      document.getElementById('search').focus();
+      return false;
+    }
+    
   }
 
   onDeco(recup : boolean){
