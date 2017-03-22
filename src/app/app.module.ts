@@ -20,6 +20,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { AddChannelComponent } from './add-channel/add-channel.component';
 import { AddGroupeComponent } from './add-groupe/add-groupe.component';
 import { AddChatComponent } from './add-chat/add-chat.component';
+import { VideoCallComponent } from './video-call/video-call.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AddChatComponent } from './add-chat/add-chat.component';
     NotificationComponent,
     AddChannelComponent,
     AddGroupeComponent,
-    AddChatComponent
+    AddChatComponent,
+    VideoCallComponent
   ],
   imports: [
     BrowserModule,

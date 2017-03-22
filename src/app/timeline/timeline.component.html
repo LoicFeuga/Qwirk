@@ -1,17 +1,55 @@
 <div id="app-timeline" class="timeline">
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-  <app-message *ngFor="let message of messages" [author]="message.author" [content]="message.content" class="row message" >
+  <app-message *ngFor="let message of messages" [author]="message.author" [content]="message.content" class="row message">
   </app-message>
 
+  <app-video-call></app-video-call>
+  
   <div class="container_text">
-    <textarea class="text" (keyup.enter)="add()" [(ngModel)]="text" placeholder="Commencez à écrire votre message ici" ></textarea>
+    <div class="container_sub" *ngIf="isChatSelected()">
 
-    <div class="container_send">
+      <textarea class="text" (keyup.enter)="add()" [(ngModel)]="text" placeholder="Commencez à écrire votre message ici"></textarea>
 
-      <button (click)="add()" class="btn waves-effect waves-light send" type="submit" name="action">
+      <div class="container_send">
+
+        <button (click)="add()" class="btn waves-effect waves-light send" type="submit" name="action">
       Envoyer<i class="material-icons right">send</i>
       </button>
+      </div>
     </div>
+
+
+    <div class="container_sub_center" *ngIf="isCallSelected()">
+
+
+      <div class="container_send_center" *ngIf="isCallSelected()">
+
+        <button (click)="add()" class="btn waves-effect waves-light" type="submit" name="action">
+      Démarrer un appel audio
+      </button>
+      </div>
+    </div>
+
+    <div class="container_sub_center" *ngIf="isVideoSelected()">
+
+      <div class="container_send_center">
+
+        <button (click)="startVideo()" class="btn waves-effect waves-light" type="submit" name="action">
+      Démarrer un appel vidéo
+      </button>
+        <button (click)="joinVideo()" class="btn waves-effect waves-light" type="submit" name="action">
+      Rejoindre l'appel vidéo
+      </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="container_call">
+    <div class="item" (click)="setMode(0)" [class]="isChatSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">chat</i></div>
+    <div class="item" (click)="setMode(1)" [class]="isCallSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">call</i></div>
+    <div class="item" (click)="setMode(2)" [class]="isVideoSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">video_call</i></div>
   </div>
 </div>
