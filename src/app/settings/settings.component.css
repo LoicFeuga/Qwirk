@@ -11,6 +11,14 @@
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     transition: 0.5s;
 }
+.shadow{
+    box-shadow: 0 2px 4px rgba(0,0,0,0.30), 0 4px 3px rgba(0,0,0,0.22); 
+    padding-top: 5px;
+
+}
+.chat{
+    padding:10px;
+}
 .title{
     width:100%;
     display: flex;
@@ -20,15 +28,21 @@
 
 .title-chat{
     font-size: 18px;
+    text-align:center;
     margin-top: 20px;
 }
 .libelle-chat{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid black;
+    padding: 10px;
+}
+
+.libelle-chat:hover{
+background-color: #e0e0e0;
 }
 
 .delete-chat:hover{
     color:red;
+cursor: hand;
 }
