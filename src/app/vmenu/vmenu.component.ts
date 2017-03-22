@@ -69,9 +69,12 @@ export class VMenuComponent implements OnInit {
   }
 
   rebuildChats() {
-
     let that = this;
-    this.chatsServices.getAllChats(this.auth.getUserID(), function (chats) {
+
+    this.chatsServices.getAllChats(that.auth.getUserID(), function (chats) {
+      that.chats = [];
+      that.channels = [];
+      that.groupes = [];
       for (let i = 0; i < chats.length; i++) {
         //en fonction du type de chats
         switch (chats[i].type) {
@@ -92,31 +95,93 @@ export class VMenuComponent implements OnInit {
       that.minimize();
     });
   }
+
+  rebuildChatsFromIdLess(id: any) {
+    let that = this;
+
+    let again = true;
+    for (let i = 0; i < this.channels.length && again; i++) {
+      if (this.channels[i].id == id) {
+        this.channels.splice(i, 1);
+        again = false;
+      }
+    }
+    for (let i = 0; i < this.chats.length; i++) {
+      if (this.chats[i].id == id) {
+        this.chats.splice(i, 1);
+        again = false;
+      }
+    }
+    for (let i = 0; i < this.groupes.length; i++) {
+      if (this.groupes[i].id == id) {
+        this.groupes.splice(i, 1);
+        again = false;
+      }
+    }
+
+  }
+
   toTimeline() {
     this.timeline.emit(1);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    });
   }
   toContact() {
     this.contact.emit(true);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    });
+
   }
   toSettings() {
     this.settings.emit(true);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    }, 100);
 
   }
 
   toAddChannel() {
     this.addChannel.emit(true);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    }, 100);
   }
   toAddGroupe() {
     this.addGroupe.emit(true);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    }, 100);
 
   }
   toAddChat() {
     this.addChat.emit(true);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    }, 100);
 
   }
 
   toNotification() {
     this.notification.emit(true);
+    let that = this;
+    setTimeout(function () {
+
+      that.adapt();
+    });
   }
   deconnexion() {
     this.deco.emit(true);
@@ -136,6 +201,28 @@ export class VMenuComponent implements OnInit {
     if (el != null) {
       document.getElementById(id).style.width = "calc(100% - 20px)";
       document.getElementById(id).style.marginLeft = "10px";
+    }
+  }
+  adapt() {
+    if (this.isMinimize) {
+      document.getElementById('nav').style.left = "-200px";
+      document.getElementById('top-bar').style.left = "0px";
+      document.getElementById('top-bar').style.width = "100%";
+      for (let i = 0; i < this.allFrame.length; i++) {
+        this.maxId(this.allFrame[i]);
+      }
+
+    } else {
+
+      document.getElementById('nav').style.left = "0px";
+      document.getElementById('top-bar').style.left = "200px";
+      document.getElementById('top-bar').style.width = "calc(100% - 200px)";
+
+      for (let i = 0; i < this.allFrame.length; i++) {
+        this.minId(this.allFrame[i]);
+      }
+
+
     }
   }
   minimize() {

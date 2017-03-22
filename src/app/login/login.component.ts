@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
 
   signin() {
     this.usersService.signup(this.email, this.password, this.nom, this.prenom, function (data) {
-      console.log(data);
+      
     });
     this.isLogged = 0;
     this.initData();

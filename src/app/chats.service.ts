@@ -44,6 +44,11 @@ export class ChatsService {
     });
   }
 
+  deleteChat(id:number){
+    this.http.delete(this.api+"/"+id,this.options).map(res => res.json()).subscribe(data =>{
+      
+    });
+  }
 
   /**
    * 
