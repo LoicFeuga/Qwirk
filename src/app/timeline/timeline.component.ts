@@ -18,7 +18,7 @@ export class TimelineComponent implements OnInit {
 
   constructor() {
 
-    this.messages.push({ author: "loic", content: "loremkojaoj oijoiaj ioj" });
+    //this.messages.push({ author: "loic", content: "loremkojaoj oijoiaj ioj" });
     setTimeout(function () {
       let objDiv = document.querySelector("#app-timeline");
       objDiv.scrollTop = objDiv.scrollHeight;

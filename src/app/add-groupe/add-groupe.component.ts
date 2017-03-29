@@ -11,7 +11,11 @@ export class AddGroupeComponent implements OnInit {
   detail: string = "";
   @Output() created: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public chatsService : ChatsService) { }
+  constructor(public chatsService : ChatsService) {
+
+
+    
+  }
 
   ngOnInit() {
   }
@@ -19,6 +23,7 @@ export class AddGroupeComponent implements OnInit {
   create() {
     
     let that = this;
+
     this.chatsService.createGroupe(this.libelle, this.detail, function (data) {
 
       that.created.emit(data)
