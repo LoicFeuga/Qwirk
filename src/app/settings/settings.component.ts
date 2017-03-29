@@ -86,6 +86,14 @@ export class SettingsComponent implements OnInit {
     this.deleted.emit(id);
   }
 
+  leaveChat(id :any){
+    let idUser = this.auth.getUserID();
+    this.chatsService.leaveChat(id,idUser);
+
+    this.rebuildChatsFromIdLess(id);
+    this.deleted.emit(id);
+  }
+
   ngOnInit() {
   }
 

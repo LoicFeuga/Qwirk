@@ -17,8 +17,14 @@ export class AddChannelComponent implements OnInit {
   mode: number = 0;
   @Output() created: EventEmitter<any> = new EventEmitter<any>();
   constructor(public chatsService: ChatsService, private auth: AuthenticationService) {
+    this.buildAllChat();
+  }
+  ngOnInit() {
+  }
+
+  buildAllChat() {
     let that = this;
-    let idUser = auth.getUserID();
+    let idUser = that.auth.getUserID();
     that.chatsService.getAllChats(idUser, function (dataChannel) {
 
       that.chatsService.getAllChannel(function (data) {
@@ -26,21 +32,17 @@ export class AddChannelComponent implements OnInit {
         for (let i = 0; i < data.length; i++) {
           let add = 1;
           for (let j = 0; j < dataChannel.length; j++) {
-            if(data[i].id == dataChannel[j].id){
+            if (data[i].id == dataChannel[j].id) {
               add = 0;
             }
           }
-          if(add == 1){
+          if (add == 1) {
             that.channels.push(data[i]);
           }
         }
-        //that.channels = data;
-        console.log(that.channels);
       });
     });
-  }
 
-  ngOnInit() {
   }
   toAddChannel() {
     this.mode = 1;
@@ -48,9 +50,10 @@ export class AddChannelComponent implements OnInit {
 
   joinChannel(chat: number) {
     let idUser = this.auth.getUserID();
-
+    let that = this;
     this.chatsService.joinChannel(idUser, chat, function (data) {
-      console.log(data);
+      that.buildAllChat();
+      that.created.emit(data.chat);
     });
   }
 
@@ -60,7 +63,7 @@ export class AddChannelComponent implements OnInit {
   create() {
     let that = this;
     this.chatsService.createChannel(this.libelle, this.detail, function (data) {
-      that.created.emit(data)
+      that.created.emit(data);
     });
   }
 }

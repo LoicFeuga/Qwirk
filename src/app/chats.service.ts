@@ -54,6 +54,12 @@ export class ChatsService {
     });
   }
 
+  leaveChat(idChat : number, idUser : number){
+
+    this.http.delete(this.apijoin + "/" + idUser + "/" + idChat, this.options).map(res => res.json()).subscribe(data => {
+     
+    });
+  }
   getContact(id: number) {
     this.http.get(this.apiContacts + "/" + id, this.options).map(res => res.json()).subscribe(data => {
       console.log(data);
