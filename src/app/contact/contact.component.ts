@@ -10,15 +10,23 @@ import { AuthenticationService } from '../authentication.service';
 export class ContactComponent implements OnInit {
 
   contacts: string[] = [];
+  //0 = see
+  //1 = create
+  mode : number = 0;
 
-  constructor(private chatsService : ChatsService, private auth : AuthenticationService) {
-    this.contacts.push('loic');
-    this.contacts.push('aaa');
-    this.contacts.push('zzz');
-    this.contacts.push('aazeazaez');
-    let idUser= this.auth.getUserID();
-    this.chatsService.getContact(idUser);
-    
+  constructor(private chatsService: ChatsService, private auth: AuthenticationService) {
+    let that = this;
+    let idUser = this.auth.getUserID();
+    this.chatsService.getContact(idUser, function (data) {
+      console.log(data);
+      that.contacts = [];
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].id != idUser) {
+          that.contacts.push(data[i]);
+        }
+      }
+    });
+
   }
 
   ngOnInit() {

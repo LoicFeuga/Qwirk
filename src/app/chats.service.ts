@@ -60,9 +60,9 @@ export class ChatsService {
      
     });
   }
-  getContact(id: number) {
+  getContact(id: number, callback : any) {
     this.http.get(this.apiContacts + "/" + id, this.options).map(res => res.json()).subscribe(data => {
-      console.log(data);
+      callback(data);
     });
   }
 
