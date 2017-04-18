@@ -12,14 +12,16 @@ export class UsersService {
   private api: string = this.httpClient.url + this.httpClient.userService;
   private apiLogin: string = this.httpClient.url + "login";
   private date: QDate = new QDate;
+  private options: RequestOptions = this.httpClient.getHeadersOptions();
 
   constructor(private http: Http, private httpClient : HttpClientService, private auth :AuthenticationService) {
-    this.http = http;
-  }
+    }
 
-  test() {
-    this.http.get(this.api + "").map(res => res.json()).subscribe(data => {
-      console.log(data);
+  getAllUser(callback : any) {
+    
+    this.http.get(this.api + "",this.options).map(res => res.json()).subscribe(data => {
+      callback(data);
+
     });
   }
 

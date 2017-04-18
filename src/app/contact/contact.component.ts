@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatsService } from '../chats.service';
 import { AuthenticationService } from '../authentication.service';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-contact',
@@ -9,24 +10,33 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class ContactComponent implements OnInit {
 
-  contacts: string[] = [];
+  contacts: any[] = [];
   //0 = see
   //1 = create
-  mode : number = 0;
+  mode: number = 0;
+  allUser: any[] = [];
 
-  constructor(private chatsService: ChatsService, private auth: AuthenticationService) {
+  constructor(private chatsService: ChatsService, private auth: AuthenticationService, private usersServices : UsersService ) {
     let that = this;
     let idUser = this.auth.getUserID();
-    this.chatsService.getContact(idUser, function (data) {
+    // this.chatsService.getContact(idUser, function (data) {
+      
+    //   that.contacts = [];
+    //   for (let i = 0; i < data.length; i++) {
+    //     if (data[i].id != idUser) {
+    //       that.contacts.push(data[i]);
+    //     }
+    //   }
+    // });
+
+    this.usersServices.getAllUser(function(data){
       console.log(data);
-      that.contacts = [];
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].id != idUser) {
-          that.contacts.push(data[i]);
-        }
-      }
     });
 
+  }
+
+  toAddContact() {
+    this.mode = 1;
   }
 
   ngOnInit() {

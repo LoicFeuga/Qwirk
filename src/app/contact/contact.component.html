@@ -1,12 +1,25 @@
 <div id="app-contact" class="contact">
-    <h2 class="title">Vos Contacts</h2>
 
-    <div class="each" *ngFor="let contact of contacts" >
-        <div class="cercle">
+    <div *ngIf="mode == 0">
 
+        <h2 class="title">Vos Contacts</h2>
+
+        <div class="each" *ngFor="let contact of contacts">
+            <div class="cercle">
+
+            </div>
+            <div class="name">
+                {{contact.nom}}
+            </div>
         </div>
-        <div class="name">
-            {{contact.nom}}
-        </div>
+
+
+        <a class="btn-floating btn waves-effect waves-light btn-large red add" (click)="toAddContact()">
+            <i class="material-icons">add</i>
+        </a>
+
+    </div>
+    <div *ngIf="mode == 1">
+
     </div>
 </div>
