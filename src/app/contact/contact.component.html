@@ -20,6 +20,23 @@
 
     </div>
     <div *ngIf="mode == 1">
+        <h2 class="title">Ajouter un contact</h2>
 
+        <div class="container">
+
+            <div class="search">
+                <i class="material-icons">search</i>
+                <input type="text" id="userFilter" [(ngModel)]="userFilter">
+            </div>
+
+            <div class="users" *ngFor="let user of allUsers" (click)="invite(user.id)">
+                <div class="users_name">
+                    {{user.nom}}
+                </div>
+                <div class="users_invite btn danger">
+                    Send invitation
+                </div>
+            </div>
+        </div>
     </div>
 </div>

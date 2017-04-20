@@ -13,12 +13,14 @@ export class UsersService {
   private apiLogin: string = this.httpClient.url + "login";
   private date: QDate = new QDate;
   private options: RequestOptions = this.httpClient.getHeadersOptions();
+  private optionsForm: RequestOptions = this.httpClient.getHeadersOptionsForm();
 
   constructor(private http: Http, private httpClient : HttpClientService, private auth :AuthenticationService) {
     }
 
   getAllUser(callback : any) {
-    
+    console.log('HEADERS');
+    console.log(this.options);
     this.http.get(this.api + "",this.options).map(res => res.json()).subscribe(data => {
       callback(data);
 
@@ -32,7 +34,7 @@ export class UsersService {
     });
     let options = new RequestOptions({ headers: headers });
     
-    this.http.post(this.apiLogin + "?login=" + login + "&mdp=" + mdp, "", options).map(res => res.json()).subscribe(data => {
+    this.http.post(this.apiLogin + "?login=" + login + "&mdp=" + mdp, "", this.optionsForm  ).map(res => res.json()).subscribe(data => {
       this.auth.setToken(data);
       callback(data);
     });

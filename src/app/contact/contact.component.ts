@@ -14,23 +14,25 @@ export class ContactComponent implements OnInit {
   //0 = see
   //1 = create
   mode: number = 0;
-  allUser: any[] = [];
+  allUsers: any[] = [];
+  userFilter: string = "";
 
-  constructor(private chatsService: ChatsService, private auth: AuthenticationService, private usersServices : UsersService ) {
+  constructor(private chatsService: ChatsService, private auth: AuthenticationService, private usersServices: UsersService) {
     let that = this;
     let idUser = this.auth.getUserID();
-    // this.chatsService.getContact(idUser, function (data) {
-      
-    //   that.contacts = [];
-    //   for (let i = 0; i < data.length; i++) {
-    //     if (data[i].id != idUser) {
-    //       that.contacts.push(data[i]);
-    //     }
-    //   }
-    // });
 
-    this.usersServices.getAllUser(function(data){
-      console.log(data);
+    this.chatsService.getContact(idUser, function (data) {
+
+      that.contacts = [];
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].id != idUser) {
+          that.contacts.push(data[i]);
+        }
+      }
+    });
+
+    this.usersServices.getAllUser(function (data) {
+      that.allUsers = data;
     });
 
   }
@@ -39,6 +41,13 @@ export class ContactComponent implements OnInit {
     this.mode = 1;
   }
 
+
+  invite(id:number){
+    let idUser = this.auth.getUserID();
+    this.chatsService.inviteContact("libelle","description",idUser,id,function(data){
+      console.log(data);
+    });
+  }
   ngOnInit() {
   }
 
