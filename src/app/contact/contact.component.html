@@ -1,13 +1,10 @@
 <div id="app-contact" class="contact">
 
-    <div *ngIf="mode == 0">
+    <div class="cent" *ngIf="mode == 0">
 
         <h2 class="title">Vos Contacts</h2>
 
         <div class="each" *ngFor="let contact of contacts">
-            <div class="cercle">
-
-            </div>
             <div class="name">
                 {{contact.nom}}
             </div>

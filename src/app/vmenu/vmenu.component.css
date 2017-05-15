@@ -9,7 +9,7 @@
     color:white;
     left: 0;
     background-color: #039BE5; /* Black*/
-    box-shadow: 0 2px 4px rgba(0,0,0,0.30), 0 4px 3px rgba(0,0,0,0.22); 
+    
     overflow-x: hidden; /* Disable horizontal scroll */
     transition: all 0.5s; /* 0.5 second transition effect to slide in the sidenav */
    
@@ -136,13 +136,13 @@
     display: flex;
     align-items: center;
     position: fixed;
-    color:white;
+    color:black;
     justify-content: space-between;
     top: 0;
     height: 60px;
     transition: 0.5s;
     box-shadow: 0 2px 4px rgba(0,0,0,0.30), 0 4px 3px rgba(0,0,0,0.22); 
-    background: #039BE5;
+    background: white;
 }
 
 .title-top{

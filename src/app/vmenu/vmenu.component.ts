@@ -223,8 +223,8 @@ export class VMenuComponent implements OnInit {
   minId(id: string) {
     let el = document.getElementById(id);
     if (el != null) {
-      el.style.width = "calc(100% - 220px)";
-      el.style.marginLeft = "210px";
+      el.style.width = "calc(100% - 200px)";
+      el.style.marginLeft = "200px";
     }
 
   }
@@ -232,8 +232,8 @@ export class VMenuComponent implements OnInit {
 
     let el = document.getElementById(id);
     if (el != null) {
-      document.getElementById(id).style.width = "calc(100% - 20px)";
-      document.getElementById(id).style.marginLeft = "10px";
+      document.getElementById(id).style.width = "calc(100% - 0px)";
+      document.getElementById(id).style.marginLeft = "0px";
     }
   }
   adapt() {
