@@ -18,8 +18,12 @@ export class SettingsComponent implements OnInit {
   constructor(private auth: AuthenticationService, private chatsService: ChatsService) {
     let id = this.auth.getUserID();
     this.idUser = id;
-
+    this.chats.push({libelle:"No again"});
     this.rebuildChats();
+  }
+
+  pushFakeItem(array,str: string){
+    array.push({libelle:"Aucun "+str+ " trouvé"});
   }
 
   /**
@@ -48,6 +52,9 @@ export class SettingsComponent implements OnInit {
             break;
         }
       }
+      if(that.channels.length <= 0) that.pushFakeItem(that.channels,"channel");
+      if(that.chats.length <= 0) that.pushFakeItem(that.chats,"chat");
+      if(that.groupes.length <= 0) that.pushFakeItem(that.groupes,"groupe");
     });
   }
   /**

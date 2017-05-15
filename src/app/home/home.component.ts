@@ -10,7 +10,7 @@ import { VMenuComponent } from '../vmenu/vmenu.component';
 })
 export class HomeComponent implements OnInit {
   @Output() deco: EventEmitter<boolean> = new EventEmitter<boolean>();
-  router: number = 1;
+  router: number = 4;
   @ViewChild(VMenuComponent) vmenu;
   //0 = timelines 
   // 1 = contact

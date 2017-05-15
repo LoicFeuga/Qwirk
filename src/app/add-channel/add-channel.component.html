@@ -2,11 +2,14 @@
 
   <div *ngIf="mode == 0">
 
-    <h2 class="title">See all</h2>
+    <h2 class="title">Rejoignez des channels</h2>
 
-    <div *ngFor="let channel of channels ">
-      <div (click)="joinChannel(channel.id)">{{channel.libelle}}
-        <i class="material-icons">send</i></div>
+    <div class="each" *ngFor="let channel of channels ">
+      <div class="name">
+        {{channel.libelle}}
+      </div>
+        {{channel.detail}}
+        <i (click)="joinChannel(channel.id)" class="material-icons">send</i>
     </div>
 
 

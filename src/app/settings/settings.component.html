@@ -6,7 +6,7 @@
                 <div class="shadow white">
                     <h3 class="title-chat">Channels</h3>
                     <div *ngFor="let channel of channels" class="libelle-chat">
-                        <i class="material-icons">group_work</i>
+                        <i *ngIf="channel.id >= 0" class="material-icons">group_work</i>
                         <div>{{channel.libelle}}</div>
                         <i *ngIf="channel.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(channel.id)">delete_forever</i>
                         <i *ngIf="channel.creator != idUser" class="material-icons delete-chat" (click)="leaveChat(channel.id)">remove_circle_outline</i>
@@ -19,7 +19,7 @@
                 <div class="shadow white">
                     <h3 class="title-chat">Groupes</h3>
                     <div *ngFor="let groupe of groupes" class="libelle-chat">
-                        <i class="material-icons">people</i>
+                        <i *ngIf="groupe.id >= 0" class="material-icons">people</i>
                         <div>{{groupe.libelle}}</div>
                         <i *ngIf="groupe.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(groupe.id)">delete_forever</i>
                     </div>
@@ -31,7 +31,7 @@
                 <div class="shadow white">
                     <h3 class="title-chat">Chats</h3>
                     <div *ngFor="let chats of chats" class="libelle-chat">
-                        <i class="material-icons">chat</i>
+                        <i *ngIf="chats.id >= 0" class="material-icons">chat</i>
                         <div>{{chats.libelle}}</div>
                         <i *ngIf="chats.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(chats.id)">delete_forever</i>
                     </div>
