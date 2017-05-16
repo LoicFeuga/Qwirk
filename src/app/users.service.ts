@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 export class UsersService {
   
   private api: string = this.httpClient.url + this.httpClient.userService;
+  private apiContact : string = this.httpClient.url + "contact";
   private apiLogin: string = this.httpClient.url + "login";
   private date: QDate = new QDate;
   private options: RequestOptions = this.httpClient.getHeadersOptions();
@@ -18,12 +19,23 @@ export class UsersService {
   constructor(private http: Http, private httpClient : HttpClientService, private auth :AuthenticationService) {
     }
 
-  getAllUser(callback : any) {
-    console.log('HEADERS');
-    console.log(this.options);
-    this.http.get(this.api + "",this.options).map(res => res.json()).subscribe(data => {
+  /**
+   * Récupère tous les users qui ne sont pour id_user et pas les contacts de id_user
+   * @param id id_user
+   * @param callback 
+   */
+  getAllUser(id:number,callback : any) {
+    
+    this.http.get(this.api ,this.options).map(res => res.json()).subscribe(data => {
       callback(data);
 
+    });
+  }
+
+  deleteContact(id2 : number, callback : any){
+
+    this.http.delete(this.apiContact+"/"+id2, this.options).map(res => res.json()).subscribe(data => {
+      callback(data);
     });
   }
 

@@ -4,9 +4,9 @@ import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class HttpClientService {
-  private urlLocal: string = "http://10.31.16.201:8080/SupChat/api/rest/";
+  private urlLocal: string = "http://10.31.18.136:8080/SupChat/api/rest/";
   private urlProd: string = "http://84.246.226.230:8080/SupChat/api/rest/";
-  public url: string = this.urlProd;
+  public url: string = this.urlLocal;
   public chatService: string = "chat";
   public userService: string = "user";
 
@@ -20,6 +20,7 @@ export class HttpClientService {
     let headers = new Headers();
     headers.append('Authorization', 'Basic ' + token);
     headers.append('Content-type', 'application/json');
+    headers.append('id',""+this.auth.getUserID());
     return headers;
   }
 
@@ -29,6 +30,7 @@ export class HttpClientService {
     
     headers.append('Authorization', 'Basic ' + token);
     headers.append('Content-type', 'application/json');
+    headers.append('id',""+this.auth.getUserID());
     return new RequestOptions({ headers: headers });
   }
 
@@ -38,6 +40,7 @@ export class HttpClientService {
     
     headers.append('Authorization', 'Basic ' + token);
     headers.append('Content-type', 'application/x-www-form-urlencoded');
+    headers.append('id',""+this.auth.getUserID());
     return new RequestOptions({ headers: headers });
   }
 

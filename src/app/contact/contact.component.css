@@ -39,9 +39,11 @@
     width:90%;
     float:left;
     display: flex;
-    justify-content: center;
+    padding:10px;
+
+    justify-content: space-between;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     width:100%;
     height: 50px;
     background: white;
@@ -75,8 +77,47 @@
 }
 .bot{
     width: 90%;
+    display: flex;
+    justify-content: center;
     max-height: 75%;
     height: 75%;
+}
+.search i{
+    width:15%;float:left;
+    color:grey;
+    display: flex;  
+    justify-content: center;
+}
+.search input{
+    width:85%;
+    height: 100%;
+    float:left;
+    display: flex;
+    align-items: center;
+    margin-top:20px;
+    border:none;
+}
+
+.search{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+    box-shadow: 0 2px 4px rgba(0,0,0,0.30), 0 4px 3px rgba(0,0,0,0.22); 
+    height: 40px;
+    background: white;
+    color:black;
+    margin: 10px 0px;
+    margin-top: 40px;
+    border-radius: 1px;
+}
+.my-search{
+    width: 80%;
+    background: white;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .users_name{
 

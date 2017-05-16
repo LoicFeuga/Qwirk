@@ -34,6 +34,8 @@
                         <i *ngIf="chats.id >= 0" class="material-icons">chat</i>
                         <div>{{chats.libelle}}</div>
                         <i *ngIf="chats.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(chats.id)">delete_forever</i>
+                        <i *ngIf="chats.creator != idUser && chats.id >= 0" class="material-icons delete-chat" (click)="leaveChat(chats.id)">remove_circle_outline</i>
+                        
                     </div>
 
                 </div>

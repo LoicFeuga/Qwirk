@@ -31,16 +31,27 @@ export class ContactComponent implements OnInit {
       }
     });
 
-    this.usersServices.getAllUser(function (data) {
+    this.usersServices.getAllUser(idUser,function (data) {
       that.allUsers = data;
     });
 
+  }
+
+  deleteContact(id:number){
+
+    this.usersServices.deleteContact(id,function(data){
+      console.log(data);
+    });
+    
   }
 
   toAddContact() {
     this.mode = 1;
   }
 
+  toSeeContact(){
+    this.mode = 0;
+  }
 
   invite(id:number){
     let idUser = this.auth.getUserID();

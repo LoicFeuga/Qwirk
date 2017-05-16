@@ -10,6 +10,7 @@
                 <div class="name">
                     {{contact.nom}}
                 </div>
+                <i (click)="deleteContact(contact.id)" class="material-icons">delete</i>
             </div>
         </div>
 
@@ -23,9 +24,10 @@
 
     <div *ngIf="mode == 1" class="bot">
 
-        <div class="search">
+        <div class="search my-search">
             <i class="material-icons">search</i>
             <input type="text" id="userFilter" [(ngModel)]="userFilter">
+
         </div>
 
         <div class="all_users">
@@ -38,5 +40,8 @@
                 </div>
             </div>
         </div>
+        <a class="btn-floating btn waves-effect waves-light btn-large red add" (click)="toSeeContact()">
+            <i class="material-icons">visibility</i>
+        </a>
     </div>
 </div>
