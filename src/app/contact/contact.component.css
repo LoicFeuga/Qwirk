@@ -59,6 +59,11 @@
     display: block;
     overflow: auto;
 }
+.all_user::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 10px;
+    background: #eee;
+}
 .users{
     display: flex;
     justify-content: space-between;
