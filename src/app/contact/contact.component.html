@@ -4,9 +4,12 @@
 
         <h2 class="title">Vos Contacts</h2>
 
-        <div class="each" *ngFor="let contact of contacts">
-            <div class="name">
-                {{contact.nom}}
+        <div class="all_users">
+
+            <div class="each" *ngFor="let contact of contacts">
+                <div class="name">
+                    {{contact.nom}}
+                </div>
             </div>
         </div>
 
@@ -16,22 +19,22 @@
         </a>
 
     </div>
-    <div *ngIf="mode == 1">
-        <h2 class="title">Ajouter un contact</h2>
+    <h2 *ngIf="mode == 1" class="title">Ajouter un contact</h2>
 
-        <div class="container">
+    <div *ngIf="mode == 1" class="bot">
 
-            <div class="search">
-                <i class="material-icons">search</i>
-                <input type="text" id="userFilter" [(ngModel)]="userFilter">
-            </div>
+        <div class="search">
+            <i class="material-icons">search</i>
+            <input type="text" id="userFilter" [(ngModel)]="userFilter">
+        </div>
 
+        <div class="all_users">
             <div class="users" *ngFor="let user of allUsers" (click)="invite(user.id)">
                 <div class="users_name">
-                    {{user.nom}}
+                    {{user.nom}} {{user.prenom}}
                 </div>
                 <div class="users_invite btn danger">
-                    Send invitation
+                    Ajouter
                 </div>
             </div>
         </div>

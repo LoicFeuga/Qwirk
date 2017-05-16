@@ -1,4 +1,4 @@
-import { Component, OnInit,EventEmitter, Output} from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { ChatsService } from '../chats.service';
 
@@ -18,7 +18,6 @@ export class SettingsComponent implements OnInit {
   constructor(private auth: AuthenticationService, private chatsService: ChatsService) {
     let id = this.auth.getUserID();
     this.idUser = id;
-    this.chats.push({libelle:"No again"});
     this.rebuildChats();
   }
 

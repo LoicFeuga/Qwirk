@@ -9,7 +9,7 @@
                         <i *ngIf="channel.id >= 0" class="material-icons">group_work</i>
                         <div>{{channel.libelle}}</div>
                         <i *ngIf="channel.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(channel.id)">delete_forever</i>
-                        <i *ngIf="channel.creator != idUser" class="material-icons delete-chat" (click)="leaveChat(channel.id)">remove_circle_outline</i>
+                        <i *ngIf="channel.creator != idUser && channel.id >= 0" class="material-icons delete-chat" (click)="leaveChat(channel.id)">remove_circle_outline</i>
 
                     </div>
 
