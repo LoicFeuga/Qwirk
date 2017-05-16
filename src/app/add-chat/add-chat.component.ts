@@ -21,7 +21,7 @@ export class AddChatComponent implements OnInit {
   
   create() {
     let that = this;
-    this.chatsService.createChat(this.libelle, this.detail, function (data) {
+    this.chatsService.createChat(this.libelle, this.detail,1, function (data) {
       that.created.emit(data);
     });
   }

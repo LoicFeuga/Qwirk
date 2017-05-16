@@ -6,8 +6,8 @@ export class AuthenticationService {
   public user: any = {};
   constructor() {
 
-    // var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    // this.token = currentUser && currentUser.token;
+     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+     this.token = currentUser && currentUser.token;
   }
 
   /**

@@ -1,15 +1,21 @@
 .timeline{
-    width: calc(100%- 220px);
+    width: calc(100%- 200px);
     border-radius: 1px;
-    max-height: calc(100% - 75px);
+    max-height: calc(100% - 61px);
+    height: calc(100% - 61px);
     overflow: auto;
-    bottom:10px;
+    bottom:40px;
     margin-bottom: 0;
-    margin-left: 210px;
+    padding-bottom: 30px;
+    margin-left: 200px;
     background: white;
-    margin-top:70px;
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    margin-top:60px;
     transition: 0.5s;
+}
+.container_bot{
+    bottom: 0;
+    width:calc(100% - 200px);
+    position: absolute;
 }
 .hr{
     content :'';

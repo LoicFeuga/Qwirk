@@ -1,19 +1,40 @@
 <div id="app-add-channel" class="add-channel">
-  <h2 class="title">Créez un channel</h2>
+
+  <div *ngIf="mode == 0">
+
+    <h2 class="title">Rejoignez des channels</h2>
+
+    <div class="each" *ngFor="let channel of channels ">
+      <div class="name">
+        {{channel.libelle}}
+      </div>
+        {{channel.detail}}
+        <i (click)="joinChannel(channel.id)" class="material-icons">send</i>
+    </div>
 
 
+    <a class="btn-floating btn waves-effect waves-light btn-large red add" (click)="toAddChannel()">
+      <i class="material-icons">add</i>
+    </a>
 
-  <div class="input-field">
-    <input id="last_name" type="text" [(ngModel)]="libelle" class="validate">
-    <label for="last_name">Libellé du channel</label>
   </div>
 
-  <div class="input-field">
-    <input id="last_name" type="text" [(ngModel)]="detail" class="validate">
-    <label for="last_name">Description</label>
+  <div *ngIf="mode == 1">
+
+    <h2 class="title">Créez un channel</h2>
+    <div class="input-field">
+      <input id="last_name" type="text" [(ngModel)]="libelle" class="validate">
+      <label for="last_name">Libellé du channel</label>
+    </div>
+
+    <div class="input-field">
+      <input id="last_name" type="text" [(ngModel)]="detail" class="validate">
+      <label for="last_name">Description</label>
+    </div>
+
+
+    <a class="waves-effect waves-light btn" (click)="toJoinChannel()"><i class="material-icons right">cancel</i>Annuler</a>
+    <a class="waves-effect waves-light btn" (click)="create()"><i class="material-icons right">add</i>Créer</a>
+
   </div>
-
-
-  <a class="waves-effect waves-light btn" (click)="create()"><i class="material-icons right">add</i>Créer</a>
-
 </div>

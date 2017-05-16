@@ -1,4 +1,4 @@
-import { Component, OnInit,EventEmitter, Output} from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { ChatsService } from '../chats.service';
 
@@ -18,8 +18,11 @@ export class SettingsComponent implements OnInit {
   constructor(private auth: AuthenticationService, private chatsService: ChatsService) {
     let id = this.auth.getUserID();
     this.idUser = id;
-
     this.rebuildChats();
+  }
+
+  pushFakeItem(array,str: string){
+    array.push({libelle:"Aucun "+str+ " trouvé"});
   }
 
   /**
@@ -48,6 +51,9 @@ export class SettingsComponent implements OnInit {
             break;
         }
       }
+      if(that.channels.length <= 0) that.pushFakeItem(that.channels,"channel");
+      if(that.chats.length <= 0) that.pushFakeItem(that.chats,"chat");
+      if(that.groupes.length <= 0) that.pushFakeItem(that.groupes,"groupe");
     });
   }
   /**
@@ -81,6 +87,14 @@ export class SettingsComponent implements OnInit {
 
 
     this.chatsService.deleteChat(id);
+
+    this.rebuildChatsFromIdLess(id);
+    this.deleted.emit(id);
+  }
+
+  leaveChat(id :any){
+    let idUser = this.auth.getUserID();
+    this.chatsService.leaveChat(id,idUser);
 
     this.rebuildChatsFromIdLess(id);
     this.deleted.emit(id);

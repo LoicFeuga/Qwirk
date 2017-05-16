@@ -1,12 +1,42 @@
 <div id="app-contact" class="contact">
-    <h2 class="title">Vos Contacts</h2>
 
-    <div class="each" *ngFor="let contact of contacts" >
-        <div class="cercle">
+    <div class="cent" *ngIf="mode == 0">
 
+        <h2 class="title">Vos Contacts</h2>
+
+        <div class="all_users">
+
+            <div class="each" *ngFor="let contact of contacts">
+                <div class="name">
+                    {{contact.nom}}
+                </div>
+            </div>
         </div>
-        <div class="name">
-            {{contact}}
+
+
+        <a class="btn-floating btn waves-effect waves-light btn-large red add" (click)="toAddContact()">
+            <i class="material-icons">add</i>
+        </a>
+
+    </div>
+    <h2 *ngIf="mode == 1" class="title">Ajouter un contact</h2>
+
+    <div *ngIf="mode == 1" class="bot">
+
+        <div class="search">
+            <i class="material-icons">search</i>
+            <input type="text" id="userFilter" [(ngModel)]="userFilter">
+        </div>
+
+        <div class="all_users">
+            <div class="users" *ngFor="let user of allUsers" (click)="invite(user.id)">
+                <div class="users_name">
+                    {{user.nom}} {{user.prenom}}
+                </div>
+                <div class="users_invite btn danger">
+                    Ajouter
+                </div>
+            </div>
         </div>
     </div>
 </div>

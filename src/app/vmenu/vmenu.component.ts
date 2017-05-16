@@ -223,8 +223,8 @@ export class VMenuComponent implements OnInit {
   minId(id: string) {
     let el = document.getElementById(id);
     if (el != null) {
-      el.style.width = "calc(100% - 220px)";
-      el.style.marginLeft = "210px";
+      el.style.width = "calc(100% - 200px)";
+      el.style.marginLeft = "200px";
     }
 
   }
@@ -232,8 +232,8 @@ export class VMenuComponent implements OnInit {
 
     let el = document.getElementById(id);
     if (el != null) {
-      document.getElementById(id).style.width = "calc(100% - 20px)";
-      document.getElementById(id).style.marginLeft = "10px";
+      document.getElementById(id).style.width = "calc(100% - 0px)";
+      document.getElementById(id).style.marginLeft = "0px";
     }
   }
   adapt() {
@@ -241,6 +241,10 @@ export class VMenuComponent implements OnInit {
       document.getElementById('nav').style.left = "-200px";
       document.getElementById('top-bar').style.left = "0px";
       document.getElementById('top-bar').style.width = "100%";
+      if (document.getElementById('container_bot') != null) {
+
+        document.getElementById('container_bot').style.width = "100%";
+      }
       for (let i = 0; i < this.allFrame.length; i++) {
         this.maxId(this.allFrame[i]);
       }
@@ -250,6 +254,11 @@ export class VMenuComponent implements OnInit {
       document.getElementById('nav').style.left = "0px";
       document.getElementById('top-bar').style.left = "200px";
       document.getElementById('top-bar').style.width = "calc(100% - 200px)";
+      if (document.getElementById('container_bot') != null) {
+
+        document.getElementById('container_bot').style.width = "calc(100% - 200px)";
+      }
+
 
       for (let i = 0; i < this.allFrame.length; i++) {
         this.minId(this.allFrame[i]);
@@ -263,6 +272,11 @@ export class VMenuComponent implements OnInit {
       document.getElementById('nav').style.left = "-200px";
       document.getElementById('top-bar').style.left = "0px";
       document.getElementById('top-bar').style.width = "100%";
+
+      if (document.getElementById('container_bot') != null) {
+        document.getElementById('container_bot').style.width = "100%";
+      }
+
       for (let i = 0; i < this.allFrame.length; i++) {
         this.maxId(this.allFrame[i]);
       }
@@ -272,6 +286,10 @@ export class VMenuComponent implements OnInit {
       document.getElementById('nav').style.left = "0px";
       document.getElementById('top-bar').style.left = "200px";
       document.getElementById('top-bar').style.width = "calc(100% - 200px)";
+
+      if (document.getElementById('container_bot') != null) {
+        document.getElementById('container_bot').style.width = "calc(100% - 200px)";
+      }
 
       for (let i = 0; i < this.allFrame.length; i++) {
         this.minId(this.allFrame[i]);
