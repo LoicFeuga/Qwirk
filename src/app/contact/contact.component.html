@@ -13,7 +13,7 @@
                     <div class="name">
                         {{contact.nom}} {{contact.prenom}}
                     </div>
-                    <button class="waves-effect waves-light btn " style="width:100%">Discuter</button>
+                    <button class="waves-effect waves-light btn " (click)="startChat(contact.id, contact.nom, contact.prenom)" style="width:100%">Discuter</button>
                     <button (click)="deleteContact(contact.id)" class="waves-effect waves-light btn red accent-4" style="width:100%">Supprimer</button>
 
 

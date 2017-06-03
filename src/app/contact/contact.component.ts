@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, Output, EventEmitter } from '@angular/core';
 import { ChatsService } from '../chats.service';
 import { AuthenticationService } from '../authentication.service';
 import { UsersService } from '../users.service';
@@ -18,6 +18,7 @@ export class ContactComponent implements OnInit {
   mode: number = 0;
   allUsers: any[] = [];
   userFilter: string = "";
+  @Output() created: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private chatsService: ChatsService, overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal, private auth: AuthenticationService, private usersServices: UsersService) {
     let that = this;
@@ -38,6 +39,16 @@ export class ContactComponent implements OnInit {
       that.allUsers = data;
     });
 
+  }
+
+  startChat(id: number, nom: string, prenom: string){
+    let that = this;
+    this.chatsService.createChat(nom+" "+prenom,"chat",1,function(data){
+      if(!data) return;
+
+      that.created.emit(data);
+      
+    }); 
   }
 
   deleteContact(id: number) {

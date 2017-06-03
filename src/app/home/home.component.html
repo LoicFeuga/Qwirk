@@ -2,7 +2,7 @@
     (notification)="toNotification($event)" (timeline)="toTimeline($event)" (contact)="toContact($event)" (settings)="toSettings($event)"></app-vmenu>
 
 <app-timeline  *ngIf="router == 0"></app-timeline>
-<app-contact  *ngIf="router == 1"></app-contact>
+<app-contact  *ngIf="router == 1" (created)="chatCreate($event)"></app-contact>
 <app-settings (deleted)="chatDeleted($event)" *ngIf="router == 2"></app-settings>
 <app-notification  *ngIf="router == 3"></app-notification>
 <app-add-channel  *ngIf="router == 4" (created)="channelCreate($event)"></app-add-channel>
