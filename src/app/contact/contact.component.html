@@ -6,10 +6,17 @@
 
         <div class="all_users">
 
-            <div class="each" *ngFor="let contact of contacts">
-                <div class="name">
-                    {{contact.nom}}
-                </div>
+
+                <div class="each col s2" *ngFor="let contact of contacts">
+
+                    <img src="/assets/images/contact.png" style="width:100px;" alt="Contact">
+                    <div class="name">
+                        {{contact.nom}} {{contact.prenom}}
+                    </div>
+                    <button class="waves-effect waves-light btn " (click)="startChat(contact.id, contact.nom, contact.prenom)" style="width:100%">Discuter</button>
+                    <button (click)="deleteContact(contact.id)" class="waves-effect waves-light btn red accent-4" style="width:100%">Supprimer</button>
+
+
             </div>
         </div>
 
@@ -23,9 +30,10 @@
 
     <div *ngIf="mode == 1" class="bot">
 
-        <div class="search">
+        <div class="search my-search">
             <i class="material-icons">search</i>
             <input type="text" id="userFilter" [(ngModel)]="userFilter">
+
         </div>
 
         <div class="all_users">
@@ -38,5 +46,8 @@
                 </div>
             </div>
         </div>
+        <a class="btn-floating btn waves-effect waves-light btn-large red add" (click)="toSeeContact()">
+            <i class="material-icons">visibility</i>
+        </a>
     </div>
 </div>

@@ -7,7 +7,7 @@ import { VideoCallComponent } from '../video-call/video-call.component';
   styleUrls: ['./timeline.component.css']
 })
 export class TimelineComponent implements OnInit {
-
+  
   messages: Object[] = [];
   text: string;
   //0 = message;

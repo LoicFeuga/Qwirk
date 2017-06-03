@@ -59,8 +59,7 @@ export class ChatsService {
     let type = 0;
     let statut = 0;
     let creator = id1;
-    console.log('HEARDER');
-    console.log(this.optionsForm);
+    
     this.http.post(this.apiContacts+"?id1="+id1+"&id2="+id2 , {},  this.optionsForm).map(res => res.json()).subscribe(data => {
       callback(data);
     });

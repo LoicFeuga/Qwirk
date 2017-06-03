@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     let dateCreate = new Date();
     let that = this;
     this.usersService.login(this.email, this.password, function (data) {
-
+      if(!data){return;}
       if (data.id != null) {
         that.auth.setToken(data);
         that.logged.emit(true);
