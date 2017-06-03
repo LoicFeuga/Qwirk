@@ -8,9 +8,13 @@
 
             <div class="each" *ngFor="let contact of contacts">
                 <div class="name">
-                    {{contact.nom}}
+                    {{contact |json}}
                 </div>
+                <button class="waves-effect waves-light btn">Discuter</button>
+                <div style="display:flex;align-items:center;justify-content:center;">
+
                 <i (click)="deleteContact(contact.id)" class="material-icons">delete</i>
+                </div>
             </div>
         </div>
 

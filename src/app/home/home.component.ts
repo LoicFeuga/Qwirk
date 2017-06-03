@@ -10,7 +10,7 @@ import { VMenuComponent } from '../vmenu/vmenu.component';
 })
 export class HomeComponent implements OnInit {
   @Output() deco: EventEmitter<boolean> = new EventEmitter<boolean>();
-  router: number = 1;
+  router: number = 2;
   @ViewChild(VMenuComponent) vmenu;
   //0 = timelines 
   // 1 = contact
@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   toAddChat(recup: boolean) {
-    this.router = 6;
+    this.router = 1;
   }
 
   toAddChannel(recup: boolean) {

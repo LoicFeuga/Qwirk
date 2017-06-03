@@ -6,8 +6,8 @@ export class AuthenticationService {
   public user: any = {};
   constructor() {
 
-     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-     this.token = currentUser && currentUser.token;
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.token = currentUser && currentUser.token;
   }
 
   /**
@@ -16,25 +16,44 @@ export class AuthenticationService {
    * @param token Le nouvelle objet qui contient le token 
    */
   setToken(user: any) {
-    localStorage.setItem('user',JSON.stringify(user));
-    localStorage.setItem('token',JSON.stringify(user.token));
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', JSON.stringify(user.token));
     this.token = user.token;
     this.user = user;
   }
 
-  getUser(){
+  /**
+   * Return un object nom prenom, id
+   */
+  getUser() {
+    let user = { nom:"", prenom:"",id: -1 };
+    try {
 
-    let user = JSON.parse(localStorage.getItem('user'));
+      user = JSON.parse(localStorage.getItem('user'));
+    } catch (e) {
+      user =  { nom:"", prenom:"",id: -1 };
+    }
     return user;
   }
-  getUserID(){
+  getUserID() {
+    let id = 0;
 
-    let user = JSON.parse(localStorage.getItem('user'));
-    return user.id;
+    try {
+      id = JSON.parse(localStorage.getItem('user')).id;
+    } catch (e) {
+      id = -1;
+    }
+    return id;
   }
 
   getToken() {
-    let token = JSON.parse(localStorage.getItem('token'));
+    let token = "";
+    try {
+
+      token = JSON.parse(localStorage.getItem('token'));
+    } catch (e) {
+      token ="";
+    }
     return token;
   }
 }
