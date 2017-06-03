@@ -6,15 +6,17 @@
 
         <div class="all_users">
 
-            <div class="each" *ngFor="let contact of contacts">
-                <div class="name">
-                    {{contact |json}}
-                </div>
-                <button class="waves-effect waves-light btn">Discuter</button>
-                <div style="display:flex;align-items:center;justify-content:center;">
 
-                <i (click)="deleteContact(contact.id)" class="material-icons">delete</i>
-                </div>
+                <div class="each col s2" *ngFor="let contact of contacts">
+
+                    <img src="/assets/images/contact.png" style="width:100px;" alt="Contact">
+                    <div class="name">
+                        {{contact.nom}} {{contact.prenom}}
+                    </div>
+                    <button class="waves-effect waves-light btn " style="width:100%">Discuter</button>
+                    <button (click)="deleteContact(contact.id)" class="waves-effect waves-light btn red accent-4" style="width:100%">Supprimer</button>
+
+
             </div>
         </div>
 
