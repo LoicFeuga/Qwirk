@@ -8,13 +8,32 @@ import { UsersService } from '../users.service';
 })
 export class NotificationComponent implements OnInit {
 
+  notifications: any[];
+
   constructor(public usersService: UsersService) {
 
-    this.usersService.getInvitation(function(data){
-      console.log(data);
-    });
+    this.getInvitation();
   }
 
+  getInvitation() {
+    let that = this;
+    this.usersService.getInvitation(function (data) {
+      that.notifications = data;
+    });
+  }
+  acceptInvit(id:number){
+    let that = this;
+    this.usersService.acceptInvitation(id,function(data){
+      that.getInvitation();
+    });
+  }
+  refuseInvit(id:number){
+    
+    let that = this;
+    this.usersService.refuseInvitation(id,function(data){
+      that.getInvitation();
+    });
+  }
   ngOnInit() {
   }
 

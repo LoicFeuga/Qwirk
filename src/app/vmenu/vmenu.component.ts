@@ -68,6 +68,11 @@ export class VMenuComponent implements OnInit {
     });
   }
 
+  setNomPrenom(recup :any){
+    this.nom = recup.nom;
+    this.prenom = recup.prenom;
+  }
+
   changeStatut(statut: any) {
     this.statut = statut;
   }

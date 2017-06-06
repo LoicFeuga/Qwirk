@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 export class UsersService {
   
   private api: string = this.httpClient.url + this.httpClient.userService;
+  private apiInvit: string = this.api + "/invit";
   private apiContact : string = this.httpClient.url+ this.httpClient.userService + "/contact";
   private apiParametre : string = this.httpClient.url+ "parametre";
   private apiDeleteContact : string = this.httpClient.url + "contact";
@@ -59,7 +60,29 @@ export class UsersService {
   getInvitation(callback:any){
     this.options =  this.httpClient.getHeadersOptions();
 
-    this.http.get(this.api+"/invit", this.options).map(res => res.json()).subscribe(data => {
+    this.http.get(this.apiInvit, this.options).map(res => res.json()).subscribe(data => {
+      callback(data);
+    });
+  }
+  acceptInvitation(id:number,callback:any){
+    this.options =  this.httpClient.getHeadersOptions();
+    this.http.put(this.apiInvit+"/"+id+"/1",this.options).map(res => res.json()).subscribe(data => {
+      callback(data);
+    });
+  }
+
+  updateUser(user:any,callback:any){
+    this.options =  this.httpClient.getHeadersOptions();
+
+    this.http.put(this.api,user,this.options).map(res => res.json()).subscribe(data => {
+      callback(data);
+    });
+
+  }
+  refuseInvitation(id:number,callback:any){
+    this.options =  this.httpClient.getHeadersOptions();
+
+    this.http.put(this.apiInvit+"/"+id+"/3",this.options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
   }

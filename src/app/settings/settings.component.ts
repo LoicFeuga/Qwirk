@@ -18,10 +18,18 @@ export class SettingsComponent implements OnInit {
   idUser: number = 0;
   @Output() deleted: EventEmitter<any> = new EventEmitter<any>();
   @Output() statutChanged: EventEmitter<any> = new EventEmitter<any>();
+  @Output() userChanged: EventEmitter<any> = new EventEmitter<any>();
 
   statut = "";
   audio: boolean = false;
   video: boolean = false;
+  user : any = {
+   nom:"",
+   prenom:"",
+   email:"",
+   bio:"",
+   dateNaiss:"" 
+  };
 
   constructor(private auth: AuthenticationService, overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal, private chatsService: ChatsService, private usersService: UsersService) {
     let id = this.auth.getUserID();
@@ -29,6 +37,36 @@ export class SettingsComponent implements OnInit {
     this.rebuildChats();
 
     overlay.defaultViewContainer = vcRef;
+    this.getParametre();
+    this.getUserDetail();
+  }
+
+  updateUser(){
+    let that =this;
+    this.usersService.updateUser(this.user, function(data){
+        that.userChanged.emit(data);
+        that.modal.alert()
+        .size('sm')
+        .isBlocking(false)
+        .showClose(false)
+        .keyboard(27)
+        .title('Informations')
+        .body('Paramètre utilisateur modifié !')
+        .open();
+    });
+  }
+
+  getUserDetail(){
+    
+    let that = this;
+
+
+    this.usersService.getUser(this.auth.getUserID(), function (data) {
+      that.user = data;
+    });
+  }
+
+  getParametre() {
 
     let that = this;
 

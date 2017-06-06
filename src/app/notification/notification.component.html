@@ -1,4 +1,14 @@
 <div id="app-notification" class="notification">
     <h2 class="title">Vos notifications</h2>
 
+    <div class="each col s12" *ngFor="let notification of notifications">
+        <div class="user">
+           Demande d'ajout de contact de {{notification.user.nom}} {{notification.user.prenom}}
+        </div>
+        <div class="buttons">
+            <a class="btn-floating green" (click)="acceptInvit(notification.id)"><i class="material-icons">done</i></a>
+            <a class="btn-floating red" (click)="refuseInvit(notification.id)"><i class="material-icons">not_interested</i></a>
+        </div>
+    </div>
+
 </div>

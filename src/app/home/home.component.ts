@@ -84,6 +84,9 @@ export class HomeComponent implements OnInit {
   toContact(recup: boolean) {
     this.router = 1;
   }
+  userChanged(recup : any){
+    this.vmenu.setNomPrenom(recup);
+  }
   toTimeline(recup: number) {
     if (recup > 0) {
 

@@ -35,20 +35,25 @@ export class ContactComponent implements OnInit {
       }
     });
 
+
+    this.getAllUser();
+  }
+
+  getAllUser() {
+    let idUser = this.auth.getUserID();
+    let that = this;
     this.usersServices.getAllUser(idUser, function (data) {
       that.allUsers = data;
     });
-
   }
-
-  startChat(id: number, nom: string, prenom: string){
+  startChat(id: number, nom: string, prenom: string) {
     let that = this;
-    this.chatsService.createChat(nom+" "+prenom,"chat",1,function(data){
-      if(!data) return;
+    this.chatsService.createChat(nom + " " + prenom, "chat", 1, function (data) {
+      if (!data) return;
 
       that.created.emit(data);
-      
-    }); 
+
+    });
   }
 
   deleteContact(id: number) {
@@ -73,13 +78,14 @@ export class ContactComponent implements OnInit {
     this.chatsService.inviteContact("libelle", "description", idUser, id, function (data) {
       if (!data) return;
       else {
+        that.getAllUser();
         that.modal.alert()
           .size('sm')
           .isBlocking(false)
           .showClose(false)
           .keyboard(27)
           .title('Informations')
-          .body('Utilisateurs ajouté !')
+          .body('Utilisateurs invité, il doit encore accepté votre invitation avant d\'aparaitre dans votre liste de contact')
           .open();
 
       }
