@@ -14,6 +14,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { UsersService } from './users.service';
 import { ChatsService } from './chats.service';
 import { HttpClientService } from './http-client.service';
+import { WebSocketService } from './web-socket.service';
 import { AuthenticationService } from './authentication.service';
 import { ModalComponent } from './modal/modal.component';
 import { NotificationComponent } from './notification/notification.component';
@@ -48,7 +49,7 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
     BootstrapModalModule,
     HttpModule
   ],
-  providers: [UsersService,AuthenticationService,ChatsService,HttpClientService],
+  providers: [UsersService,AuthenticationService,ChatsService,HttpClientService,WebSocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

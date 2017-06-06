@@ -56,7 +56,7 @@ export class VMenuComponent implements OnInit {
     this.allFrame.push('app-add-groupe');
     this.allFrame.push('app-add-chat');
     this.allFrame.push('app-setting');
-    this.allFrame.push('app-notificafion');
+    this.allFrame.push('app-notification');
 
     this.rebuildChats();
   }
@@ -66,6 +66,10 @@ export class VMenuComponent implements OnInit {
     this.usersServices.getUser(this.auth.getUserID(), function (data) {
       that.statut = data.statut;
     });
+  }
+
+  changeStatut(statut : any){
+    this.statut = statut;
   }
 
   filtre() {
@@ -164,8 +168,8 @@ export class VMenuComponent implements OnInit {
     this.filtre();
   }
 
-  toTimeline() {
-    this.timeline.emit(1);
+  toTimeline(id:number) {
+    this.timeline.emit(id);
     let that = this;
     setTimeout(function () {
 

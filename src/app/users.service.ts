@@ -33,9 +33,9 @@ export class UsersService {
     });
   }
 
-  updateUser(id:number,user:any,callback:any){
-    this.http.put(this.api+"/"+id, user,this.options).map(res => res.json()).subscribe(data => {
-      callback(callback);
+  updateStatutUser(id:number,statut:string,callback:any){
+    this.http.put(this.api+"/"+id+"/"+statut,this.options).map(res => res.json()).subscribe(data => {
+      callback(data.statut);
     });
   }
 

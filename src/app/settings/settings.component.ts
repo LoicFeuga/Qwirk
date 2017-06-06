@@ -17,25 +17,29 @@ export class SettingsComponent implements OnInit {
   channels: any[] = [];
   idUser: number = 0;
   @Output() deleted: EventEmitter<any> = new EventEmitter<any>();
+  @Output() statutChanged: EventEmitter<any> = new EventEmitter<any>();
 
-  statut ="";
+  statut = "";
   audio: boolean = false;
-  video : boolean = false;
+  video: boolean = false;
 
-  constructor(private auth: AuthenticationService, public modal: Modal, private chatsService: ChatsService, private usersService : UsersService) {
+  constructor(private auth: AuthenticationService, public modal: Modal, private chatsService: ChatsService, private usersService: UsersService) {
     let id = this.auth.getUserID();
     this.idUser = id;
     this.rebuildChats();
   }
 
-  updateStatut(){
-    this.usersService.updateUser(this.auth.getUserID(),{statut:this.statut}, function(data){
-      console.log(data);
+  updateStatut() {
+    let that = this;
+    this.usersService.updateStatutUser(this.auth.getUserID(), this.statut, function (data) {
+      that.statutChanged.emit(data);
+ 
+
     });
   }
 
-  updateAudioVideo(){
-    this.usersService.updateAudioVideo(this.auth.getUserID(),{audio: this.audio, video: this.video}, function(data){
+  updateAudioVideo() {
+    this.usersService.updateAudioVideo(this.auth.getUserID(), { audio: this.audio, video: this.video }, function (data) {
       console.log(data);
     });
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { VideoCallComponent } from '../video-call/video-call.component';
 import { QBot } from '../classes/bot';
 import {AuthenticationService } from '../authentication.service';
@@ -13,8 +13,12 @@ export class TimelineComponent implements OnInit {
   
   messages: Object[] = [];
   text: string;
+  idChat : number = 0;
   bot:QBot;
   itemMessage : ItemMessage;
+  
+  @Output() added: EventEmitter<any> = new EventEmitter<any>();
+  
   
   //0 = message;
   //1 = audio;
@@ -32,10 +36,18 @@ export class TimelineComponent implements OnInit {
     }, 100);
   }
 
+
   scrollBot() {
   }
 
 
+  /**
+   * Permet de modifier le chat 
+   * @param id id chat
+   */
+  setChat(id: number){
+    this.idChat = id;
+  }
 
   isChatSelected() {
     return this.modeTimeline == 0;
@@ -61,6 +73,7 @@ export class TimelineComponent implements OnInit {
 
   add() {
     this.messages.push(new ItemMessage("loic",this.text, this.auth.getUserID()).get());
+    this.added.emit(this.formatTextForSocket(this.text,1));
     this.bot.execute();
     setTimeout(function () {
       let objDiv = document.querySelector("#app-timeline");
@@ -70,6 +83,13 @@ export class TimelineComponent implements OnInit {
   }
   ngOnInit() {
 
+  }
+
+  formatTextForSocket(message:string,id:number){
+    return {
+      id:id,
+      content:message
+    }
   }
 
 }
