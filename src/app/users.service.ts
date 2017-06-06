@@ -29,7 +29,7 @@ export class UsersService {
   getAllUser(id:number,callback : any) {
     this.options =  this.httpClient.getHeadersOptions();
     
-    this.http.get(this.api ,this.options).map(res => res.json()).subscribe(data => {
+    this.http.get(this.httpClient.url+"user/notContact" ,this.options).map(res => res.json()).subscribe(data => {
       callback(data);
 
     });

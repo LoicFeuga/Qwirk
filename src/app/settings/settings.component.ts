@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, ViewContainerRef } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { ChatsService } from '../chats.service';
 import { UsersService } from '../users.service';
@@ -23,11 +23,16 @@ export class SettingsComponent implements OnInit {
   audio: boolean = false;
   video: boolean = false;
 
-  constructor(private auth: AuthenticationService, public modal: Modal, private chatsService: ChatsService, private usersService: UsersService) {
+  constructor(private auth: AuthenticationService, overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal, private chatsService: ChatsService, private usersService: UsersService) {
     let id = this.auth.getUserID();
     this.idUser = id;
     this.rebuildChats();
+
+    overlay.defaultViewContainer = vcRef;
+
     let that = this;
+
+
     this.usersService.getParametre(this.auth.getUserID(), function (data) {
       that.audio = data.audio;
       that.video = data.video;
@@ -41,6 +46,14 @@ export class SettingsComponent implements OnInit {
     this.usersService.updateStatutUser(this.auth.getUserID(), this.statut, function (data) {
       that.statutChanged.emit(data);
 
+      that.modal.alert()
+        .size('sm')
+        .isBlocking(false)
+        .showClose(false)
+        .keyboard(27)
+        .title('Informations')
+        .body('Statut modifié !')
+        .open();
 
     });
   }
@@ -51,9 +64,17 @@ export class SettingsComponent implements OnInit {
 
       data.video = that.video;
       data.audio = that.audio;
-      
+
       that.usersService.updateAudioVideo(data, function (res) {
-       
+
+        that.modal.alert()
+          .size('sm')
+          .isBlocking(false)
+          .showClose(false)
+          .keyboard(27)
+          .title('Informations')
+          .body('Paramètre modifié !')
+          .open();
       });
     });
   }
