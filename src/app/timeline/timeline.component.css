@@ -1,12 +1,12 @@
 .timeline{
     width: calc(100%- 200px);
     border-radius: 1px;
-    max-height: calc(100% - 61px);
-    height: calc(100% - 61px);
+    max-height: calc(100% - 101px);
+    height: calc(100% - 101px);
     overflow: auto;
     bottom:40px;
     margin-bottom: 0;
-    padding-bottom: 30px;
+    padding-bottom: 70px;
     margin-left: 200px;
     background: white;
     margin-top:60px;

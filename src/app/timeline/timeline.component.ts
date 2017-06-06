@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { VideoCallComponent } from '../video-call/video-call.component';
+import { QBot } from '../classes/bot';
+import {AuthenticationService } from '../authentication.service';
+import { ItemMessage } from '../classes/itemMessage';
 
 @Component({
   selector: 'app-timeline',
@@ -10,13 +13,17 @@ export class TimelineComponent implements OnInit {
   
   messages: Object[] = [];
   text: string;
+  bot:QBot;
+  itemMessage : ItemMessage;
+  
   //0 = message;
   //1 = audio;
   //2 = video
   modeTimeline = 0;
   @ViewChild(VideoCallComponent) video;
 
-  constructor() {
+  constructor(public auth : AuthenticationService) {
+    this.bot = new QBot(this.messages);
 
     //this.messages.push({ author: "loic", content: "loremkojaoj oijoiaj ioj" });
     setTimeout(function () {
@@ -53,7 +60,8 @@ export class TimelineComponent implements OnInit {
   }
 
   add() {
-    this.messages.push({ author: "loic", content: this.text });
+    this.messages.push(new ItemMessage("loic",this.text, this.auth.getUserID()).get());
+    this.bot.execute();
     setTimeout(function () {
       let objDiv = document.querySelector("#app-timeline");
       objDiv.scrollTop = objDiv.scrollHeight;

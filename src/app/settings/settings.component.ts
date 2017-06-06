@@ -2,6 +2,8 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { ChatsService } from '../chats.service';
 
+import { Overlay } from 'angular2-modal';
+import { Modal } from 'angular2-modal/plugins/bootstrap';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -15,7 +17,7 @@ export class SettingsComponent implements OnInit {
   idUser: number = 0;
   @Output() deleted : EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private auth: AuthenticationService, private chatsService: ChatsService) {
+  constructor(private auth: AuthenticationService,public modal : Modal, private chatsService: ChatsService) {
     let id = this.auth.getUserID();
     this.idUser = id;
     this.rebuildChats();
@@ -87,6 +89,14 @@ export class SettingsComponent implements OnInit {
 
 
     this.chatsService.deleteChat(id);
+        this.modal.alert()
+          .size('sm')
+          .isBlocking(false)
+          .showClose(false)
+          .keyboard(27)
+          .title('Informations')
+          .body('Chat supprimé !')
+          .open();
 
     this.rebuildChatsFromIdLess(id);
     this.deleted.emit(id);
@@ -95,6 +105,14 @@ export class SettingsComponent implements OnInit {
   leaveChat(id :any){
     let idUser = this.auth.getUserID();
     this.chatsService.leaveChat(id,idUser);
+     this.modal.alert()
+          .size('sm')
+          .isBlocking(false)
+          .showClose(false)
+          .keyboard(27)
+          .title('Informations')
+          .body('Vous avez quitter ce chat !')
+          .open();
 
     this.rebuildChatsFromIdLess(id);
     this.deleted.emit(id);
