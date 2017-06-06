@@ -13,13 +13,13 @@ import { $WebSocket, WebSocketSendMode } from 'angular2-websocket/angular2-webso
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   @Output() deco: EventEmitter<boolean> = new EventEmitter<boolean>();
   router: number = 0;
   @ViewChild(VMenuComponent) vmenu;
-  @ViewChild(TimelineComponent) timeline;
+  @ViewChild(TimelineComponent) timeline: TimelineComponent;
   private urlSocket = this.httpService.urlSocket + this.auth.getUserID();
   private ws;
   private socket;
@@ -33,6 +33,8 @@ export class HomeComponent implements OnInit {
   // 6 = add chat
   constructor(private auth: AuthenticationService, public chatsServices: ChatsService, public webSocket: WebSocketService, public httpService: HttpClientService) {
     this.connectToSocket();
+    let that = this;
+    
   }
 
   connectToSocket() {
@@ -83,8 +85,12 @@ export class HomeComponent implements OnInit {
     this.router = 1;
   }
   toTimeline(recup: number) {
-    this.timeline.setChat(recup);
-    this.router = 0;
+    if (recup > 0) {
+
+      this.router = 0;
+
+      this.timeline.idChat = recup;
+    }
   }
   toSettings(recup: boolean) {
     this.router = 2;

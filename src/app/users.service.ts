@@ -11,6 +11,7 @@ export class UsersService {
   
   private api: string = this.httpClient.url + this.httpClient.userService;
   private apiContact : string = this.httpClient.url+ this.httpClient.userService + "/contact";
+  private apiParametre : string = this.httpClient.url+ "/parametre";
   private apiDeleteContact : string = this.httpClient.url + "contact";
   private apiLogin: string = this.httpClient.url + "login";
   private date: QDate = new QDate;
@@ -28,6 +29,12 @@ export class UsersService {
   getAllUser(id:number,callback : any) {
     
     this.http.get(this.api ,this.options).map(res => res.json()).subscribe(data => {
+      callback(data);
+
+    });
+  }
+  getParametre(id:number, callback: any){
+    this.http.get(this.apiParametre+"/"+id ,this.options).map(res => res.json()).subscribe(data => {
       callback(data);
 
     });

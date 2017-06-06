@@ -1,7 +1,7 @@
 <app-vmenu (deco)="deconnexion($event)" (addGroupe)="toAddGroupe($event)" (addChat)="toAddChat($event)" (addChannel)="toAddChannel($event)"
     (notification)="toNotification($event)" (timeline)="toTimeline($event)" (contact)="toContact($event)" (settings)="toSettings($event)"></app-vmenu>
 
-<app-timeline (click)="connectToSocket()" (added)="sendToSocket($event)"  *ngIf="router == 0"></app-timeline>
+<app-timeline  (added)="sendToSocket($event)"  *ngIf="router == 0"></app-timeline>
 <app-contact  *ngIf="router == 1" (created)="chatCreate($event)"></app-contact>
 <app-settings (deleted)="chatDeleted($event)" (statutChanged)="statutChanged($event)" *ngIf="router == 2"></app-settings>
 <app-notification  *ngIf="router == 3"></app-notification>

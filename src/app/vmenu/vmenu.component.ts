@@ -68,7 +68,7 @@ export class VMenuComponent implements OnInit {
     });
   }
 
-  changeStatut(statut : any){
+  changeStatut(statut: any) {
     this.statut = statut;
   }
 
@@ -124,14 +124,17 @@ export class VMenuComponent implements OnInit {
         //en fonction du type de chats
         switch (chats[i].type) {
           case 0:
+            that.timeline.emit(chats[i].id);
             that.chats.push(chats[i]);
             break;
 
           case 1:
+            that.timeline.emit(chats[i].id);
             that.groupes.push(chats[i]);
             break;
 
           case 2:
+            that.timeline.emit(chats[i].id);
             that.channels.push(chats[i]);
             break;
         }
@@ -168,7 +171,7 @@ export class VMenuComponent implements OnInit {
     this.filtre();
   }
 
-  toTimeline(id:number) {
+  toTimeline(id: number) {
     this.timeline.emit(id);
     let that = this;
     setTimeout(function () {

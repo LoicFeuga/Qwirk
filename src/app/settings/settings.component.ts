@@ -31,6 +31,11 @@ export class SettingsComponent implements OnInit {
 
   updateStatut() {
     let that = this;
+
+    this.usersService.getParametre(this.auth.getUserID(),function(data){
+      console.log(data);
+    });
+
     this.usersService.updateStatutUser(this.auth.getUserID(), this.statut, function (data) {
       that.statutChanged.emit(data);
  
