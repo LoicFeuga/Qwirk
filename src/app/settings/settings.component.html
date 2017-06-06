@@ -35,12 +35,45 @@
                         <div>{{chats.libelle}}</div>
                         <i *ngIf="chats.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(chats.id)">delete_forever</i>
                         <i *ngIf="chats.creator != idUser && chats.id >= 0" class="material-icons delete-chat" (click)="leaveChat(chats.id)">remove_circle_outline</i>
-                        
+
                     </div>
 
                 </div>
 
             </div>
         </div>
+
+        <div class="row">
+            <div class="col s4 input-field">
+                <div class="shadow white statut-container">
+                    <h3 class="title-chat"> Changez votre Statut</h3>
+                    <div class="input-field">
+                        <input [(ngModel)]="statut" id="statut" type="text" class="validate">
+                        <label for="statut">Statut</label>
+                        <button class="waves-effect waves-light btn" (click)="updateStatut()">Valider</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s8 input-field">
+
+                <div class="shadow white statut-container">
+                    <h3 class="title-chat "> Préférences pour les appels</h3>
+
+                    <form action="#">
+                        <p>
+                            <input type="checkbox"  [(ngModel)]="audio" id="audio" name="audio" />
+                            <label for="audio">Audio</label>
+                        </p>
+                        <p>
+                            <input  type="checkbox" [(ngModel)]="video" id="video" name="video" />
+                            <label for="video">Video</label>
+                        </p>
+                    <button class="waves-effect waves-light btn marge-top" (click)="updateAudioVideo()">Valider</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
     </div>
-</div>

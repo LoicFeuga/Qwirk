@@ -10,7 +10,8 @@ export class ChatsService {
   private service: string = this.httpClient.chatService;
   private api: string = this.url + this.service;
   private apiCreate: string = this.api + "";
-  private apiContacts: string = this.url + "contact";
+  private apiContacts: string = this.httpClient.url + this.httpClient.userService + "/contact";
+  private apiContactsInvit: string = this.httpClient.url +  "contact";
   private apijoin: string = this.url + "userHasChat";
   private apiPublic: string = this.api + "/public";
   private headers: Headers = this.httpClient.getHeaders();
@@ -60,7 +61,7 @@ export class ChatsService {
     let statut = 0;
     let creator = id1;
     
-    this.http.post(this.apiContacts+"?id1="+id1+"&id2="+id2 , {},  this.optionsForm).map(res => res.json()).subscribe(data => {
+    this.http.post(this.apiContactsInvit+"?id1="+id1+"&id2="+id2+"&libelle="+libelle, {},  this.optionsForm).map(res => res.json()).subscribe(data => {
       callback(data);
     });
   }
@@ -79,7 +80,7 @@ export class ChatsService {
     });
   }
   getContact(id: number, callback: any) {
-    this.http.get(this.apiContacts + "/" + id, this.options).map(res => res.json()).subscribe(data => {
+    this.http.get(this.apiContacts, this.options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
   }

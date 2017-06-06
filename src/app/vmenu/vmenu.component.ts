@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { AuthenticationService } from '../authentication.service';
 import { ChatsService } from '../chats.service';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-vmenu',
@@ -37,16 +38,18 @@ export class VMenuComponent implements OnInit {
   allFrame: string[] = [];
 
   appName: string = "Qwirk";
+  statut: string;
 
 
-  constructor(app: AppComponent, private auth: AuthenticationService, private chatsServices: ChatsService) {
+  constructor(app: AppComponent, private auth: AuthenticationService, private chatsServices: ChatsService, private usersServices: UsersService) {
     this.appName = app.appName;
 
     let user = this.auth.getUser();
 
     this.nom = user.nom;
     this.prenom = user.prenom;
-
+    this.statut = "";
+    this.MAJStatut();
     this.allFrame.push('app-timeline');
     this.allFrame.push('app-contact');
     this.allFrame.push('app-add-channel');
@@ -56,6 +59,13 @@ export class VMenuComponent implements OnInit {
     this.allFrame.push('app-notificafion');
 
     this.rebuildChats();
+  }
+
+  MAJStatut() {
+    let that = this;
+    this.usersServices.getUser(this.auth.getUserID(), function (data) {
+      that.statut = data.statut;
+    });
   }
 
   filtre() {

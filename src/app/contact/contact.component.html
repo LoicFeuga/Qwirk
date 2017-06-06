@@ -11,10 +11,10 @@
 
                     <img src="/assets/images/contact.png" style="width:100px;" alt="Contact">
                     <div class="name">
-                        {{contact.nom}} {{contact.prenom}}
+                        {{contact.user.nom}} {{contact.user.prenom}}
                     </div>
                     <button class="waves-effect waves-light btn " (click)="startChat(contact.id, contact.nom, contact.prenom)" style="width:100%">Discuter</button>
-                    <button (click)="deleteContact(contact.id)" class="waves-effect waves-light btn red accent-4" style="width:100%">Supprimer</button>
+                    <button (click)="deleteContact(contact.user.id)" class="waves-effect waves-light btn red accent-4" style="width:100%">Supprimer</button>
 
 
             </div>

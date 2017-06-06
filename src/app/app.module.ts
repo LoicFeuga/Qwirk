@@ -21,7 +21,6 @@ import { AddChannelComponent } from './add-channel/add-channel.component';
 import { AddGroupeComponent } from './add-groupe/add-groupe.component';
 import { AddChatComponent } from './add-chat/add-chat.component';
 import { VideoCallComponent } from './video-call/video-call.component';
-
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 

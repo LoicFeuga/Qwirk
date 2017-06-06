@@ -25,6 +25,16 @@
 .white{
     background: white;
 }
+.marge-top{
+    margin-top:10px;
+}
+.statut-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
 .title{
     width:100%;
     display: flex;

@@ -10,7 +10,8 @@ import 'rxjs/add/operator/map';
 export class UsersService {
   
   private api: string = this.httpClient.url + this.httpClient.userService;
-  private apiContact : string = this.httpClient.url + "contact";
+  private apiContact : string = this.httpClient.url+ this.httpClient.userService + "/contact";
+  private apiDeleteContact : string = this.httpClient.url + "contact";
   private apiLogin: string = this.httpClient.url + "login";
   private date: QDate = new QDate;
   private options: RequestOptions = this.httpClient.getHeadersOptions();
@@ -32,9 +33,25 @@ export class UsersService {
     });
   }
 
+  updateUser(id:number,user:any,callback:any){
+    this.http.put(this.api+"/"+id, user,this.options).map(res => res.json()).subscribe(data => {
+      callback(callback);
+    });
+  }
+
+  getUser(id:number,callback:any){
+    this.http.get(this.api+"/"+id, this.options).map(res => res.json()).subscribe(data => {
+      callback(data);
+    });
+  }
+
+  updateAudioVideo(id:number,settings : any, callback:any){
+    
+  }
+
   deleteContact(id2 : number, callback : any){
 
-    this.http.delete(this.apiContact+"/"+id2, this.options).map(res => res.json()).subscribe(data => {
+    this.http.get(this.apiDeleteContact+"/"+id2+"/5", this.options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
   }

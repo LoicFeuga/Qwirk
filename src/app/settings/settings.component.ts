@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { ChatsService } from '../chats.service';
+import { UsersService } from '../users.service';
 
 import { Overlay } from 'angular2-modal';
 import { Modal } from 'angular2-modal/plugins/bootstrap';
@@ -15,16 +16,31 @@ export class SettingsComponent implements OnInit {
   groupes: any[] = [];
   channels: any[] = [];
   idUser: number = 0;
-  @Output() deleted : EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleted: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private auth: AuthenticationService,public modal : Modal, private chatsService: ChatsService) {
+  statut ="";
+  audio: boolean = false;
+  video : boolean = false;
+
+  constructor(private auth: AuthenticationService, public modal: Modal, private chatsService: ChatsService, private usersService : UsersService) {
     let id = this.auth.getUserID();
     this.idUser = id;
     this.rebuildChats();
   }
 
-  pushFakeItem(array,str: string){
-    array.push({libelle:"Aucun "+str+ " trouvé"});
+  updateStatut(){
+    this.usersService.updateUser(this.auth.getUserID(),{statut:this.statut}, function(data){
+      console.log(data);
+    });
+  }
+
+  updateAudioVideo(){
+    this.usersService.updateAudioVideo(this.auth.getUserID(),{audio: this.audio, video: this.video}, function(data){
+      console.log(data);
+    });
+  }
+  pushFakeItem(array, str: string) {
+    array.push({ libelle: "Aucun " + str + " trouvé" });
   }
 
   /**
@@ -53,9 +69,9 @@ export class SettingsComponent implements OnInit {
             break;
         }
       }
-      if(that.channels.length <= 0) that.pushFakeItem(that.channels,"channel");
-      if(that.chats.length <= 0) that.pushFakeItem(that.chats,"chat");
-      if(that.groupes.length <= 0) that.pushFakeItem(that.groupes,"groupe");
+      if (that.channels.length <= 0) that.pushFakeItem(that.channels, "channel");
+      if (that.chats.length <= 0) that.pushFakeItem(that.chats, "chat");
+      if (that.groupes.length <= 0) that.pushFakeItem(that.groupes, "groupe");
     });
   }
   /**
@@ -89,30 +105,30 @@ export class SettingsComponent implements OnInit {
 
 
     this.chatsService.deleteChat(id);
-        this.modal.alert()
-          .size('sm')
-          .isBlocking(false)
-          .showClose(false)
-          .keyboard(27)
-          .title('Informations')
-          .body('Chat supprimé !')
-          .open();
+    this.modal.alert()
+      .size('sm')
+      .isBlocking(false)
+      .showClose(false)
+      .keyboard(27)
+      .title('Informations')
+      .body('Chat supprimé !')
+      .open();
 
     this.rebuildChatsFromIdLess(id);
     this.deleted.emit(id);
   }
 
-  leaveChat(id :any){
+  leaveChat(id: any) {
     let idUser = this.auth.getUserID();
-    this.chatsService.leaveChat(id,idUser);
-     this.modal.alert()
-          .size('sm')
-          .isBlocking(false)
-          .showClose(false)
-          .keyboard(27)
-          .title('Informations')
-          .body('Vous avez quitter ce chat !')
-          .open();
+    this.chatsService.leaveChat(id, idUser);
+    this.modal.alert()
+      .size('sm')
+      .isBlocking(false)
+      .showClose(false)
+      .keyboard(27)
+      .title('Informations')
+      .body('Vous avez quitter ce chat !')
+      .open();
 
     this.rebuildChatsFromIdLess(id);
     this.deleted.emit(id);
