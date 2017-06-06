@@ -11,7 +11,7 @@ export class UsersService {
   
   private api: string = this.httpClient.url + this.httpClient.userService;
   private apiContact : string = this.httpClient.url+ this.httpClient.userService + "/contact";
-  private apiParametre : string = this.httpClient.url+ "/parametre";
+  private apiParametre : string = this.httpClient.url+ "parametre";
   private apiDeleteContact : string = this.httpClient.url + "contact";
   private apiLogin: string = this.httpClient.url + "login";
   private date: QDate = new QDate;
@@ -27,6 +27,7 @@ export class UsersService {
    * @param callback 
    */
   getAllUser(id:number,callback : any) {
+    this.options =  this.httpClient.getHeadersOptions();
     
     this.http.get(this.api ,this.options).map(res => res.json()).subscribe(data => {
       callback(data);
@@ -34,6 +35,7 @@ export class UsersService {
     });
   }
   getParametre(id:number, callback: any){
+    this.options =  this.httpClient.getHeadersOptions();
     this.http.get(this.apiParametre+"/"+id ,this.options).map(res => res.json()).subscribe(data => {
       callback(data);
 
@@ -41,22 +43,36 @@ export class UsersService {
   }
 
   updateStatutUser(id:number,statut:string,callback:any){
+    this.options =  this.httpClient.getHeadersOptions();
     this.http.put(this.api+"/"+id+"/"+statut,this.options).map(res => res.json()).subscribe(data => {
       callback(data.statut);
     });
   }
 
   getUser(id:number,callback:any){
+    this.options =  this.httpClient.getHeadersOptions();
     this.http.get(this.api+"/"+id, this.options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
   }
 
-  updateAudioVideo(id:number,settings : any, callback:any){
-    
+  getInvitation(callback:any){
+    this.options =  this.httpClient.getHeadersOptions();
+
+    this.http.get(this.api+"/invit", this.options).map(res => res.json()).subscribe(data => {
+      callback(data);
+    });
+  }
+  updateAudioVideo(settings : any, callback:any){
+    this.options =  this.httpClient.getHeadersOptions();
+
+     this.http.put(this.apiParametre,settings, this.options).map(res => res.json()).subscribe(data => {
+      callback(data);
+    });
   }
 
   deleteContact(id2 : number, callback : any){
+    this.options =  this.httpClient.getHeadersOptions();
 
     this.http.get(this.apiDeleteContact+"/"+id2+"/5", this.options).map(res => res.json()).subscribe(data => {
       callback(data);

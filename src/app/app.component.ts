@@ -8,7 +8,7 @@ import { VMenuComponent } from './vmenu/vmenu.component';
 })
 export class AppComponent {
   appName : string = "Qwirk";
-  isLog : number = 1;
+  isLog : number = 0;
   
   
   onLogged(recup : boolean){    
@@ -28,7 +28,8 @@ export class AppComponent {
     this.isLog = 0;  
     localStorage.setItem('user','');
     document.querySelector('.root')['style'].background = "#FFFFFF";
-
+    
+    window.location.reload();
 
   }
 }

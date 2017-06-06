@@ -27,25 +27,34 @@ export class SettingsComponent implements OnInit {
     let id = this.auth.getUserID();
     this.idUser = id;
     this.rebuildChats();
+    let that = this;
+    this.usersService.getParametre(this.auth.getUserID(), function (data) {
+      that.audio = data.audio;
+      that.video = data.video;
+    });
   }
 
   updateStatut() {
     let that = this;
 
-    this.usersService.getParametre(this.auth.getUserID(),function(data){
-      console.log(data);
-    });
 
     this.usersService.updateStatutUser(this.auth.getUserID(), this.statut, function (data) {
       that.statutChanged.emit(data);
- 
+
 
     });
   }
 
   updateAudioVideo() {
-    this.usersService.updateAudioVideo(this.auth.getUserID(), { audio: this.audio, video: this.video }, function (data) {
-      console.log(data);
+    let that = this;
+    this.usersService.getParametre(this.auth.getUserID(), function (data) {
+
+      data.video = that.video;
+      data.audio = that.audio;
+      
+      that.usersService.updateAudioVideo(data, function (res) {
+       
+      });
     });
   }
   pushFakeItem(array, str: string) {
