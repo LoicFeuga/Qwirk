@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   constructor(private auth: AuthenticationService, public chatsServices: ChatsService, public webSocket: WebSocketService, public httpService: HttpClientService) {
     this.connectToSocket();
     let that = this;
-    
+
   }
 
   connectToSocket() {
@@ -84,14 +84,14 @@ export class HomeComponent implements OnInit {
   toContact(recup: boolean) {
     this.router = 1;
   }
-  userChanged(recup : any){
+  userChanged(recup: any) {
     this.vmenu.setNomPrenom(recup);
   }
   toTimeline(recup: number) {
     if (recup > 0) {
 
       this.router = 0;
-
+      
       this.timeline.idChat = recup;
     }
   }
