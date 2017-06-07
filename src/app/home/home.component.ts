@@ -45,6 +45,9 @@ export class HomeComponent implements OnInit {
       this.ws.onMessage(
         (msg: MessageEvent) => {
           console.log("onMessage ", msg.data);
+          if(this.timeline.idChat == msg.data.id){
+            //this.timeline.messages.push(this.timeline.);
+          }
         },
         { autoApply: false }
       );

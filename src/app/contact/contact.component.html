@@ -7,14 +7,16 @@
         <div class="all_users">
 
 
-                <div class="each col s2" *ngFor="let contact of contacts">
+            <div class="each col s2" *ngFor="let contact of contacts">
 
-                    <img src="/assets/images/contact.png" style="width:100px;" alt="Contact">
-                    <div class="name">
-                        {{contact.user.nom}} {{contact.user.prenom}}
-                    </div>
-                    <button class="waves-effect waves-light btn " (click)="startChat(contact.id, contact.nom, contact.prenom)" style="width:100%">Discuter</button>
-                    <button (click)="deleteContact(contact.user.id)" class="waves-effect waves-light btn red accent-4" style="width:100%">Supprimer</button>
+                <img src="/assets/images/contact.png" style="width:100px;" alt="Contact">
+                <div class="name">
+                    {{contact.user.nom}} {{contact.user.prenom}}
+                </div>
+                <button class="waves-effect waves-light btn green" (click)="seeProfil(contact.user.id)" style="width:100%">Voir le profil</button>
+                <button class="waves-effect waves-light btn " (click)="startChat(contact.user.id, contact.user.nom, contact.user.prenom)"
+                    style="width:100%">Discuter</button>
+                <button (click)="deleteContact(contact.user.id)" class="waves-effect waves-light btn red accent-4" style="width:100%">Supprimer</button>
 
 
             </div>
@@ -46,6 +48,59 @@
                 </div>
             </div>
         </div>
+        <a class="btn-floating btn waves-effect waves-light btn-large red add" (click)="toSeeContact()">
+            <i class="material-icons">visibility</i>
+        </a>
+
+    </div>
+
+    <div class="cent" *ngIf="mode ==2">
+
+        <h2 class="title">Détails utilisateur</h2>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col s12">
+                    <img *ngIf="userDisplayed.photo == ''" src="assets/images/contact.png" class="profil-img" alt="Photo utilisateur">
+                    <img *ngIf="userDisplayed.photo != ''" [src]="userDisplayed.photo" class="profil-img" alt="Photo utilisateur">
+                </div>
+            </div>
+            <div class="profil-content">
+
+                <div class="row">
+                    <div class="col s6 ">
+                        <label for="prenom" class="active profil-label ">Prénom</label>
+                        <div id="prenom" class="validate profil-champ">{{userDisplayed.prenom}} </div>
+                    </div>
+                    <div class="col s6 ">
+                        <label for="nom" class="active profil-label ">Nom</label>
+                        <div id="nom" class="validate profil-champ">{{userDisplayed.nom}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 ">
+                        <label for="email" class="active profil-label ">Email</label>
+                        <div id="email" class="validate profil-champ">{{userDisplayed.email}}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 ">
+                        <label for="bio" class="active profil-label ">Bio</label>
+                        <div id="bio" class="validate profil-champ">{{userDisplayed.bio}}</div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col s12 ">
+                        <label for="statut" class="active profil-label ">Statut</label>
+                        <div id="statut" class="validate profil-champ">{{userDisplayed.statut}}</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
         <a class="btn-floating btn waves-effect waves-light btn-large red add" (click)="toSeeContact()">
             <i class="material-icons">visibility</i>
         </a>

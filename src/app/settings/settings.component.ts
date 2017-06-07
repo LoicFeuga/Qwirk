@@ -20,6 +20,7 @@ export class SettingsComponent implements OnInit {
   @Output() statutChanged: EventEmitter<any> = new EventEmitter<any>();
   @Output() userChanged: EventEmitter<any> = new EventEmitter<any>();
 
+  editMode = 0;
   statut = "";
   audio: boolean = false;
   video: boolean = false;
@@ -56,6 +57,13 @@ export class SettingsComponent implements OnInit {
     });
   }
 
+  toEdit(){
+    this.editMode = 1;
+  }
+
+  valideEdit(){
+    this.editMode = 0;
+  }
   getUserDetail(){
     
     let that = this;

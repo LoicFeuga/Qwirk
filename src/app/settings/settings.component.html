@@ -29,14 +29,18 @@
             </div>
             <div class="col m4 s12  chat ">
                 <div class="shadow white">
-                    <h3 class="title-chat">Chats</h3>
+                    <h3 class="title-chat">Chats</h3> 
+                        
                     <div *ngFor="let chats of chats" class="libelle-chat">
                         <i *ngIf="chats.id >= 0" class="material-icons">chat</i>
-                        <div>{{chats.libelle}}</div>
+                        <input *ngIf="editMode == 1" type="text" [(ngModel)]="chats.libelle" >
+                        <div *ngIf="editMode == 0" type="text" >{{chats.libelle}}</div>
                         <i *ngIf="chats.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(chats.id)">delete_forever</i>
                         <i *ngIf="chats.creator != idUser && chats.id >= 0" class="material-icons delete-chat" (click)="leaveChat(chats.id)">remove_circle_outline</i>
 
                     </div>
+                <div style="width:100%;padding:10px;display:flex;justify-content:space-between;"> <i  class="material-icons" (click)="toEdit()">mode_edit</i>  <i  (click)="valideEdit()" class="material-icons">check_circle</i></div>
+
 
                 </div>
 

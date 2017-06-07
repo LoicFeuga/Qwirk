@@ -20,7 +20,6 @@
     height: 100%;
     display: flex;
     padding:0px 10px;
-    justify-content: center;
     flex-direction: column;
 }
 
@@ -36,6 +35,26 @@
     right:20px;
 }
 
+.profil-champ{
+    font-size: 20px;
+    color:black;
+}
+.profil-content{
+    background: white;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    padding:10px;
+}
+.profil-img{
+    max-width: 200px;
+    max-height: 200px;
+    display: block;
+    margin:auto auto;
+    margin-bottom: 20px;
+}
+
+.profil-label{
+    font-size: 18px;
+}
 .each{
     
     float:left;
@@ -46,7 +65,7 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    height:240px;
+    height:270px;
     background: white;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }

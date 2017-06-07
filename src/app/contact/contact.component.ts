@@ -17,14 +17,29 @@ export class ContactComponent implements OnInit {
   //1 = create
   mode: number = 0;
   allUsers: any[] = [];
+  userDisplayed: any = {
+    nom: "",
+    prenom: "",
+    bio: "",
+    email: "",
+    photo: ""
+  };
   userFilter: string = "";
   @Output() created: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private chatsService: ChatsService, overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal, private auth: AuthenticationService, private usersServices: UsersService) {
     let that = this;
-    let idUser = this.auth.getUserID();
     overlay.defaultViewContainer = vcRef;
 
+
+
+    this.getAllUser();
+    this.getContact();
+  }
+
+  getContact() {
+    let idUser = this.auth.getUserID();
+    let that = this;
     this.chatsService.getContact(idUser, function (data) {
 
       that.contacts = [];
@@ -35,8 +50,6 @@ export class ContactComponent implements OnInit {
       }
     });
 
-
-    this.getAllUser();
   }
 
   getAllUser() {
@@ -57,19 +70,34 @@ export class ContactComponent implements OnInit {
   }
 
   deleteContact(id: number) {
+    let that = this;
 
     this.usersServices.deleteContact(id, function (data) {
-      console.log(data);
+
+      that.getContact();
     });
 
   }
 
   toAddContact() {
     this.mode = 1;
+    this.getAllUser();
   }
 
   toSeeContact() {
     this.mode = 0;
+  }
+
+  seeProfil(id: number) {
+    this.mode = 2;
+    let that = this;
+    this.usersServices.getUser(id, function (data) {
+      if (data.photo == null) {
+        data.photo = "";
+      }
+      that.userDisplayed = data;
+    });
+
   }
 
   invite(id: number) {

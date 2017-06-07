@@ -41,6 +41,7 @@ export class TimelineComponent implements OnInit {
   }
 
 
+
   /**
    * Permet de modifier le chat 
    * @param id id chat
@@ -73,7 +74,7 @@ export class TimelineComponent implements OnInit {
 
   add() {
     this.messages.push(new ItemMessage("loic",this.text, this.auth.getUserID()).get());
-    this.added.emit(this.formatTextForSocket(this.text,1));
+    this.added.emit(this.formatTextForSocket(this.text,this.idChat));
     this.bot.execute();
     setTimeout(function () {
       let objDiv = document.querySelector("#app-timeline");
