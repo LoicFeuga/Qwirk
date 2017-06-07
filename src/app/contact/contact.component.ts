@@ -59,14 +59,9 @@ export class ContactComponent implements OnInit {
       that.allUsers = data;
     });
   }
-  startChat(id: number, nom: string, prenom: string) {
+  startChat(id: number) {
     let that = this;
-    this.chatsService.createChat(nom + " " + prenom, "chat", 1, function (data) {
-      if (!data) return;
-
-      that.created.emit(data);
-
-    });
+    that.created.emit(id);
   }
 
   deleteContact(id: number) {

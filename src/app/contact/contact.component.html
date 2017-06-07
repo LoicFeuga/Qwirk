@@ -14,7 +14,7 @@
                     {{contact.user.nom}} {{contact.user.prenom}}
                 </div>
                 <button class="waves-effect waves-light btn green" (click)="seeProfil(contact.user.id)" style="width:100%">Voir le profil</button>
-                <button class="waves-effect waves-light btn " (click)="startChat(contact.user.id, contact.user.nom, contact.user.prenom)"
+                <button class="waves-effect waves-light btn " (click)="startChat(contact.chat.id)"
                     style="width:100%">Discuter</button>
                 <button (click)="deleteContact(contact.user.id)" class="waves-effect waves-light btn red accent-4" style="width:100%">Supprimer</button>
 

@@ -16,3 +16,9 @@
 .input-field{
     width: 100%;
 }
+
+.change{
+    position: absolute;
+    bottom:20px;
+    right:20px;
+}

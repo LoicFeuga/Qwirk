@@ -1,19 +1,32 @@
 <div id="app-add-groupe" class="add-groupe">
-  <h2 class="title">Créez un groupe</h2>
+  <div *ngIf="mode == 0">
+
+    <h2 class="title">Créez un groupe</h2>
+    <div class="input-field">
+      <input id="last_name" type="text" [(ngModel)]="libelle" class="validate">
+      <label for="last_name">Libellé du groupe</label>
+    </div>
+
+    <div class="input-field">
+      <input id="last_name" type="text" [(ngModel)]="detail" class="validate">
+      <label for="last_name">Description</label>
+    </div>
 
 
+    <a class="waves-effect waves-light btn" (click)="create()"><i class="material-icons right">add</i>Créer</a>
 
-  <div class="input-field">
-    <input id="last_name" type="text" [(ngModel)]="libelle" class="validate">
-    <label for="last_name">Libellé du groupe</label>
+
+    <a class="btn-floating btn waves-effect waves-light btn-large red change" (click)="toJoinGroupe()">
+      <i  class="material-icons">search</i>
+    </a>
   </div>
+  <div *ngIf="mode == 1">
 
-  <div class="input-field">
-    <input id="last_name" type="text" [(ngModel)]="detail" class="validate">
-    <label for="last_name">Description</label>
-  </div>
+    <h2 class="title">Rejoignez un groupe</h2>
 
+    
 
-  <a class="waves-effect waves-light btn" (click)="create()"><i class="material-icons right">add</i>Créer</a>
-
+    <a class="btn-floating btn waves-effect waves-light btn-large red change" (click)="toCreateGroupe()">
+      <i  class="material-icons">add</i>
+    </a> </div>
 </div>

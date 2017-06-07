@@ -106,6 +106,7 @@ export class TimelineComponent implements OnInit {
     return {
       id:id,
       content:message,
+      type:1,
       idUser:idUser,
       author:author
     }

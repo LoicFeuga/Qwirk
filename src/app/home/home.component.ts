@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
         (msg: MessageEvent) => {
           let data = { id: 0, author: "", content: "", idUser: 0 };
           try {
-
+            console.log(msg.data);
             data = JSON.parse(msg.data);
             
 

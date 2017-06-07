@@ -70,7 +70,19 @@ export class ChatsService {
     });
   }
 
-
+  getAllGroupes(callback:any){
+    this.options =  this.httpClient.getHeadersOptions();
+    
+    this.http.get(this.api,this.options).map(res => res.json()).subscribe(data => {
+      var ret = [];
+      for(var i = 0; i < data.length;i++){
+        if(data.type==1){
+          ret.push(data);
+        }
+      }
+      callback(ret);
+    });
+  }
   deleteChat(id: number) {
     this.options =  this.httpClient.getHeadersOptions();
     this.http.delete(this.api + "/" + id, this.options).map(res => res.json()).subscribe(data => {
