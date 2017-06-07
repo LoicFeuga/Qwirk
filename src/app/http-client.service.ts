@@ -6,6 +6,7 @@ import { AuthenticationService } from './authentication.service';
 export class HttpClientService {
   private urlLocal: string = "http://10.31.19.47:8080/SupChat/api/rest/";
   private urlProd: string = "http://84.246.226.230:8080/SupChat/api/rest/";
+  //dans timeline pour le server file
   public urlSocket: string = "84.246.226.230:8080/SupChat/server/";
   public url: string = this.urlProd;
   public chatService: string = "chat";

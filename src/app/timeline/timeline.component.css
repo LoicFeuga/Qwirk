@@ -101,6 +101,22 @@
     resize:vertical ;
 }
 
+.space{
+    display: flex;
+    justify-content: space-between;
+}
+.label-file {
+    cursor: pointer;
+    color: white;
+}
+
+.my-drop-zone { border: dotted 3px lightgray; width:300px;}
+    .nv-file-over { border: dotted 3px red; } 
+    .another-file-over-class { border: dotted 3px green; }
+
+.input-file {
+    display: none;
+}
 .container_send{
 
     display: flex;

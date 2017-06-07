@@ -4,7 +4,12 @@ import { QBot } from '../classes/bot';
 import { AuthenticationService } from '../authentication.service';
 import { ItemMessage } from '../classes/itemMessage';
 import { ChatsService } from '../chats.service';
+import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
+import { NgClass, NgStyle} from '@angular/common';
+
+
+const URL : string = "http://84.246.226.230:8080/SupChat/api/rest/";
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -16,6 +21,7 @@ export class TimelineComponent implements OnInit {
   text: string;
   idChat: number = 0;
   bot: QBot;
+  file:any;
   itemMessage: ItemMessage;
 
   @Output() added: EventEmitter<any> = new EventEmitter<any>();
@@ -32,11 +38,26 @@ export class TimelineComponent implements OnInit {
     this.setChat(this.idChat);
   }
 
-
+  public uploader:FileUploader = new FileUploader({url: URL});
+  public hasBaseDropZoneOver:boolean = false;
+  public hasAnotherDropZoneOver:boolean = false;
+ 
+  public fileOverBase(e:any):void {
+    this.hasBaseDropZoneOver = e;
+  }
+ 
+  public fileOverAnother(e:any):void {
+    this.hasAnotherDropZoneOver = e;
+  }
+  
   scrollBot() {
   }
 
 
+  getFile(e){
+    console.log(this.file);
+    console.log( e.srcElement.files);
+  }
 
   /**
    * Permet de modifier le chat 
@@ -61,6 +82,9 @@ export class TimelineComponent implements OnInit {
   }
   isCallSelected() {
     return this.modeTimeline == 1;
+  }
+  isDocumentSelected() {
+    return this.modeTimeline == 3;
   }
 
   setMode(mode: number) {

@@ -24,6 +24,9 @@ import { AddChatComponent } from './add-chat/add-chat.component';
 import { VideoCallComponent } from './video-call/video-call.component';
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
+
+import { NgClass, NgStyle} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,7 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
     NotificationComponent,
     AddChannelComponent,
     AddGroupeComponent,
+    FileDropDirective,FileSelectDirective,
     AddChatComponent,
     VideoCallComponent
   ],

@@ -1,7 +1,8 @@
 <div id="app-timeline" class="timeline">
   <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-  <app-message *ngFor="let message of messages" [author]="message.author || message.user.prenom" [content]="message.content || message.detail" class="row message">
+  <app-message *ngFor="let message of messages" [author]="message.author || message.user.prenom" [content]="message.content || message.detail"
+    class="row message">
   </app-message>
 
   <app-video-call></app-video-call>
@@ -22,29 +23,57 @@
         </div>
       </div>
 
+      <div class="container_sub_center space" *ngIf="isDocumentSelected()">
+        <!--
+          <div class="file-field input-field heimax">
+            <div class="btn heimax">
+              <span>Sélectionner un fichier</span>
+              <input type="file">
+            </div>
+            <div class="file-path-wrapper heimax">
+              <input class="file-path validate heimax" type="text">
+            </div>
+          </div>
+          -->
+        <label for="file" class="label-file btn">Choisir un ou des document(s)</label>
+
+        <input type="file" id="file" class="input-file" ng2FileSelect [uploader]="uploader" multiple />
+
+        <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader"
+          class="well my-drop-zone">
+          Posez vos documents ici
+        </div>
+
+        <p>Document en attente d'envoie : {{ uploader?.queue?.length }}</p>
+
+
+
+        <button (click)="uploader.uploadAll()" class="btn waves-effect waves-light" type="submit" name="action">
+      Envoyer 
+      </button>
+      </div>
 
       <div class="container_sub_center" *ngIf="isCallSelected()">
 
 
-        <div class="container_send_center" *ngIf="isCallSelected()">
 
-          <button (click)="add()" class="btn waves-effect waves-light" type="submit" name="action">
-      Démarrer un appel audio {{idChat}}
+
+        <button (click)="add()" class="btn waves-effect waves-light" type="submit" name="action">
+      Démarrer un appel audio 
       </button>
-        </div>
+
       </div>
 
       <div class="container_sub_center" *ngIf="isVideoSelected()">
 
-        <div class="container_send_center">
 
-          <button (click)="startVideo()" class="btn waves-effect waves-light" type="submit" name="action">
+        <button (click)="startVideo()" class="btn waves-effect waves-light" type="submit" name="action">
       Démarrer un appel vidéo
       </button>
-          <button (click)="joinVideo()" class="btn waves-effect waves-light" type="submit" name="action">
+        <button (click)="joinVideo()" class="btn waves-effect waves-light" type="submit" name="action">
       Rejoindre l'appel vidéo
       </button>
-        </div>
+
       </div>
     </div>
 
@@ -52,6 +81,7 @@
 
     <div class="container_call">
       <div class="item" (click)="setMode(0)" [class]="isChatSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">chat</i></div>
+      <div class="item" (click)="setMode(3)" [class]="isDocumentSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">attach_file</i></div>
       <div class="item" (click)="setMode(1)" [class]="isCallSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">call</i></div>
       <div class="item" (click)="setMode(2)" [class]="isVideoSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">video_call</i></div>
     </div>
