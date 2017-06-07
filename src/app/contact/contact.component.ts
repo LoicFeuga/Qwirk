@@ -24,7 +24,8 @@ export class ContactComponent implements OnInit {
     email: "",
     photo: ""
   };
-  userFilter: string = "";
+  filtreText : string = "";
+  allUsersWithoutFiltre: any = [];
   @Output() created: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private chatsService: ChatsService, overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal, private auth: AuthenticationService, private usersServices: UsersService) {
@@ -51,12 +52,22 @@ export class ContactComponent implements OnInit {
     });
 
   }
+  filtre(){
+   
+    this.allUsers = [];
+    for(var i = 0; i < this.allUsersWithoutFiltre.length; i++){
+      if(this.allUsersWithoutFiltre[i].nom.indexOf(this.filtreText) > -1 || this.allUsersWithoutFiltre[i].prenom.indexOf(this.filtreText) > -1){
+        this.allUsers.push(this.allUsersWithoutFiltre[i]);
+      }
+    }
+  }
 
   getAllUser() {
     let idUser = this.auth.getUserID();
     let that = this;
     this.usersServices.getAllUser(idUser, function (data) {
       that.allUsers = data;
+      that.allUsersWithoutFiltre = data;
     });
   }
   startChat(id: number) {

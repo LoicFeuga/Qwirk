@@ -34,7 +34,7 @@
 
         <div class="search my-search">
             <i class="material-icons">search</i>
-            <input type="text" id="userFilter" [(ngModel)]="userFilter">
+            <input type="text" id="userFilter" [(ngModel)]="filtreText" (keyup)="filtre()">
 
         </div>
 
