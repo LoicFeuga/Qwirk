@@ -34,6 +34,7 @@ export class VMenuComponent implements OnInit {
 
   timelineSelected = 0;
 
+  haveNotification : number = 0;
   isMinimize: boolean = true;
 
   //contiendra chaque différent fenetre possible en main
@@ -61,6 +62,17 @@ export class VMenuComponent implements OnInit {
     this.allFrame.push('app-notification');
 
     this.rebuildChats();
+  }
+
+  checkNotification(){
+    let that = this;
+    this.usersServices.getInvitation(function(data){
+      if(data.length > 0){
+        that.haveNotification = data.length;
+      }else{
+        that.haveNotification = 0;
+      }
+    });
   }
 
   MAJStatut() {
@@ -122,6 +134,7 @@ export class VMenuComponent implements OnInit {
 
   rebuildChats() {
     let that = this;
+    this.checkNotification();
 
     this.chatsServices.getAllChats(that.auth.getUserID(), function (chats) {
       that.chats = [];
@@ -225,6 +238,7 @@ export class VMenuComponent implements OnInit {
 
   }
   toSettings() {
+    
     this.timelineSelected = 0;
     this.settings.emit(true);
     let that = this;

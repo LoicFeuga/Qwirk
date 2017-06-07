@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
 
             data = JSON.parse(msg.data);
             
-            
+
             if (this.timeline.idChat == data.id) {
 
               this.timeline.addExt(data.author, data.content, data.idUser);
@@ -106,7 +106,7 @@ export class HomeComponent implements OnInit {
 
       this.router = 0;
 
-      this.timeline.idChat = recup;
+      this.timeline.setChat(recup);
     }
   }
   toSettings(recup: boolean) {

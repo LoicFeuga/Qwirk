@@ -32,11 +32,18 @@ export class QBot {
     }
 
     getLastMessage() {
+
+        if(this.messages.length > 0){
+
         return this.messages[this.messages.length - 1].content;
+        }else return -1;
     }
 
     getCommand() {
         let message = this.getLastMessage();
+        if(message == -1){
+            return "";   
+        }
         let command = "";
         for (let i = 5; i < message.length - 1; i++) {
             command += message.charAt(i);
@@ -45,7 +52,9 @@ export class QBot {
     }
 
     lastMessageIsForBot() {
-        if (this.getLastMessage().startsWith('/bot')) {
+        let messages = this.getLastMessage();
+        if(messages == -1){ return false;}
+        if (messages.startsWith('/bot')) {
             return true;
         } else {
             return false;

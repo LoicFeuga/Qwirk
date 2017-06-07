@@ -107,6 +107,13 @@ export class ChatsService {
       callback(data);
     });
   }
+
+  getChatMessages(id:number,callback){
+    this.options =  this.httpClient.getHeadersOptions();
+    this.http.get(this.api+"/"+id+"/messages", this.options).map(res => res.json()).subscribe(data => {
+      callback(data);
+    });
+  }
   /**
    * 
    */

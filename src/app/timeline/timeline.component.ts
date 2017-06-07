@@ -3,6 +3,7 @@ import { VideoCallComponent } from '../video-call/video-call.component';
 import { QBot } from '../classes/bot';
 import {AuthenticationService } from '../authentication.service';
 import { ItemMessage } from '../classes/itemMessage';
+import { ChatsService } from '../chats.service';
 
 @Component({
   selector: 'app-timeline',
@@ -26,7 +27,7 @@ export class TimelineComponent implements OnInit {
   modeTimeline = 0;
   @ViewChild(VideoCallComponent) video;
 
-  constructor(public auth : AuthenticationService) {
+  constructor(public auth : AuthenticationService, public chatsService : ChatsService) {
     this.bot = new QBot(this.messages);
 
     //this.messages.push({ author: "loic", content: "loremkojaoj oijoiaj ioj" });
@@ -48,6 +49,12 @@ export class TimelineComponent implements OnInit {
    */
   setChat(id: number){
     this.idChat = id;
+    this.messages = [];
+    let that = this;
+    this.chatsService.getChatMessages(id,function(data){
+      that.messages = data;
+    });
+    this.bot = new QBot(this.messages);
   }
 
   isChatSelected() {
@@ -85,11 +92,11 @@ export class TimelineComponent implements OnInit {
     this.messages.push(new ItemMessage("loic",this.text, this.auth.getUserID()).get());
     this.added.emit(this.formatTextForSocket(this.text,this.idChat,this.auth.getUserID(),this.auth.getUser().prenom));
     this.bot.execute();
+    this.text = "";
     setTimeout(function () {
       let objDiv = document.querySelector("#app-timeline");
       objDiv.scrollTop = objDiv.scrollHeight;
     }, 1);
-    this.text = "";
   }
   ngOnInit() {
 

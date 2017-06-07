@@ -54,7 +54,8 @@
 
   <div class="title-right" (click)="toNotification()">
 
-    <i class="material-icons">notifications_none</i>
+    <i class="material-icons" *ngIf="haveNotification == 0">notifications_none</i>
+    <i class="material-icons" *ngIf="haveNotification > 0">notifications_active</i>
   </div>
 
 </div>
