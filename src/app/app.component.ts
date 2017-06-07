@@ -11,7 +11,7 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AppComponent {
   appName: string = "Qwirk";
-  isLog: number = 0;
+  isLog: number = 1;
 
   constructor(private usersService: UsersService, private auth: AuthenticationService) {
 
@@ -36,7 +36,7 @@ export class AppComponent {
     this.usersService.getUser(this.auth.getUserID(), function (data) {
       data.statut = "Hors Ligne";
       that.usersService.updateUser(data, function (data) {
-        
+
       });
     });
 

@@ -32,6 +32,8 @@ export class VMenuComponent implements OnInit {
   nom: string = "";
   prenom: string = "";
 
+  timelineSelected = 0;
+
   isMinimize: boolean = true;
 
   //contiendra chaque différent fenetre possible en main
@@ -68,7 +70,7 @@ export class VMenuComponent implements OnInit {
     });
   }
 
-  setNomPrenom(recup :any){
+  setNomPrenom(recup: any) {
     this.nom = recup.nom;
     this.prenom = recup.prenom;
   }
@@ -126,20 +128,21 @@ export class VMenuComponent implements OnInit {
       that.channels = [];
       that.groupes = [];
       for (let i = 0; i < chats.length; i++) {
+        chats[i].notification = 0;
         //en fonction du type de chats
         switch (chats[i].type) {
           case 0:
-            that.timeline.emit(chats[i].id);
+            that.toTimeline(chats[i].id);
             that.chats.push(chats[i]);
             break;
 
           case 1:
-            that.timeline.emit(chats[i].id);
+            that.toTimeline(chats[i].id);
             that.groupes.push(chats[i]);
             break;
 
           case 2:
-            that.timeline.emit(chats[i].id);
+            that.toTimeline(chats[i].id);
             that.channels.push(chats[i]);
             break;
         }
@@ -178,13 +181,41 @@ export class VMenuComponent implements OnInit {
 
   toTimeline(id: number) {
     this.timeline.emit(id);
+    this.timelineSelected = id;
+    
+    this.notificationToZero(id); 
     let that = this;
     setTimeout(function () {
 
       that.adapt();
     });
   }
+  notificationToZero(idS: number) {
+    for (let i = 0; i < this.channels.length; i++) {
+      if (this.channels[i].id == idS) {
+        this.channels[i].notification = 0;
+      }
+    }
+    for (let i = 0; i < this.chats.length; i++) {
+      if (this.chats[i].id == idS) {
+        this.chats[i].notification = 0;
+      }
+    }
+    for (let i = 0; i < this.groupes.length; i++) {
+      if (this.groupes[i].id == idS) {
+        this.groupes[i].notification = 0;
+      }
+    }
+  }
+  isTimelineSelected(idS: number) {
+    if (idS == this.timelineSelected) {
+      return "black";
+    } else {
+      return "white";
+    }
+  }
   toContact() {
+    this.timelineSelected = 0;
     this.contact.emit(true);
     let that = this;
     setTimeout(function () {
@@ -194,6 +225,7 @@ export class VMenuComponent implements OnInit {
 
   }
   toSettings() {
+    this.timelineSelected = 0;
     this.settings.emit(true);
     let that = this;
     setTimeout(function () {
@@ -204,6 +236,7 @@ export class VMenuComponent implements OnInit {
   }
 
   toAddChannel() {
+    this.timelineSelected = 0;
     this.addChannel.emit(true);
     let that = this;
     setTimeout(function () {
@@ -212,6 +245,7 @@ export class VMenuComponent implements OnInit {
     }, 100);
   }
   toAddGroupe() {
+    this.timelineSelected = 0;
     this.addGroupe.emit(true);
     let that = this;
     setTimeout(function () {
@@ -221,6 +255,7 @@ export class VMenuComponent implements OnInit {
 
   }
   toAddChat() {
+    this.timelineSelected = 0;
     this.addChat.emit(true);
     let that = this;
     setTimeout(function () {
@@ -230,7 +265,26 @@ export class VMenuComponent implements OnInit {
 
   }
 
+  addNumberNotification(idTimeline: number) {
+    for (let i = 0; i < this.channels.length; i++) {
+      if (this.channels[i].id == idTimeline) {
+        this.channels[i].notification++;
+      }
+    }
+    for (let i = 0; i < this.chats.length; i++) {
+      if (this.chats[i].id == idTimeline) {
+        this.chats[i].notification++;
+      }
+    }
+    for (let i = 0; i < this.groupes.length; i++) {
+      if (this.groupes[i].id == idTimeline) {
+        this.groupes[i].notification++;
+      }
+    }
+  }
+
   toNotification() {
+    this.timelineSelected = 0;
     this.notification.emit(true);
     let that = this;
     setTimeout(function () {

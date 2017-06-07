@@ -22,8 +22,8 @@
 
   </div>
 
-  <div *ngFor="let channel of channelsFiltred" (click)="toTimeline(channel.id)" class="line">
-    <i class="material-icons">group_work</i>{{channel.libelle}}
+  <div *ngFor="let channel of channelsFiltred" (click)="toTimeline(channel.id)" class="line" [style.color]="isTimelineSelected(channel.id)">
+    <i class="material-icons">group_work</i><div style="width:60%;">{{channel.libelle}}</div><div *ngIf="channel.notification >0" class="notif">{{channel.notification}}</div>
   </div>
 
   <div class="chap">
@@ -32,8 +32,8 @@
 
   </div>
 
-  <div *ngFor="let groupe of groupesFiltred" (click)="toTimeline(groupe.id)" class="line">
-    <i class="material-icons">people</i> {{groupe.libelle}}
+  <div *ngFor="let groupe of groupesFiltred" (click)="toTimeline(groupe.id)" class="line" [style.color]="isTimelineSelected(groupe.id)">
+    <i class="material-icons">people</i> <div style="width:60%;">{{groupe.libelle}}</div> <div *ngIf="groupe.notification >0" class="notif">{{groupe.notification}}</div>
   </div>
   <div class="chap">
     <div class="chap_title">Chats</div>
@@ -41,8 +41,8 @@
     <a class="btn-floating btn waves-effect waves-light red chap_more" (click)="toAddChat()"><i class="material-icons">add</i></a>
   </div>
 
-  <div *ngFor="let chat of chatsFiltred" (click)="toTimeline(chat.id)" class="line">
-    <i class="material-icons">chat</i> {{chat.libelle}}
+  <div *ngFor="let chat of chatsFiltred" (click)="toTimeline(chat.id)"  class="line" [style.color]="isTimelineSelected(chat.id)">
+    <i class="material-icons">chat</i> <div style="width:60%;">{{chat.libelle}}</div><div *ngIf="chat.notification >0" class="notif">{{chat.notification}}</div>
   </div>
 </div>
 

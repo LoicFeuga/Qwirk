@@ -72,9 +72,18 @@ export class TimelineComponent implements OnInit {
     this.video.join();
   }
 
+  addExt(author:string,text:string,idUser:number){
+    this.messages.push(new ItemMessage(author,text,idUser).get());
+    this.bot.execute();
+      setTimeout(function () {
+      let objDiv = document.querySelector("#app-timeline");
+      objDiv.scrollTop = objDiv.scrollHeight;
+    }, 1);
+  }
+
   add() {
     this.messages.push(new ItemMessage("loic",this.text, this.auth.getUserID()).get());
-    this.added.emit(this.formatTextForSocket(this.text,this.idChat));
+    this.added.emit(this.formatTextForSocket(this.text,this.idChat,this.auth.getUserID(),this.auth.getUser().prenom));
     this.bot.execute();
     setTimeout(function () {
       let objDiv = document.querySelector("#app-timeline");
@@ -86,10 +95,12 @@ export class TimelineComponent implements OnInit {
 
   }
 
-  formatTextForSocket(message:string,id:number){
+  formatTextForSocket(message:string,id:number,idUser:number,author:string){
     return {
       id:id,
-      content:message
+      content:message,
+      idUser:idUser,
+      author:author
     }
   }
 

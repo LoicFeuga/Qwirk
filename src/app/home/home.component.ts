@@ -44,10 +44,21 @@ export class HomeComponent implements OnInit {
 
       this.ws.onMessage(
         (msg: MessageEvent) => {
-          console.log("onMessage ", msg.data);
-          if(this.timeline.idChat == msg.data.id){
-            //this.timeline.messages.push(this.timeline.);
-          }
+          let data = { id: 0, author: "", content: "", idUser: 0 };
+          try {
+
+            data = JSON.parse(msg.data);
+            
+            
+            if (this.timeline.idChat == data.id) {
+
+              this.timeline.addExt(data.author, data.content, data.idUser);
+            }else{
+              this.vmenu.addNumberNotification(data.id);
+            }
+          } catch (e) { }
+
+
         },
         { autoApply: false }
       );
@@ -94,7 +105,7 @@ export class HomeComponent implements OnInit {
     if (recup > 0) {
 
       this.router = 0;
-      
+
       this.timeline.idChat = recup;
     }
   }
