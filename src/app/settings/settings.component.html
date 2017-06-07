@@ -7,11 +7,18 @@
                     <h3 class="title-chat">Channels</h3>
                     <div *ngFor="let channel of channels" class="libelle-chat">
                         <i *ngIf="channel.id >= 0" class="material-icons">group_work</i>
-                        <div>{{channel.libelle}}</div>
+                        <input *ngIf="editModeChannel == 1" type="text" [(ngModel)]="channel.libelle" (keyup.enter)="renameChat(channel.libelle,channel.userHasChats)">
+                        <div *ngIf="editModeChannel == 0" type="text">{{channel.libelle}}</div>
+
                         <i *ngIf="channel.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(channel.id)">delete_forever</i>
                         <i *ngIf="channel.creator != idUser && channel.id >= 0" class="material-icons delete-chat" (click)="leaveChat(channel.id)">remove_circle_outline</i>
 
                     </div>
+                    
+                    <div style="width:100%;padding:10px;display:flex;justify-content:space-between;"> <i class="material-icons" (click)="toEditChannel()">mode_edit</i> <i (click)="valideEditChannel()" class="material-icons">check_circle</i></div>
+
+
+
 
                 </div>
             </div>
@@ -20,26 +27,29 @@
                     <h3 class="title-chat">Groupes</h3>
                     <div *ngFor="let groupe of groupes" class="libelle-chat">
                         <i *ngIf="groupe.id >= 0" class="material-icons">people</i>
-                        <div>{{groupe.libelle}}</div>
+                        <input *ngIf="editModeGroupe == 1" type="text" [(ngModel)]="groupe.libelle" (keyup.enter)="renameChat(groupe.libelle,groupe.userHasChats)">
+                        <div *ngIf="editModeGroupe == 0" type="text">{{groupe.libelle}}</div>
+
                         <i *ngIf="groupe.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(groupe.id)">delete_forever</i>
                     </div>
+                    <div style="width:100%;padding:10px;display:flex;justify-content:space-between;"> <i class="material-icons" (click)="toEditGroupe()">mode_edit</i> <i (click)="valideEditGroupe()" class="material-icons">check_circle</i></div>
 
                 </div>
 
             </div>
             <div class="col m4 s12  chat ">
                 <div class="shadow white">
-                    <h3 class="title-chat">Chats</h3> 
-                        
+                    <h3 class="title-chat">Chats</h3>
+
                     <div *ngFor="let chats of chats" class="libelle-chat">
                         <i *ngIf="chats.id >= 0" class="material-icons">chat</i>
-                        <input *ngIf="editMode == 1" type="text" [(ngModel)]="chats.libelle" >
-                        <div *ngIf="editMode == 0" type="text" >{{chats.libelle}}</div>
+                        <input *ngIf="editModeChat == 1" type="text" [(ngModel)]="chats.libelle" (keyup.enter)="renameChat(chats.libelle,chats.userHasChats)">
+                        <div *ngIf="editModeChat == 0" type="text">{{chats.libelle}}</div>
                         <i *ngIf="chats.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(chats.id)">delete_forever</i>
                         <i *ngIf="chats.creator != idUser && chats.id >= 0" class="material-icons delete-chat" (click)="leaveChat(chats.id)">remove_circle_outline</i>
 
                     </div>
-                <div style="width:100%;padding:10px;display:flex;justify-content:space-between;"> <i  class="material-icons" (click)="toEdit()">mode_edit</i>  <i  (click)="valideEdit()" class="material-icons">check_circle</i></div>
+                    <div style="width:100%;padding:10px;display:flex;justify-content:space-between;"> <i class="material-icons" (click)="toEditChat()">mode_edit</i> <i (click)="valideEditChat()" class="material-icons">check_circle</i></div>
 
 
                 </div>
@@ -103,12 +113,12 @@
                     <div class="input-field col s12">
                         <div>Date de Naissance</div>
                         <input [(ngModel)]="user.dateNaiss" type="date" class="datepicker">
-                        
+
                     </div>
 
                     <div class="input-field col s12">
                         <input [(ngModel)]="user.bio" id="bio" type="text" class="validate">
-                        <label class="active" for="bio">Votre Bio</label>                        
+                        <label class="active" for="bio">Votre Bio</label>
                     </div>
 
 

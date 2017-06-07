@@ -37,15 +37,14 @@ export class AppComponent {
       data.statut = "Hors Ligne";
       that.usersService.updateUser(data, function (data) {
 
+        localStorage.setItem('user', '');
+        document.querySelector('.root')['style'].background = "#FFFFFF";
+
       });
     });
-
     this.isLog = 0;
-    localStorage.setItem('user', '');
-    document.querySelector('.root')['style'].background = "#FFFFFF";
 
 
-    window.location.reload();
 
   }
 }

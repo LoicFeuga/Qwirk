@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ChatsService } from '../chats.service';
-
+import { AuthenticationService } from '../authentication.service';
 @Component({
   selector: 'app-add-groupe',
   templateUrl: './add-groupe.component.html',
@@ -9,19 +9,26 @@ import { ChatsService } from '../chats.service';
 export class AddGroupeComponent implements OnInit {
   libelle: string = "";
   detail: string = "";
+  groupes : any = [];
   mode: number = 0;
   @Output() created: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public chatsService: ChatsService) {
+  constructor(public chatsService: ChatsService, public auth : AuthenticationService) {
 
 
     this.getAllGroupe();
 
   }
+  joinGroupe(id :number){
+    this.chatsService.joinChannel(this.auth.getUserID(),id,function(data){
+      console.log(data);
+    });
+  }
 
   getAllGroupe() {
-    this.chatsService.getAllGroupes(function (data) {
-      console.log(data);
+    let that = this;
+    this.chatsService.getAllGroupes(this.auth.getUserID(),function (data) {
+      that.groupes = data;
     });
   }
   ngOnInit() {

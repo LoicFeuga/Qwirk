@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { VideoCallComponent } from '../video-call/video-call.component';
 import { QBot } from '../classes/bot';
-import {AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../authentication.service';
 import { ItemMessage } from '../classes/itemMessage';
 import { ChatsService } from '../chats.service';
 
@@ -11,30 +11,25 @@ import { ChatsService } from '../chats.service';
   styleUrls: ['./timeline.component.css']
 })
 export class TimelineComponent implements OnInit {
-  
+
   messages: Object[] = [];
   text: string;
-  idChat : number = 0;
-  bot:QBot;
-  itemMessage : ItemMessage;
-  
+  idChat: number = 0;
+  bot: QBot;
+  itemMessage: ItemMessage;
+
   @Output() added: EventEmitter<any> = new EventEmitter<any>();
-  
-  
+
+
   //0 = message;
   //1 = audio;
   //2 = video
   modeTimeline = 0;
   @ViewChild(VideoCallComponent) video;
 
-  constructor(public auth : AuthenticationService, public chatsService : ChatsService) {
-    this.bot = new QBot(this.messages);
+  constructor(public auth: AuthenticationService, public chatsService: ChatsService) {
 
-    //this.messages.push({ author: "loic", content: "loremkojaoj oijoiaj ioj" });
-    setTimeout(function () {
-      let objDiv = document.querySelector("#app-timeline");
-      objDiv.scrollTop = objDiv.scrollHeight;
-    }, 100);
+    this.setChat(this.idChat);
   }
 
 
@@ -47,14 +42,18 @@ export class TimelineComponent implements OnInit {
    * Permet de modifier le chat 
    * @param id id chat
    */
-  setChat(id: number){
+  setChat(id: number) {
     this.idChat = id;
     this.messages = [];
     let that = this;
-    this.chatsService.getChatMessages(id,function(data){
+    this.chatsService.getChatMessages(id, function (data) {
       that.messages = data;
+      setTimeout(function () {
+        let objDiv = document.querySelector("#app-timeline");
+        objDiv.scrollTop = objDiv.scrollHeight;
+      }, 1);
+      that.bot = new QBot(that.messages);
     });
-    this.bot = new QBot(this.messages);
   }
 
   isChatSelected() {
@@ -75,22 +74,22 @@ export class TimelineComponent implements OnInit {
     this.video.start();
   }
 
-  joinVideo(){
+  joinVideo() {
     this.video.join();
   }
 
-  addExt(author:string,text:string,idUser:number){
-    this.messages.push(new ItemMessage(author,text,idUser).get());
+  addExt(author: string, text: string, idUser: number) {
+    this.messages.push(new ItemMessage(author, text, idUser).get());
     this.bot.execute();
-      setTimeout(function () {
+    setTimeout(function () {
       let objDiv = document.querySelector("#app-timeline");
       objDiv.scrollTop = objDiv.scrollHeight;
     }, 1);
   }
 
   add() {
-    this.messages.push(new ItemMessage("loic",this.text, this.auth.getUserID()).get());
-    this.added.emit(this.formatTextForSocket(this.text,this.idChat,this.auth.getUserID(),this.auth.getUser().prenom));
+    this.messages.push(new ItemMessage("loic", this.text, this.auth.getUserID()).get());
+    this.added.emit(this.formatTextForSocket(this.text, this.idChat, this.auth.getUserID(), this.auth.getUser().prenom));
     this.bot.execute();
     this.text = "";
     setTimeout(function () {
@@ -102,13 +101,13 @@ export class TimelineComponent implements OnInit {
 
   }
 
-  formatTextForSocket(message:string,id:number,idUser:number,author:string){
+  formatTextForSocket(message: string, id: number, idUser: number, author: string) {
     return {
-      id:id,
-      content:message,
-      type:1,
-      idUser:idUser,
-      author:author
+      id: id,
+      content: message,
+      type: 1,
+      idUser: idUser,
+      author: author
     }
   }
 

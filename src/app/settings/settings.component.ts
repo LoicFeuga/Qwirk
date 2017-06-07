@@ -20,16 +20,18 @@ export class SettingsComponent implements OnInit {
   @Output() statutChanged: EventEmitter<any> = new EventEmitter<any>();
   @Output() userChanged: EventEmitter<any> = new EventEmitter<any>();
 
-  editMode = 0;
+  editModeChat = 0;
+  editModeGroupe = 0;
+  editModeChannel = 0;
   statut = "";
   audio: boolean = false;
   video: boolean = false;
-  user : any = {
-   nom:"",
-   prenom:"",
-   email:"",
-   bio:"",
-   dateNaiss:"" 
+  user: any = {
+    nom: "",
+    prenom: "",
+    email: "",
+    bio: "",
+    dateNaiss: ""
   };
 
   constructor(private auth: AuthenticationService, overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal, private chatsService: ChatsService, private usersService: UsersService) {
@@ -42,11 +44,11 @@ export class SettingsComponent implements OnInit {
     this.getUserDetail();
   }
 
-  updateUser(){
-    let that =this;
-    this.usersService.updateUser(this.user, function(data){
-        that.userChanged.emit(data);
-        that.modal.alert()
+  updateUser() {
+    let that = this;
+    this.usersService.updateUser(this.user, function (data) {
+      that.userChanged.emit(data);
+      that.modal.alert()
         .size('sm')
         .isBlocking(false)
         .showClose(false)
@@ -57,15 +59,29 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  toEdit(){
-    this.editMode = 1;
+  toEditChat() {
+    this.editModeChat = 1;
   }
 
-  valideEdit(){
-    this.editMode = 0;
+  valideEditChat() {
+    this.editModeChat = 0;
   }
-  getUserDetail(){
-    
+  toEditGroupe() {
+    this.editModeGroupe = 1;
+  }
+
+  valideEditGroupe() {
+    this.editModeGroupe = 0;
+  }
+  toEditChannel() {
+    this.editModeChannel = 1;
+  }
+
+  valideEditChannel() {
+    this.editModeChannel = 0;
+  }
+  getUserDetail() {
+
     let that = this;
 
 
@@ -154,10 +170,50 @@ export class SettingsComponent implements OnInit {
             break;
         }
       }
+      that.updateLibelle();
       if (that.channels.length <= 0) that.pushFakeItem(that.channels, "channel");
       if (that.chats.length <= 0) that.pushFakeItem(that.chats, "chat");
       if (that.groupes.length <= 0) that.pushFakeItem(that.groupes, "groupe");
     });
+  }
+
+  renameChat(libelle: string, uhc: any) {
+    for (let i = 0; i < uhc.length; i++) {
+      if (uhc[i].user.id == this.auth.getUserID()) {
+        this.chatsService.renameChat(uhc[i].id, libelle, function (data) {
+          console.log(data);
+        });
+      }
+    }
+  }
+  updateLibelle() {
+    let id = this.auth.getUserID();
+    for (let i = 0; i < this.channels.length; i++) {
+
+      for (let j = 0; j < this.channels[i].userHasChats.length; j++) {
+        if (this.channels[i].userHasChats[j].user.id == id) {
+          this.channels[i].libelle = this.channels[i].userHasChats[j].chat.libelle;
+        }
+      }
+    }
+    for (let i = 0; i < this.chats.length; i++) {
+
+      for (let j = 0; j < this.chats[i].userHasChats.length; j++) {
+        if (this.chats[i].userHasChats[j].user.id == id) {
+          this.chats[i].libelle = this.chats[i].userHasChats[j].chat.libelle;
+        }
+      }
+    }
+    for (let i = 0; i < this.groupes.length; i++) {
+
+      for (let j = 0; j < this.groupes[i].userHasChats.length; j++) {
+        if (this.groupes[i].userHasChats[j].user.id == id) {
+          this.groupes[i].libelle = this.groupes[i].userHasChats[j].chat.libelle;
+        }
+      }
+
+    }
+
   }
   /**
    * Supprimer l'id en paramètre des chats

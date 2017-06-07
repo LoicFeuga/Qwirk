@@ -106,10 +106,12 @@ export class ContactComponent implements OnInit {
 
   }
 
-  invite(id: number) {
+  invite(id: number,nom:string,prenom:string) {
     let idUser = this.auth.getUserID();
     let that = this;
-    this.chatsService.inviteContact("libelle", "description", idUser, id, function (data) {
+    let user = this.auth.getUser();
+    let libelle = user.nom + " " +user.prenom+" - " + nom +" " +prenom;
+    this.chatsService.inviteContact(libelle, "Discution privée "+libelle, idUser, id, function (data) {
       if (!data) return;
       else {
         that.getAllUser();

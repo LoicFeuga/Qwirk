@@ -11,7 +11,7 @@ export class ChatsService {
   private api: string = this.url + this.service;
   private apiCreate: string = this.api + "";
   private apiContacts: string = this.httpClient.url + this.httpClient.userService + "/contact";
-  private apiContactsInvit: string = this.httpClient.url +  "contact";
+  private apiContactsInvit: string = this.httpClient.url + "contact";
   private apijoin: string = this.url + "userHasChat";
   private apiPublic: string = this.api + "/public";
   private headers: Headers = this.httpClient.getHeaders();
@@ -25,7 +25,7 @@ export class ChatsService {
     let statut = 1;
     let creator = this.auth.getUserID();
 
-    this.options =  this.httpClient.getHeadersOptions();
+    this.options = this.httpClient.getHeadersOptions();
     this.http.post(this.apiCreate, { libelle, detail, type, statut, creator }, this.options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
@@ -42,7 +42,7 @@ export class ChatsService {
     let type = 0;
     let creator = this.auth.getUserID();
 
-    this.options =  this.httpClient.getHeadersOptions();
+    this.options = this.httpClient.getHeadersOptions();
     this.http.post(this.apiCreate, { libelle, detail, type, statut, creator }, this.options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
@@ -53,7 +53,7 @@ export class ChatsService {
     let statut = 1;
     let creator = this.auth.getUserID();
 
-    this.options =  this.httpClient.getHeadersOptions();
+    this.options = this.httpClient.getHeadersOptions();
     this.http.post(this.apiCreate, { libelle, detail, type, statut, creator }, this.options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
@@ -63,28 +63,32 @@ export class ChatsService {
     let type = 0;
     let statut = 0;
     let creator = id1;
-    
-    this.optionsForm =  this.httpClient.getHeadersOptionsForm();
-    this.http.post(this.apiContactsInvit+"?id1="+id1+"&id2="+id2+"&libelle="+libelle, {},  this.optionsForm).map(res => res.json()).subscribe(data => {
+
+    this.optionsForm = this.httpClient.getHeadersOptionsForm();
+    this.http.post(this.apiContactsInvit + "?id1=" + id1 + "&id2=" + id2 + "&libelle=" + libelle, {}, this.optionsForm).map(res => res.json()).subscribe(data => {
       callback(data);
     });
   }
 
-  getAllGroupes(callback:any){
-    this.options =  this.httpClient.getHeadersOptions();
-    
-    this.http.get(this.api,this.options).map(res => res.json()).subscribe(data => {
-      var ret = [];
-      for(var i = 0; i < data.length;i++){
-        if(data.type==1){
-          ret.push(data);
-        }
-      }
-      callback(ret);
+  getAllGroupes(id: number, callback: any) {
+    this.options = this.httpClient.getHeadersOptions();
+
+    this.http.get(this.url + "user/notgroupe/" + id, this.options).map(res => res.json()).subscribe(data => {
+
+      callback(data);
     });
   }
+
+  renameChat(idUHC: number, libelle: string, callback: any) {
+
+    this.options = this.httpClient.getHeadersOptions();
+    this.http.put(this.api, { idUHC, libelle }, this.options).map(res => res.json()).subscribe(data => {
+      callback(data);;
+    });
+
+  }
   deleteChat(id: number) {
-    this.options =  this.httpClient.getHeadersOptions();
+    this.options = this.httpClient.getHeadersOptions();
     this.http.delete(this.api + "/" + id, this.options).map(res => res.json()).subscribe(data => {
 
 
@@ -93,20 +97,20 @@ export class ChatsService {
 
   leaveChat(idChat: number, idUser: number) {
 
-    this.options =  this.httpClient.getHeadersOptions();
+    this.options = this.httpClient.getHeadersOptions();
     this.http.delete(this.apijoin + "/" + idUser + "/" + idChat, this.options).map(res => res.json()).subscribe(data => {
 
     });
   }
   getContact(id: number, callback: any) {
-    this.options =  this.httpClient.getHeadersOptions();
+    this.options = this.httpClient.getHeadersOptions();
     this.http.get(this.apiContacts, this.options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
   }
 
   getAllChannel(callback: any) {
-    this.options =  this.httpClient.getHeadersOptions();
+    this.options = this.httpClient.getHeadersOptions();
     this.http.get(this.apiPublic + "/", this.options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
@@ -114,15 +118,15 @@ export class ChatsService {
 
 
   joinChannel(idUser: number, idChannel: number, callback: any) {
-    this.options =  this.httpClient.getHeadersOptions();
+    this.options = this.httpClient.getHeadersOptions();
     this.http.post(this.apijoin + "/" + idUser + "/" + idChannel, {}, this.options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
   }
 
-  getChatMessages(id:number,callback){
-    this.options =  this.httpClient.getHeadersOptions();
-    this.http.get(this.api+"/"+id+"/messages", this.options).map(res => res.json()).subscribe(data => {
+  getChatMessages(id: number, callback) {
+    this.options = this.httpClient.getHeadersOptions();
+    this.http.get(this.api + "/" + id + "/messages", this.options).map(res => res.json()).subscribe(data => {
       callback(data);
     });
   }

@@ -34,7 +34,7 @@ export class VMenuComponent implements OnInit {
 
   timelineSelected = 0;
 
-  haveNotification : number = 0;
+  haveNotification: number = 0;
   isMinimize: boolean = true;
 
   //contiendra chaque différent fenetre possible en main
@@ -64,12 +64,12 @@ export class VMenuComponent implements OnInit {
     this.rebuildChats();
   }
 
-  checkNotification(){
+  checkNotification() {
     let that = this;
-    this.usersServices.getInvitation(function(data){
-      if(data.length > 0){
+    this.usersServices.getInvitation(function (data) {
+      if (data.length > 0) {
         that.haveNotification = data.length;
-      }else{
+      } else {
         that.haveNotification = 0;
       }
     });
@@ -131,6 +131,37 @@ export class VMenuComponent implements OnInit {
   pushChat(data: any) {
     this.chats.push(data);
   }
+  rebuildMenu() {
+    let that = this;
+    this.checkNotification();
+
+    this.chatsServices.getAllChats(that.auth.getUserID(), function (chats) {
+      that.chats = [];
+      that.channels = [];
+      that.groupes = [];
+      for (let i = 0; i < chats.length; i++) {
+        chats[i].notification = 0;
+        //en fonction du type de chats
+        switch (chats[i].type) {
+          case 0:
+            that.chats.push(chats[i]);
+            break;
+
+          case 1:
+            that.groupes.push(chats[i]);
+            break;
+
+          case 2:
+            that.channels.push(chats[i]);
+            break;
+        }
+      }
+
+      that.updateLibelle();
+      that.minimize();
+      that.filtre();
+    });
+  }
 
   rebuildChats() {
     let that = this;
@@ -160,12 +191,41 @@ export class VMenuComponent implements OnInit {
             break;
         }
       }
-
+      that.updateLibelle();
       that.minimize();
       that.filtre();
     });
   }
 
+  updateLibelle() {
+    let id = this.auth.getUserID();
+    for (let i = 0; i < this.channels.length ; i++) {
+      
+      for(let j = 0; j < this.channels[i].userHasChats.length;j++){
+        if(this.channels[i].userHasChats[j].user.id == id){
+          this.channels[i].libelle = this.channels[i].userHasChats[j].chat.libelle;
+        }
+      }
+    }
+    for (let i = 0; i < this.chats.length; i++) {
+      
+      for(let j = 0; j < this.chats[i].userHasChats.length;j++){
+        if(this.chats[i].userHasChats[j].user.id == id){
+          this.chats[i].libelle = this.chats[i].userHasChats[j].chat.libelle;
+        }
+      }
+    }
+    for (let i = 0; i < this.groupes.length; i++) {
+      
+      for(let j = 0; j < this.groupes[i].userHasChats.length;j++){
+        if(this.groupes[i].userHasChats[j].user.id ==id){
+          this.groupes[i].libelle = this.groupes[i].userHasChats[j].chat.libelle;
+        }
+      }
+
+    }
+
+  }
   rebuildChatsFromIdLess(id: any) {
     let that = this;
 
@@ -195,8 +255,8 @@ export class VMenuComponent implements OnInit {
   toTimeline(id: number) {
     this.timeline.emit(id);
     this.timelineSelected = id;
-    
-    this.notificationToZero(id); 
+
+    this.notificationToZero(id);
     let that = this;
     setTimeout(function () {
 
@@ -238,7 +298,7 @@ export class VMenuComponent implements OnInit {
 
   }
   toSettings() {
-    
+
     this.timelineSelected = 0;
     this.settings.emit(true);
     let that = this;

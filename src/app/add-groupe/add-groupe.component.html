@@ -24,7 +24,13 @@
 
     <h2 class="title">Rejoignez un groupe</h2>
 
-    
+    <div class="each" *ngFor="let groupe of groupes">
+      <div class="name">
+        {{groupe.libelle}}
+      </div>
+      {{groupe.detail}}
+      <i (click)="joinGroupe(groupe.id)" class="material-icons">send</i>
+    </div>
 
     <a class="btn-floating btn waves-effect waves-light btn-large red change" (click)="toCreateGroupe()">
       <i  class="material-icons">add</i>

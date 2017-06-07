@@ -22,3 +22,14 @@
     bottom:20px;
     right:20px;
 }
+
+.each{
+     width:100%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    display: flex;
+    background: white;  
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}

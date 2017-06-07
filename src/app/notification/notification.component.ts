@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UsersService } from '../users.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { UsersService } from '../users.service';
 export class NotificationComponent implements OnInit {
 
   notifications: any[];
+  
+  @Output() accepted: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(public usersService: UsersService) {
 
@@ -25,6 +27,7 @@ export class NotificationComponent implements OnInit {
     let that = this;
     this.usersService.acceptInvitation(id,function(data){
       that.getInvitation();
+      that.accepted.emit(true);
     });
   }
   refuseInvit(id:number){

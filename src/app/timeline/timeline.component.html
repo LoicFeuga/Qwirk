@@ -1,7 +1,7 @@
 <div id="app-timeline" class="timeline">
   <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-  <app-message *ngFor="let message of messages" [author]="message.author" [content]="message.content" class="row message">
+  <app-message *ngFor="let message of messages" [author]="message.author || message.user.prenom" [content]="message.content || message.detail" class="row message">
   </app-message>
 
   <app-video-call></app-video-call>
