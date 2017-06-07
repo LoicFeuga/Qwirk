@@ -38,9 +38,6 @@ export class QBot {
         "Boudin",
         "Bouffon",
         "Bougre",
-        "Bougre",
-        "Bougre",
-        "Bougre",
         "Boule",
         "Boulet",
         "Bouricot",
@@ -77,16 +74,13 @@ export class QBot {
         "Casse",
         "Cassos",
         "Catin",
-        "Cave",
         "Cervelle",
-        "Chacal",
         "Chacal",
         "Chafouin",
         "Chameau",
         "Chancreux",
         "Chancre",
         "Chaoui",
-        "Charogne",
         "Chenapan",
         "Chiassard",
         "Chiasse",
@@ -95,16 +89,12 @@ export class QBot {
         "Cinglé",
         "Clampin",
         "Cloaque",
-        "Cloche",
         "Clodo",
         "Cloporte",
-        "Clown",
-        "Cochon",
         "Cocu",
         "Con",
         "Conard",
         "Conchieur",
-        "Concombre",
         "Connard",
         "Connasse",
         "Conne",
@@ -115,7 +105,6 @@ export class QBot {
         "Corniaud",
         "Cornichon",
         "Couard",
-        "Couille",
         "Couille",
         "Couillon",
         "Crapaud",
@@ -128,9 +117,6 @@ export class QBot {
         "Crotte",
         "Cryptorchide",
         "Crâne",
-        "Crétin",
-        "Crétin",
-        "Crétin",
         "Crétin",
         "Cuistre",
         "Cul",
@@ -146,7 +132,6 @@ export class QBot {
         "Décérébré",
         "Dégueulis",
         "Dégénéré",
-        "Dégénéré",
         "Dépravé",
         "Détritus",
         "Ecervelé",
@@ -161,13 +146,9 @@ export class QBot {
         "Enfoiré",
         "Erreur",
         "Eunuque",
-        "Face",
-        "Face",
-        "Face",
         "Faquin",
         "Faraud",
         "Faux",
-        "Fesse",
         "Fesse",
         "Fesses",
         "Fiente",
@@ -178,9 +159,7 @@ export class QBot {
         "Flaque",
         "Foireux",
         "Foldingue",
-        "Fonctionnaire",
         "Fouille",
-        "Four",
         "Fourbe",
         "Foutriquet",
         "Frapadingue",
@@ -213,8 +192,6 @@ export class QBot {
         "Goulu",
         "Gourdasse",
         "Gourgandin",
-        "Grand",
-        "Grand",
         "Gras",
         "Graveleux",
         "Gredin",
@@ -509,6 +486,8 @@ export class QBot {
         "Zouave",
         "Zoulou"];
 
+  
+  
     constructor(message: any) {
         this.name = "Qwibot";
         this.messages = message;
@@ -516,8 +495,11 @@ export class QBot {
 
         this.commands = [];
         this.commands.push("kick");
+        this.commands.push("kick list");
+        this.commands.push("kick add");
         this.commands.push("add");
         this.commands.push("statut");
+        this.commands.push("ban list");
         this.commands.push("remove");
         this.commands.push("ban");
 
@@ -614,6 +596,17 @@ export class QBot {
         }
     }
 
+    commandBanList() {
+
+        let me = "Voici la list des mots interdits : ";
+        for (let i = 0; i < this.wordBan.length; i++) {
+            me += this.wordBan[i] + ""+(i == this.wordBan.length - 1 ? "" : ", ");
+        }
+        let m = new ItemMessage(this.name, me, -1);
+        this.messages.push(m.get());
+
+    }
+
     commandKick() {
         if (this.added) {
             this.kickable = !this.kickable;
@@ -633,28 +626,30 @@ export class QBot {
         this.messages.push(m.get());
     }
 
-    kickOrBan(){    
+    kickOrBan() {
         let message = this.getLastMessage();
-        if(message == -1) return;
+        if (message == -1) return;
 
-        if(this.kickable) this.kick(message);
+        if (this.kickable) this.kick(message);
 
-        if(this.banable) this.ban(message);
+        if (this.banable) this.ban(message);
 
     }
 
-    kick(message :string){
+    kick(message: string) {
         console.log(message);
     }
 
-    ban(message:string){
+    ban(message: string) {
+
 
     }
     execute() {
 
+        this.kickOrBan();
         if (this.lastMessageIsForBot()) {
-            this.kickOrBan();
             let command = this.getCommand();
+
             if (this.isCommandKnow(command)) {
                 switch (command) {
                     case "remove":
@@ -668,7 +663,9 @@ export class QBot {
                         break;
                     case "ban":
                         this.commandBan();
-
+                        break;
+                    case "ban list":
+                        this.commandBanList();
                         break;
                     case "kick":
 

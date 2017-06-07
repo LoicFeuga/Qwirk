@@ -6,5 +6,5 @@
 <app-settings (deleted)="chatDeleted($event)" (userChanged)="userChanged($event)" (statutChanged)="statutChanged($event)" *ngIf="router == 2"></app-settings>
 <app-notification (accepted)="menu()" *ngIf="router == 3"></app-notification>
 <app-add-channel  *ngIf="router == 4" (created)="channelCreate($event)"></app-add-channel>
-<app-add-groupe  *ngIf="router == 5" (created)="groupeCreate($event)"></app-add-groupe>
+<app-add-groupe  *ngIf="router == 5" (menu)="build()" (created)="groupeCreate($event)"></app-add-groupe>
 <app-add-chat  *ngIf="router == 6" (created)="chatCreate($event)"></app-add-chat>

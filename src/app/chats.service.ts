@@ -123,6 +123,12 @@ export class ChatsService {
       callback(data);
     });
   }
+  joinGroupe(idUser: number, idChannel: number, callback: any) {
+    this.options = this.httpClient.getHeadersOptions();
+    this.http.post(this.url + "joinGroup/" + idUser + "/" + idChannel, {}, this.options).map(res => res.json()).subscribe(data => {
+      callback(data);
+    });
+  }
 
   getChatMessages(id: number, callback) {
     this.options = this.httpClient.getHeadersOptions();

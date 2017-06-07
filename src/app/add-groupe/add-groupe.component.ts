@@ -12,6 +12,8 @@ export class AddGroupeComponent implements OnInit {
   groupes : any = [];
   mode: number = 0;
   @Output() created: EventEmitter<any> = new EventEmitter<any>();
+  @Output() menu: EventEmitter<any> = new EventEmitter<any>();
+
 
   constructor(public chatsService: ChatsService, public auth : AuthenticationService) {
 
@@ -20,8 +22,10 @@ export class AddGroupeComponent implements OnInit {
 
   }
   joinGroupe(id :number){
-    this.chatsService.joinChannel(this.auth.getUserID(),id,function(data){
-      console.log(data);
+    let that = this;
+    this.chatsService.joinGroupe(this.auth.getUserID(),id,function(data){
+      that.getAllGroupe();
+      that.menu.emit(true);
     });
   }
 

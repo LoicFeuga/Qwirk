@@ -2,8 +2,11 @@
     <h2 class="title">Vos notifications</h2>
 
     <div class="each col s12" *ngFor="let notification of notifications">
-        <div class="user">
+        <div class="user" *ngIf="notification.status == 2">
            Demande d'ajout de contact de {{notification.user.nom}} {{notification.user.prenom}}
+        </div>
+         <div class="user" *ngIf="notification.status == 1">
+           Demande pour rejoindre le groupe {{notification.chat.libelle}}  de {{notification.user.nom}} {{notification.user.prenom}}
         </div>
         <div class="buttons">
             <a class="btn-floating green" (click)="acceptInvit(notification.id)"><i class="material-icons">done</i></a>
