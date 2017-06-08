@@ -6,10 +6,11 @@ import { ItemMessage } from '../classes/itemMessage';
 import { ChatsService } from '../chats.service';
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
-import { NgClass, NgStyle} from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 
 
-const URL : string = "http://84.246.226.230:8080/SupChat/api/rest/";
+const URL: string = "http://84.246.226.230:8888/files/";
+
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
@@ -21,10 +22,11 @@ export class TimelineComponent implements OnInit {
   text: string;
   idChat: number = 0;
   bot: QBot;
-  file:any;
+  file: any;
   itemMessage: ItemMessage;
 
   @Output() added: EventEmitter<any> = new EventEmitter<any>();
+  @Output() botAction: EventEmitter<any> = new EventEmitter<any>();
 
 
   //0 = message;
@@ -38,25 +40,46 @@ export class TimelineComponent implements OnInit {
     this.setChat(this.idChat);
   }
 
-  public uploader:FileUploader = new FileUploader({url: URL});
-  public hasBaseDropZoneOver:boolean = false;
-  public hasAnotherDropZoneOver:boolean = false;
- 
-  public fileOverBase(e:any):void {
+  public uploader: FileUploader = new FileUploader({ url: URL });
+  public hasBaseDropZoneOver: boolean = false;
+  public hasAnotherDropZoneOver: boolean = false;
+
+  public fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }
- 
-  public fileOverAnother(e:any):void {
+
+  public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
   }
-  
+
   scrollBot() {
   }
 
 
-  getFile(e){
-    console.log(this.file);
-    console.log( e.srcElement.files);
+  uploadFiles() {
+
+    for (let i = 0; i < this.uploader.queue.length; i++) {
+
+      let messageForDoc = `
+        <form method="get" action="`+ URL + this.uploader.queue[i].file.name + `">
+        <i class="material-icons">attach_file</i><button type="submit">Nouveau Fichier : `+this.uploader.queue[i].file.name+`</button>
+        </form>
+      `;
+      let parser = new DOMParser();
+      let htmlDoc = parser.parseFromString(messageForDoc, "text/html");
+      this.messages.push(new ItemMessage(this.auth.getUser().prenom, messageForDoc, this.auth.getUserID(),2).get());
+      this.added.emit(this.formatTextForSocket(messageForDoc, this.idChat, this.auth.getUserID(), this.auth.getUser().prenom, 2));
+      this.bot.execute();
+      this.text = "";
+    }
+
+    setTimeout(function () {
+      let objDiv = document.querySelector("#app-timeline");
+      objDiv.scrollTop = objDiv.scrollHeight;
+    }, 1);
+
+
+    this.uploader.uploadAll();
   }
 
   /**
@@ -73,7 +96,7 @@ export class TimelineComponent implements OnInit {
         let objDiv = document.querySelector("#app-timeline");
         objDiv.scrollTop = objDiv.scrollHeight;
       }, 1);
-      that.bot = new QBot(that.messages);
+      that.bot = new QBot(that.messages,that.chatsService,id,that.botAction,that.auth.getUserID());
     });
   }
 
@@ -103,7 +126,7 @@ export class TimelineComponent implements OnInit {
   }
 
   addExt(author: string, text: string, idUser: number) {
-    this.messages.push(new ItemMessage(author, text, idUser).get());
+    this.messages.push(new ItemMessage(author, text, idUser,1).get());
     this.bot.execute();
     setTimeout(function () {
       let objDiv = document.querySelector("#app-timeline");
@@ -112,8 +135,8 @@ export class TimelineComponent implements OnInit {
   }
 
   add() {
-    this.messages.push(new ItemMessage("loic", this.text, this.auth.getUserID()).get());
-    this.added.emit(this.formatTextForSocket(this.text, this.idChat, this.auth.getUserID(), this.auth.getUser().prenom));
+    this.messages.push(new ItemMessage(this.auth.getUser().prenom, this.text, this.auth.getUserID(),1).get());
+    this.added.emit(this.formatTextForSocket(this.text, this.idChat, this.auth.getUserID(), this.auth.getUser().prenom, 1));
     this.bot.execute();
     this.text = "";
     setTimeout(function () {
@@ -125,11 +148,11 @@ export class TimelineComponent implements OnInit {
 
   }
 
-  formatTextForSocket(message: string, id: number, idUser: number, author: string) {
+  formatTextForSocket(message: string, id: number, idUser: number, author: string, type: number) {
     return {
       id: id,
       content: message,
-      type: 1,
+      type: type,
       idUser: idUser,
       author: author
     }

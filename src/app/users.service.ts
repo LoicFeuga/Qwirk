@@ -71,6 +71,8 @@ export class UsersService {
     });
   }
 
+
+
   updateUser(user:any,callback:any){
     this.options =  this.httpClient.getHeadersOptions();
 

@@ -35,6 +35,14 @@ export class HomeComponent implements OnInit {
     this.connectToSocket();
     let that = this;
 
+    setInterval(function(){
+      that.build();
+    },10000);
+  }
+
+  hardBuild(){
+    this.vmenu.rebuildChats();
+    this.vmenu.minimize();
   }
 
   build(){

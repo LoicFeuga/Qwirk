@@ -5,7 +5,7 @@
         <div class="user" *ngIf="notification.status == 2">
            Demande d'ajout de contact de {{notification.user.nom}} {{notification.user.prenom}}
         </div>
-         <div class="user" *ngIf="notification.status == 1">
+         <div class="user" *ngIf="notification.status == 4">
            Demande pour rejoindre le groupe {{notification.chat.libelle}}  de {{notification.user.nom}} {{notification.user.prenom}}
         </div>
         <div class="buttons">

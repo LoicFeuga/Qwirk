@@ -1,7 +1,7 @@
 <div id="app-timeline" class="timeline">
   <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-  <app-message *ngFor="let message of messages" [author]="message.author || message.user.prenom" [content]="message.content || message.detail"
+  <app-message *ngFor="let message of messages" [author]="message.author || message.user.prenom" [type]="message.type" [content]="message.content || message.detail"
     class="row message">
   </app-message>
 
@@ -48,7 +48,7 @@
 
 
 
-        <button (click)="uploader.uploadAll()" class="btn waves-effect waves-light" type="submit" name="action">
+        <button (click)="uploadFiles()" class="btn waves-effect waves-light" type="submit" name="action">
       Envoyer 
       </button>
       </div>

@@ -9,6 +9,7 @@ export class MessageComponent implements OnInit {
  
   @Input() author : string;
   @Input() content : string;
+  @Input() type : number;
   constructor() { }
 
   ngOnInit() {

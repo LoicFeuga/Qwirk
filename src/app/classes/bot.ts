@@ -1,48 +1,40 @@
 import { ItemMessage } from './itemMessage';
+import { EventEmitter } from '@angular/core';
+import { ChatsService } from '../chats.service';
+import { VMenuComponent } from '../vmenu/vmenu.component';
 export class QBot {
     name: string;
     messages: any;
     added: boolean;
     commands: string[];
+    idChat: number;
     kickable: boolean = false;
+    idUser: number;
     banable: boolean = false;
     messageFail: ItemMessage;
-    wordKick: string[] = [""];
-    wordBan: string[] = ["Abruti",
-        "Ahuri",
-        "Aigrefin",
-        "Anachorète",
+    wordKick: string[] = [
         "Analphabète",
         "Andouille",
         "Anus",
+        "Assisté",
+        "Attardé",
+        "Baltringue",
+        "Batârd",
+        "Boloss",
+        "Cul",];
+    wordBan: string[] = ["Abruti",
+        "Ahuri",
         "Arsouille",
         "Aspirateur",
-        "Assisté",
-        "Asticot",
-        "Attardé",
         "Avorton",
         "Babache",
         "Bachibouzouk",
-        "Balai",
-        "Baltringue",
-        "Banane",
         "Bandit",
         "Barjot",
-        "Batârd",
-        "Betterave",
         "Bigleux",
         "Blaireau",
-        "Boloss",
-        "Bordel",
-        "Bordel",
-        "Boudin",
         "Bouffon",
         "Bougre",
-        "Boule",
-        "Boulet",
-        "Bouricot",
-        "Bourique",
-        "Bourrin",
         "Boursemolle",
         "Boursouflure",
         "Bouseux",
@@ -119,7 +111,6 @@ export class QBot {
         "Crâne",
         "Crétin",
         "Cuistre",
-        "Cul",
         "Cul",
         "Dégueulasse",
         "Don",
@@ -391,13 +382,6 @@ export class QBot {
         "Résidu",
         "Résidus",
         "Sabraque",
-        "Sac",
-        "Sac",
-        "Sac",
-        "Sac",
-        "Sac",
-        "Sac",
-        "Sacrebleu",
         "Sacrement",
         "Sacripan",
         "Sagouin",
@@ -408,91 +392,21 @@ export class QBot {
         "Salope",
         "Saloperie",
         "Salopiaud",
-        "Saltinbanque",
-        "Saperlipopette",
-        "Saperlotte",
-        "Sauvage",
-        "Scaphandrier",
-        "Scatophile",
-        "Scelerat",
-        "Schnock",
-        "Schpountz",
-        "Serpillière",
-        "Sinistrose",
         "Sinoque",
         "Sodomite",
-        "Sombre",
-        "Sombre",
-        "Sot",
-        "Souillon",
-        "Sous",
-        "Spermatozoide",
-        "Spermiducte",
-        "Suintance",
-        "Sybarite",
-        "Syphonné",
-        "Tabarnak",
-        "Tabernacle",
-        "Tâcheron",
-        "Tafiole",
-        "Tanche",
-        "Tartignole",
-        "Taré",
-        "Tas",
-        "Tasse",
-        "Thon",
         "Tire",
         "Tocard",
-        "Tonnerre",
-        "Toqué",
         "Trainé",
-        "Traîne",
-        "Tricard",
-        "Triple",
-        "Tromblon",
-        "Tronche",
-        "Trou",
-        "Trou",
-        "Troubignole",
-        "Truand",
-        "Trumeaux",
-        "Tuberculeux",
-        "Tudieu",
-        "Tétârd",
-        "Usurpateur",
-        "Va",
-        "Va",
-        "Vandale",
-        "Vaurien",
-        "Vautour",
-        "Ventrebleu",
-        "Vermine",
-        "Veule",
-        "Vicelard",
-        "Vieille",
-        "Vieille",
-        "Vieille",
-        "Vioque",
-        "Vipère",
-        "Voleur",
-        "Vorace",
-        "Voyou",
-        "Vérole",
-        "Wisigoth",
-        "Yéti",
-        "Zigomar",
-        "Zigoto",
-        "Zonard",
-        "Zouave",
-        "Zoulou"];
+        "Traîne",];
 
-  
-  
-    constructor(message: any) {
+
+
+    constructor(message: any, public chatsService: ChatsService, idChat: number, public botAction: EventEmitter<any>, idUser: number) {
         this.name = "Qwibot";
         this.messages = message;
         this.added = false;
-
+        this.idUser = idUser;
+        this.idChat = idChat;
         this.commands = [];
         this.commands.push("kick");
         this.commands.push("kick list");
@@ -508,7 +422,7 @@ export class QBot {
         for (let i = 0; i < this.commands.length; i++) {
             mFail += this.commands[i] + (i == this.commands.length - 1 ? "" : ", ");
         }
-        this.messageFail = new ItemMessage(this.name, mFail, -1);
+        this.messageFail = new ItemMessage(this.name, mFail, -1, 1);
     }
 
     sayHi() {
@@ -521,6 +435,14 @@ export class QBot {
 
             return this.messages[this.messages.length - 1].content;
         } else return -1;
+    }
+    getLastMessageObject() {
+
+        if (this.messages.length > 0) {
+
+            return this.messages[this.messages.length - 1];
+        } else return -1;
+
     }
 
     getCommand() {
@@ -564,7 +486,7 @@ export class QBot {
         this.added = true;
 
         let me = "Je suis ajouté à cette discution";
-        let m = new ItemMessage(this.name, me, -1);
+        let m = new ItemMessage(this.name, me, -1, 1);
         this.messages.push(m.get());
 
     }
@@ -578,7 +500,7 @@ export class QBot {
             me = "Je ne suis pas encore ajouté à cette discution, je ne peux donc pas être supprimé";
         }
 
-        let m = new ItemMessage(this.name, me, -1);
+        let m = new ItemMessage(this.name, me, -1, 1);
         this.messages.push(m.get());
     }
 
@@ -586,12 +508,12 @@ export class QBot {
         if (this.added) {
             this.banable = !this.banable;
             let me = this.banable == true ? "Je suis maintenant capable de bannir" : "Je ne suis plus capable de bannir";
-            let m = new ItemMessage(this.name, me, -1);
+            let m = new ItemMessage(this.name, me, -1, 1);
             this.messages.push(m.get());
 
         } else {
             let me = "Je ne suis pas ajouté à cette discution, je ne peux pas prendre en considération votre requête";
-            let m = new ItemMessage(this.name, me, -1);
+            let m = new ItemMessage(this.name, me, -1, 1);
             this.messages.push(m.get());
         }
     }
@@ -600,9 +522,9 @@ export class QBot {
 
         let me = "Voici la list des mots interdits : ";
         for (let i = 0; i < this.wordBan.length; i++) {
-            me += this.wordBan[i] + ""+(i == this.wordBan.length - 1 ? "" : ", ");
+            me += this.wordBan[i] + "" + (i == this.wordBan.length - 1 ? "" : ", ");
         }
-        let m = new ItemMessage(this.name, me, -1);
+        let m = new ItemMessage(this.name, me, -1, 1);
         this.messages.push(m.get());
 
     }
@@ -611,18 +533,18 @@ export class QBot {
         if (this.added) {
             this.kickable = !this.kickable;
             let me = this.kickable == true ? "Je suis maintenant capable de kicker" : "Je ne suis plus capable de kicker";
-            let m = new ItemMessage(this.name, me, -1);
+            let m = new ItemMessage(this.name, me, -1, 1);
             this.messages.push(m.get());
 
         } else {
             let me = "Je ne suis pas ajouté à cette discution, je ne peux pas prendre en considération votre requête";
-            let m = new ItemMessage(this.name, me, -1);
+            let m = new ItemMessage(this.name, me, -1, 1);
             this.messages.push(m.get());
         }
     }
     commandStatut() {
         let me = this.added == true ? "Je suis ajouté à cette discution" : "Je ne suis pas ajouté à cette discution";
-        let m = new ItemMessage(this.name, me, -1);
+        let m = new ItemMessage(this.name, me, -1, 1);
         this.messages.push(m.get());
     }
 
@@ -637,11 +559,42 @@ export class QBot {
     }
 
     kick(message: string) {
-        console.log(message);
+        let that = this;
+        for (let i = 0; i < this.wordKick.length; i++) {
+            if (message.toLowerCase().indexOf(this.wordKick[i].toLowerCase()) > -1) {
+                let obj = this.getLastMessageObject();
+
+                if (this.idUser == obj.id) {
+
+                    let me = "Vous ne devriez pas parler comme ça, je vous kick ! ";
+
+                    let m = new ItemMessage(this.name, me, -1, 1);
+                    this.messages.push(m.get());
+
+                    this.chatsService.leaveChat(that.idChat, obj.id);
+                    this.botAction.emit(true);
+
+                    break;
+                }
+            }
+        }
+
     }
 
     ban(message: string) {
+        for (let i = 0; i < this.wordBan.length; i++) {
+            if (message.toLowerCase().indexOf(this.wordBan[i].toLowerCase()) > -1) {
+                let obj = this.getLastMessageObject();
 
+                let me = "Vous ne devriez pas parler comme ça, vous êtes bannit ! ";
+
+                let m = new ItemMessage(this.name, me, -1, 1);
+                this.messages.push(m.get());
+
+
+                break;
+            }
+        }
 
     }
     execute() {

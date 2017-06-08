@@ -2,8 +2,10 @@
   <div class="author">
     {{author}} dit :
   </div>
-  <div class="content">
+  <div *ngIf="type == 1" class="content">
     {{content}}
   </div>
+
+  <div *ngIf="type ==2" class="content" [innerHTML]="content"> </div>
   
 </div>

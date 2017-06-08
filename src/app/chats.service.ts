@@ -102,6 +102,14 @@ export class ChatsService {
 
     });
   }
+
+  
+  banUser(idUser:number, idChat : number, callback: any){
+    this.options =  this.httpClient.getHeadersOptions();
+    //this.http.put()
+  }
+
+  
   getContact(id: number, callback: any) {
     this.options = this.httpClient.getHeadersOptions();
     this.http.get(this.apiContacts, this.options).map(res => res.json()).subscribe(data => {

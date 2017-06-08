@@ -158,7 +158,6 @@ export class VMenuComponent implements OnInit {
       }
 
       that.updateLibelle();
-      that.minimize();
       that.filtre();
     });
   }
