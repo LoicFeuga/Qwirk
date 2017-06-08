@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+declare var RTCMultiConnection : any;
 
 @Component({
   selector: 'app-video-call',
@@ -7,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./video-call.component.css']
 })
 export class VideoCallComponent implements OnInit {
- // connection: RTCMultiConnection = new RTCMultiConnection();
+  connection: any = new RTCMultiConnection();
 
   constructor() {
-   // this.connection.socketURL = "https://rtcmulticonnection.herokuapp.com:443/";
+    this.connection.socketURL = "http://localhost:9001/";
 
-    /*this.connection.session = {
+    this.connection.session = {
       audio: true,
       video: false
     }
@@ -21,19 +22,20 @@ export class VideoCallComponent implements OnInit {
       OfferToReceiveAudio: true,
       OfferToReceiveVideo: false
 
-    }*/
+    }
   }
 
   start() {
-    console.log('start');
-    /*this.connection.openOrJoin('testvideotestloicsupinfo');
+    
+    this.connection.openOrJoin('testvideotestloicsupinfo');
     this.connection.onstream = function (event) {
-      document.getElementById('app-timeline').appendChild(event.mediaElement);
-    };*/
+      document.getElementById('app-video-call').appendChild(event.mediaElement);
+    };
   }
 
   join() {
-    console.log('join');
+    
+
   }
   ngOnInit() {
   }
