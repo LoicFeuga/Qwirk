@@ -125,6 +125,10 @@ export class TimelineComponent implements OnInit {
     this.video.join();
   }
 
+  closeVideo(){
+    this.video.close();
+  }
+
   addExt(author: string, text: string, idUser: number) {
     this.messages.push(new ItemMessage(author, text, idUser,1).get());
     this.bot.execute();

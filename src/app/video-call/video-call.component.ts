@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
-declare var RTCMultiConnection : any;
+declare var RTCMultiConnection: any;
 
 @Component({
   selector: 'app-video-call',
@@ -9,7 +9,7 @@ declare var RTCMultiConnection : any;
 })
 export class VideoCallComponent implements OnInit {
   connection: any = new RTCMultiConnection();
-
+  @Input() idChat: any;
   constructor() {
     this.connection.socketURL = "http://localhost:9001/";
 
@@ -26,15 +26,23 @@ export class VideoCallComponent implements OnInit {
   }
 
   start() {
-    
-    this.connection.openOrJoin('testvideotestloicsupinfo');
+
+    this.connection.openOrJoin('room_' + this.idChat);
     this.connection.onstream = function (event) {
+      event.mediaElement.style.width = "365px";
       document.getElementById('app-video-call').appendChild(event.mediaElement);
     };
   }
 
+  close() {
+    this.connection.attachStreams.forEach(function (localStream) {
+      localStream.stop();
+    });
+    this.connection.close();
+  }
+
   join() {
-    
+
 
   }
   ngOnInit() {

@@ -1,7 +1,12 @@
 #app-video-call{
     position: absolute;
-    top:0;
-    left:200px;
-    width:calc(100%-200px);
-    height:400px;
+    top:100px;
+    right:0px;
+    width:calc(400px);
+    height:calc(100%-200px);
+}
+
+#app-video-call video{
+    max-width:365px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
