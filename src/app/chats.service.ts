@@ -82,7 +82,7 @@ export class ChatsService {
   renameChat(idUHC: number, libelle: string, callback: any) {
 
     this.options = this.httpClient.getHeadersOptions();
-    this.http.put(this.api, { idUHC, libelle }, this.options).map(res => res.json()).subscribe(data => {
+    this.http.put(this.url+"userHasChat/"+idUHC+"/"+libelle, { idUHC, libelle }, this.options).map(res => res.json()).subscribe(data => {
       callback(data);;
     });
 

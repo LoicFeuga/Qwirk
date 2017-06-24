@@ -47,6 +47,7 @@ export class ItemMessage {
     }
 
     get() {
-        return { author: this.author, content: this.message, id: this.id,type:this.type }
+        console.log({ author: this.author, content: this.message, id: this.id,type:this.type });
+        return { author: this.author, content: this.message, id: this.id,type:this.type };
     }
 }
