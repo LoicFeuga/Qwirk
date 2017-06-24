@@ -1,0 +1,129 @@
+<div id="app-setting" class="settings">
+    <h2 class="title">Vos paramètres</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col m4 s12 chat   ">
+                <div class="shadow white">
+                    <h3 class="title-chat">Channels</h3>
+                    <div *ngFor="let channel of channels" class="libelle-chat">
+                        <i *ngIf="channel.id >= 0" class="material-icons">group_work</i>
+                        <input *ngIf="editModeChannel == 1" type="text" [(ngModel)]="channel.libelle" (keyup.enter)="renameChat(channel.libelle,channel.userHasChats)">
+                        <div *ngIf="editModeChannel == 0" type="text">{{channel.libelle}}</div>
+
+                        <i *ngIf="channel.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(channel.id)">delete_forever</i>
+                        <i *ngIf="channel.creator != idUser && channel.id >= 0" class="material-icons delete-chat" (click)="leaveChat(channel.id)">remove_circle_outline</i>
+
+                    </div>
+                    
+                    <div style="width:100%;padding:10px;display:flex;justify-content:space-between;"> <i class="material-icons" (click)="toEditChannel()">mode_edit</i> <i (click)="valideEditChannel()" class="material-icons">check_circle</i></div>
+
+
+
+
+                </div>
+            </div>
+            <div class="col m4 s12 chat   ">
+                <div class="shadow white">
+                    <h3 class="title-chat">Groupes</h3>
+                    <div *ngFor="let groupe of groupes" class="libelle-chat">
+                        <i *ngIf="groupe.id >= 0" class="material-icons">people</i>
+                        <input *ngIf="editModeGroupe == 1" type="text" [(ngModel)]="groupe.libelle" (keyup.enter)="renameChat(groupe.libelle,groupe.userHasChats)">
+                        <div *ngIf="editModeGroupe == 0" type="text">{{groupe.libelle}}</div>
+
+                        <i *ngIf="groupe.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(groupe.id)">delete_forever</i>
+                    </div>
+                    <div style="width:100%;padding:10px;display:flex;justify-content:space-between;"> <i class="material-icons" (click)="toEditGroupe()">mode_edit</i> <i (click)="valideEditGroupe()" class="material-icons">check_circle</i></div>
+
+                </div>
+
+            </div>
+            <div class="col m4 s12  chat ">
+                <div class="shadow white">
+                    <h3 class="title-chat">Chats</h3>
+
+                    <div *ngFor="let chats of chats" class="libelle-chat">
+                        <i *ngIf="chats.id >= 0" class="material-icons">chat</i>
+                        <input *ngIf="editModeChat == 1" type="text" [(ngModel)]="chats.libelle" (keyup.enter)="renameChat(chats.libelle,chats.userHasChats)">
+                        <div *ngIf="editModeChat == 0" type="text">{{chats.libelle}}</div>
+                        <i *ngIf="chats.creator == idUser" class="material-icons delete-chat" (click)="deleteChat(chats.id)">delete_forever</i>
+                        <i *ngIf="chats.creator != idUser && chats.id >= 0" class="material-icons delete-chat" (click)="leaveChat(chats.id)">remove_circle_outline</i>
+
+                    </div>
+                    <div style="width:100%;padding:10px;display:flex;justify-content:space-between;"> <i class="material-icons" (click)="toEditChat()">mode_edit</i> <i (click)="valideEditChat()" class="material-icons">check_circle</i></div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s4 input-field">
+                <div class="shadow white statut-container">
+                    <h3 class="title-chat"> Changez votre Statut</h3>
+                    <div class="input-field">
+                        <input [(ngModel)]="statut" id="statut" type="text" class="validate">
+                        <label for="statut">Statut</label>
+                        <button class="waves-effect waves-light btn" (click)="updateStatut()">Valider</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s8 input-field">
+
+                <div class="shadow white statut-container">
+                    <h3 class="title-chat "> Préférences pour les appels</h3>
+
+                    <form action="#">
+                        <p>
+                            <input type="checkbox" [(ngModel)]="audio" id="audio" name="audio" />
+                            <label for="audio">Audio</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" [(ngModel)]="video" id="video" name="video" />
+                            <label for="video">Video</label>
+                        </p>
+                        <button class="waves-effect waves-light btn marge-top" (click)="updateAudioVideo()">Valider</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 input-field">
+                <div class="shadow white statut-container">
+                    <h3 class="title-chat"> Changez vos paramètres utilisateurs</h3>
+                    <div class="input-field col s12">
+                        <input [(ngModel)]="user.nom" id="nom" type="text" class="validate">
+                        <label class="active" for="nom">Nom</label>
+
+                    </div>
+                    <div class="input-field col s12">
+                        <input [(ngModel)]="user.prenom" id="prenom" type="text" class="validate">
+                        <label class="active" for="prenom">Prénom</label>
+
+                    </div>
+                    <div class="input-field col s12">
+                        <input [(ngModel)]="user.email" id="email" type="text" class="validate">
+                        <label class="active" for="email">Email</label>
+
+                    </div>
+                    <div class="input-field col s12">
+                        <div>Date de Naissance</div>
+                        <input [(ngModel)]="user.dateNaiss" type="date" class="datepicker">
+
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input [(ngModel)]="user.bio" id="bio" type="text" class="validate">
+                        <label class="active" for="bio">Votre Bio</label>
+                    </div>
+
+
+                    <button class="waves-effect waves-light btn" (click)="updateUser()">Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>

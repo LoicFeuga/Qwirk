@@ -1,0 +1,19 @@
+<div id="app-add-chat" class="add-chat">
+  <h2 class="title">Démarrez un chat</h2>
+
+
+
+  <div class="input-field">
+    <input id="last_name" type="text" [(ngModel)]="libelle" class="validate">
+    <label for="last_name">Libellé du chat</label>
+  </div>
+
+  <div class="input-field">
+    <input id="last_name" type="text" [(ngModel)]="detail" class="validate">
+    <label for="last_name">Description</label>
+  </div>
+
+
+  <a class="waves-effect waves-light btn" (click)="create()"><i class="material-icons right">add</i>Créer</a>
+
+</div>

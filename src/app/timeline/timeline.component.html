@@ -1,0 +1,92 @@
+<div id="app-timeline" class="timeline">
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <app-video-call [idChat]="idChat"></app-video-call>
+  <app-message *ngFor="let message of messages" [author]="message.author || message.user.prenom" [type]="message.type" [content]="message.content || message.detail"
+    class="row message">
+  </app-message>
+
+  <app-video-call></app-video-call>
+
+  <div class="container_bot" id="container_bot">
+
+    <div class="container_text">
+      <div class="container_sub" *ngIf="isChatSelected()">
+
+        <textarea class="text" (keyup.enter)="add()" [(ngModel)]="text" placeholder="Commencez à écrire votre message ici"></textarea>
+
+
+        <div class="container_send">
+
+          <button (click)="add()" class="btn waves-effect waves-light send" type="submit" name="action">
+      Envoyer<i class="material-icons right">send</i>
+      </button>
+        </div>
+      </div>
+
+      <div class="container_sub_center space" *ngIf="isDocumentSelected()">
+        <!--
+          <div class="file-field input-field heimax">
+            <div class="btn heimax">
+              <span>Sélectionner un fichier</span>
+              <input type="file">
+            </div>
+            <div class="file-path-wrapper heimax">
+              <input class="file-path validate heimax" type="text">
+            </div>
+          </div>
+          -->
+
+
+<form action="/upload" class="dropzone needsclick dz-clickable" id="demo-upload">
+
+  <div class="dz-message needsclick">
+    Drop files here or click to upload.<br>
+    <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+  </div>
+
+</form>
+        <button (click)="uploadFiles()" class="btn waves-effect waves-light" type="submit" name="action">
+      Envoyer 
+      </button>
+      </div>
+
+      <div class="container_sub_center" *ngIf="isCallSelected()">
+
+
+
+
+        <button (click)="add()" class="btn waves-effect waves-light" type="submit" name="action">
+      Démarrer un appel audio 
+      </button>
+
+      </div>
+
+      <div class="container_sub_center" style="display:flex;justify-content:space-between" *ngIf="isVideoSelected()">
+        <button id="start-call" (click)="startCall()">start call</button>
+<video controls autoplay></video>
+
+
+        <button (click)="startVideo()" class="btn waves-effect waves-light" type="submit" name="action">
+      Démarrer un appel vidéo
+      </button>
+        <button (click)="joinVideo()" class="btn waves-effect waves-light" type="submit" name="action">
+      Rejoindre l'appel vidéo
+      </button>
+        <button (click)="closeVideo()" class="btn waves-effect waves-light" type="submit" name="action">
+      Raccrocher l'appel vidéo
+      </button>
+
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="container_call">
+      <div class="item" (click)="setMode(0)" [class]="isChatSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">chat</i></div>
+      <div class="item" (click)="setMode(3)" [class]="isDocumentSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">attach_file</i></div>
+      <div class="item" (click)="setMode(1)" [class]="isCallSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">call</i></div>
+      <div class="item" (click)="setMode(2)" [class]="isVideoSelected() == true ? 'item-selected' : 'item' "><i class="material-icons">video_call</i></div>
+    </div>
+  </div>
+
+</div>

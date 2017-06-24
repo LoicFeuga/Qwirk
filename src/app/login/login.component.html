@@ -1,0 +1,68 @@
+<div class="root">  
+  <app-modal *ngIf="modalDisplayed" (displayed)="modalShow($event)" [titre]="modalTitre" [content]="modalContent"></app-modal>
+  <div class="padding">
+    <div class="circle">
+
+    </div>
+
+    <div class="top">
+
+      <h1 class="titre">{{appName}}</h1>
+      <p class="subtitle" *ngIf="isLogin == 1">{{loginTitle}}</p>
+      <p class="subtitle" *ngIf="isLogin == 0">{{signinTitle}}</p>
+    </div>
+
+    <div class="bot">
+      <form *ngIf="isLogin == 1" class="form">
+        <div class="container">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="email" [(ngModel)]="email" name="email" type="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+            <div class="input-field col s12">
+              <input id="password" [(ngModel)]="password" (keyup.enter)="login()" name="password" type="password" class="validate">
+              <label for="password">Password</label>
+            </div>
+            
+            <a class="col s12 waves-effect waves-light btn-large button-login  light-blue darken-1" (click)="login()">Login <i class="material-icons">input</i></a>
+
+            <a class="col s12 waves-effect waves-light btn button-signup" (click)="toSignin()">Créez un compte <i class="material-icons">add</i></a>
+
+          </div>
+        </div>
+      </form>
+      <form *ngIf="isLogin == 0" class="form">
+        <div class="container">
+          <div class="row">
+
+            <div *ngIf="step == 1" class="input-field col s12">
+              <input id="email" type="email" [(ngModel)]="email" name="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+            <div *ngIf="step == 1" class="input-field col s12">
+              <input id="password" type="password" [(ngModel)]="password" name="password" class="validate">
+              <label for="password">Password</label>
+            </div>
+
+             <div *ngIf="step == 2" class="input-field col s12">
+              <input id="nom" type="text" [(ngModel)]="nom" name="nom" class="validate">
+              <label for="nom">Nom</label>
+            </div>
+            <div *ngIf="step == 2" class="input-field col s12">
+              <input id="prenom" type="text" [(ngModel)]="prenom" name="prenom" class="validate">
+              <label for="prenom">Prenom</label>
+            </div>
+            
+            <a  *ngIf="step == 1"  class="col s12 waves-effect waves-light btn-large button-login  light-blue darken-1" (click)="step2()">Suivant <i class="material-icons">arrow_forward</i></a>
+            <a  *ngIf="step == 2" class="col s12 waves-effect waves-light btn-large button-login  light-blue darken-1" (click)="signin()">Signin</a>
+
+            <a *ngIf="step == 1" class="col s12 waves-effect waves-light btn button-signup" (click)="toLogin()">Vous avez déjà un compte ?</a>
+            <a *ngIf="step == 2" class="col s12 waves-effect waves-light btn button-signup" (click)="step1()"><i class="material-icons">arrow_back</i> Précedent</a>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

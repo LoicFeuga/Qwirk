@@ -1,0 +1,11 @@
+<div class="message">
+  <div class="author">
+    {{author}} dit :
+  </div>
+  <div *ngIf="type == 1" class="content">
+    {{content}}
+  </div>
+
+  <div *ngIf="type ==2" class="content" [innerHTML]="content"> </div>
+  
+</div>

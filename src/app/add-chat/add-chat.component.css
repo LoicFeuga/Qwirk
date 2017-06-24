@@ -1,0 +1,19 @@
+.add-chat{
+      width: calc(100%- 220px);
+    border-radius: 1px;
+    min-height: calc(100% - 75px);
+    overflow: auto;
+    bottom:10px;
+    margin-bottom: 0;
+    margin-left: 200px;
+    background: white;
+    margin-top:60px;
+    transition: 0.5s;
+    padding-left:20px;
+    padding-right:20px;
+    
+}
+
+.input-field{
+    width: 100%;
+}

@@ -1,0 +1,14 @@
+#all{
+    width: calc(100vw - 200px);
+    min-width: 200px;
+    margin-left:200px;
+    border-radius: 1px;
+    max-height: calc(100% - 65px);
+    overflow: auto;
+    position:fixed;
+    bottom:0px;
+    margin-bottom: 0;
+    background: white;
+    margin-top:60px;
+
+}

@@ -1,0 +1,134 @@
+.timeline{
+    width: calc(100%- 200px);
+    border-radius: 1px;
+    max-height: calc(100% - 101px);
+    height: calc(100% - 101px);
+    overflow: auto;
+    bottom:40px;
+    margin-bottom: 0;
+    padding-bottom: 70px;
+    margin-left: 200px;
+    background: white;
+    margin-top:60px;
+    transition: 0.5s;
+}
+.container_bot{
+    bottom: 0;
+    width:calc(100% - 200px);
+    position: absolute;
+}
+.hr{
+    content :'';
+    height:1px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color:grey;
+}
+.container_call{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height:40px;
+    background:#eeeeee;
+    align-items: center;
+    justify-content: center;
+}
+.item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height: 100%;
+    text-align: center;
+    transition:.2s;
+}
+.item-selected{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height: 100%;
+    text-align: center;
+    transition:.2s;
+    border-bottom: 5px solid #039BE5;
+
+}
+
+.timeline::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 10px;
+    background: #eee;
+}
+
+
+.container_text{    
+    bottom: 0;
+    padding-left:40px;
+    padding-right:40px;
+    background:#eeeeee;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+.container_sub{
+    width:100%;
+    display: flex;
+    margin-bottom:15px;
+    justify-content: space-between;
+    padding-top:15px;
+}
+.container_sub_center{
+    width:100%;
+    display: flex;
+    margin-bottom:15px;
+    justify-content: center;
+    padding-top:15px;
+}
+.text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:70%;
+    border: none;
+    overflow: hidden;
+    resize:vertical ;
+}
+
+.space{
+    display: flex;
+    justify-content: space-between;
+}
+.label-file {
+    cursor: pointer;
+    color: white;
+}
+
+.my-drop-zone, .file-is-over { border: dotted 3px lightgray; width:300px;}
+    .nv-file-over { border: dotted 3px red; } 
+    .another-file-over-class { border: dotted 3px green; }
+
+.input-file {
+    display: none;
+}
+.container_send{
+
+    display: flex;
+    justify-content: center;
+    width: 25%;
+}
+.container_send_center{
+
+    display: flex;
+    justify-content: center;
+}
+
+.send{
+    width: 100%;
+}

@@ -1,0 +1,17 @@
+
+
+.message{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+.content{
+    padding : 10px;
+    padding-left: 20px;
+    width:65%;
+    background: #2196f3 ;
+    margin-top:10px;
+}
