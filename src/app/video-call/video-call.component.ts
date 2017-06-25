@@ -9,7 +9,7 @@ declare var RTCMultiConnection: any;
   styleUrls: ['./video-call.component.css']
 })
 export class VideoCallComponent implements OnInit {
-  connection: any = new RTCMultiConnection();
+  connection: any = new RTCMultiConnection("https://77.203.205.220:9001/",null);
   @Input() idChat: any;
   public isAudio : boolean = false;
 
