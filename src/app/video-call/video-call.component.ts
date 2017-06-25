@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UsersService} from '../users.service';
+import { UsersService } from '../users.service';
+import { AuthenticationService } from '../authentication.service';
 declare var RTCMultiConnection: any;
 
 @Component({
@@ -8,9 +9,10 @@ declare var RTCMultiConnection: any;
   styleUrls: ['./video-call.component.css']
 })
 export class VideoCallComponent implements OnInit {
-  connection: any = new RTCMultiConnection("https://localhost:9001/",null);
+  connection: any = new RTCMultiConnection("https://localhost:9001/", null);
   @Input() idChat: any;
-  constructor() {
+  public isAudio: boolean = false;
+  constructor(public auth: AuthenticationService, public user: UsersService) {
     this.connection.socketURL = "https://192.168.0.17:9001/";
 
     this.connection.session = {
@@ -26,13 +28,21 @@ export class VideoCallComponent implements OnInit {
   }
 
   start() {
+    let that = this;
+    this.user.getParametre(this.auth.getUserID(), function (data) {
 
-    this.connection.openOrJoin('room_' + this.idChat);
-    this.connection.onstream = function (event) {
-      event.mediaElement.style.width = "365px";
-      console.log(event);
-      document.getElementById('app-video-call').appendChild(event.mediaElement);
-    };
+      that.connection.mediaConstraints = {
+        audio: data.audio,
+        video: that.isAudio == false ? data.video : false
+      };
+
+      that.connection.openOrJoin('room_' + that.idChat);
+      that.connection.onstream = function (event) {
+        event.mediaElement.style.width = "365px";
+        console.log(event);
+        document.getElementById('app-video-call').appendChild(event.mediaElement);
+      };
+    });
   }
 
   close() {

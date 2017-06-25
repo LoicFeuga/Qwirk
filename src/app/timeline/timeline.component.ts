@@ -151,6 +151,12 @@ export class TimelineComponent implements OnInit {
   }
 
   startVideo() {
+    this.video.isAudio = false;
+    this.video.start();
+  }
+
+  startAudio() {
+    this.video.isAudio = true;
     this.video.start();
   }
 
