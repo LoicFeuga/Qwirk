@@ -80,9 +80,18 @@ export class TimelineComponent implements OnInit {
 
   startCall() {
     this.videoStarted = true;
+    this.video.isAudio = false;
     this.video.start();
 
   }
+
+  startCallAudio(){
+
+    this.videoStarted = true;
+    this.video.isAudio = true;
+    this.video.start();
+  }
+
   uploadFiles() {
 
     for (let i = 0; i < this.files.length; i++) {
@@ -151,6 +160,8 @@ export class TimelineComponent implements OnInit {
   }
 
   startVideo() {
+    this.videoStarted = true;
+    this.video.isAudio = false;
     this.video.start();
   }
 

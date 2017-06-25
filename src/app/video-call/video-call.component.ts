@@ -9,11 +9,12 @@ declare var RTCMultiConnection: any;
   styleUrls: ['./video-call.component.css']
 })
 export class VideoCallComponent implements OnInit {
-  connection: any = new RTCMultiConnection("https://localhost:9001/", null);
+  connection: any = new RTCMultiConnection();
   @Input() idChat: any;
+  public isAudio : boolean = false;
 
   constructor(public usersService: UsersService, public auth: AuthenticationService) {
-    this.connection.socketURL = "https://192.168.0.17:9001/";
+    this.connection.socketURL = "https://77.203.205.220:9001/";
     this.connection.enableLogs = false;
     let that = this;
 
@@ -22,7 +23,7 @@ export class VideoCallComponent implements OnInit {
 
       that.connection.session = {
         audio: data.audio,
-        video: data.video
+        video: that.isAudio == false ? data.video : false
       }
 
 
@@ -34,7 +35,7 @@ export class VideoCallComponent implements OnInit {
 
       that.connection.mediaConstraints = {
         audio: true,
-        video: data.video
+        video: that.isAudio == false ? data.video : false
       };
     });
 
@@ -46,13 +47,13 @@ export class VideoCallComponent implements OnInit {
 
       that.connection.session = {
         audio: data.audio,
-        video: data.video
+        video: that.isAudio == false ? data.video : false
       }
 
 
       that.connection.mediaConstraints = {
         audio: true,
-        video: data.video
+        video: that.isAudio == false ? data.video : false
       };
 
       that.connection.sdpConstraints.mandatory = {

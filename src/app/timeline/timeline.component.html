@@ -56,10 +56,12 @@
 
 
 
-        <button (click)="add()" class="btn waves-effect waves-light" type="submit" name="action">
+        <button (click)="startCallAudio()" class="btn waves-effect waves-light" type="submit" name="action">
       Démarrer un appel audio 
       </button>
-
+  <button (click)="closeVideo()" class="btn waves-effect waves-light" type="submit" name="action">
+      Raccrocher l'appel audio 
+      </button>
       </div>
 
       <div class="container_sub_center" style="display:flex;justify-content:space-between" *ngIf="isVideoSelected()">
