@@ -3,7 +3,9 @@
     top:100px;
     right:0px;
     width:calc(400px);
-    height:calc(100%-200px);
+    
+    height:60%;
+    overflow: auto;
 }
 
 #app-video-call video{
