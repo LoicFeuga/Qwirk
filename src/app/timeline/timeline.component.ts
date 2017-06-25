@@ -24,12 +24,10 @@ export class TimelineComponent implements OnInit {
   messages: Object[] = [];
   text: string;
   idChat: number = 0;
+  videoStarted:boolean = false;
   bot: QBot;
   file: any;
   itemMessage: ItemMessage;
-  from :any;
-  peer: any;
-  to :any;
   @Output() added: EventEmitter<any> = new EventEmitter<any>();
   @Output() botAction: EventEmitter<any> = new EventEmitter<any>();
 
@@ -47,44 +45,6 @@ export class TimelineComponent implements OnInit {
 
   }
 
-  getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-      results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-  }
-  getVideo(successCallback, errorCallback) {
-    navigator.getUserMedia({ audio: true, video: true }, successCallback, errorCallback);
-  }
-
-
-  onReceiveCall(call) {
-
-    console.log('peer is calling...');
-    console.log(call);
-
-    this.getVideo(
-      function (MediaStream) {
-        call.answer(MediaStream);
-        console.log('answering call started...');
-      },
-      function (err) {
-        console.log('an error occured while getting the video');
-        console.log(err);
-      }
-    );
-
-    call.on('stream', this.onReceiveStream);
-  }
-
-  onReceiveStream(stream) {
-    var video = document.querySelector('video');
-    video.src = window.URL.createObjectURL(stream);
-    video.onloadedmetadata = function () {
-      console.log('loaded');
-    };
-
-  }
 
 
 
@@ -97,14 +57,8 @@ export class TimelineComponent implements OnInit {
   }
 
   constructor(public auth: AuthenticationService, public usersService: UsersService, public chatsService: ChatsService) {
-    this.from = this.getParameterByName('from');
-    this.to = this.getParameterByName('to');
-    this.peer = new Peer(this.from, { key: '8r7b1x07yuui8uxr' });
-
-    this.peer.on('open', function (id) {
-      console.log('My peer ID is: ' + id);
-    });
-    this.peer.on('call', this.onReceiveCall);
+    
+    
 
     this.setChat(this.idChat);
   }
@@ -125,21 +79,8 @@ export class TimelineComponent implements OnInit {
   }
 
   startCall() {
-
-    console.log('starting call...');
-    let that = this;
-    this.getVideo(
-      function (MediaStream) {
-
-        console.log('now calling ' + that.to);
-        var call = that.peer.call(that.to, MediaStream);
-        call.on('stream', that.onReceiveStream);
-      },
-      function (err) {
-        console.log('an error occured while getting the video');
-        console.log(err);
-      }
-    );
+    this.videoStarted = true;
+    this.video.start();
 
   }
   uploadFiles() {

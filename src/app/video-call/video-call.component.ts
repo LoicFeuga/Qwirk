@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import { UsersService} from '../users.service';
 declare var RTCMultiConnection: any;
 
 @Component({
@@ -8,19 +8,19 @@ declare var RTCMultiConnection: any;
   styleUrls: ['./video-call.component.css']
 })
 export class VideoCallComponent implements OnInit {
-  connection: any = new RTCMultiConnection();
+  connection: any = new RTCMultiConnection("https://localhost:9001/",null);
   @Input() idChat: any;
   constructor() {
-    this.connection.socketURL = "http://localhost:9001/";
+    this.connection.socketURL = "https://192.168.0.17:9001/";
 
     this.connection.session = {
       audio: true,
-      video: false
+      video: true
     }
 
     this.connection.sdpConstraints.mandatory = {
       OfferToReceiveAudio: true,
-      OfferToReceiveVideo: false
+      OfferToReceiveVideo: true
 
     }
   }
@@ -30,6 +30,7 @@ export class VideoCallComponent implements OnInit {
     this.connection.openOrJoin('room_' + this.idChat);
     this.connection.onstream = function (event) {
       event.mediaElement.style.width = "365px";
+      console.log(event);
       document.getElementById('app-video-call').appendChild(event.mediaElement);
     };
   }

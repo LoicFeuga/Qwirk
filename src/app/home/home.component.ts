@@ -32,12 +32,12 @@ export class HomeComponent implements OnInit {
   // 5 = add groupe
   // 6 = add chat
   constructor(private auth: AuthenticationService, public chatsServices: ChatsService, public webSocket: WebSocketService, public httpService: HttpClientService) {
-    this.connectToSocket();
+    //this.connectToSocket();
     let that = this;
 
     setInterval(function(){
       that.build();
-    },10000);
+    },3000);
   }
 
   hardBuild(){

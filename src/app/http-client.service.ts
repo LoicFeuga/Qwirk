@@ -9,7 +9,7 @@ export class HttpClientService {
   private urlProdHttps: string = "https://84.246.226.230:8443/SupChat/api/rest/";
   //dans timeline pour le server file
  public urlSocket: string = "//84.246.226.230:8080/SupChat/server/";
-  public url: string = this.urlProd;
+  public url: string = this.urlProdHttps;
   public chatService: string = "chat";
   public userService: string = "user";
 

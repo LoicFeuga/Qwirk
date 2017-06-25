@@ -4,8 +4,9 @@
   <app-message *ngFor="let message of messages" [author]="message.author || message.user.prenom" [type]="message.type" [content]="message.content || message.detail"
     class="row message">
   </app-message>
+  
 
-  <app-video-call></app-video-call>
+  <app-video-call *ngIf="videoStarted"></app-video-call>
 
   <div class="container_bot" id="container_bot">
 
@@ -62,8 +63,7 @@
       </div>
 
       <div class="container_sub_center" style="display:flex;justify-content:space-between" *ngIf="isVideoSelected()">
-        <button id="start-call" (click)="startCall()">start call</button>
-<video controls autoplay></video>
+        
 
 
         <button (click)="startVideo()" class="btn waves-effect waves-light" type="submit" name="action">
