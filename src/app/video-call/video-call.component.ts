@@ -13,7 +13,7 @@ export class VideoCallComponent implements OnInit {
   @Input() idChat: any;
   public isAudio: boolean = false;
   constructor(public auth: AuthenticationService, public user: UsersService) {
-    this.connection.socketURL = "https://192.168.0.17:9001/";
+    this.connection.socketURL = "https://77.203.205.220:9001/";
 
     this.connection.session = {
       audio: true,
